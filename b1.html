@@ -1,0 +1,2177 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>Polski B1 · Gramatyka — тренажер</title>
+<style>
+:root{
+  --bg:#f5f6f8;--card:#ffffff;--ink:#17212b;--mut:#5a6775;--line:#d8dde4;
+  --acc:#b3142c;--acc-ink:#ffffff;--acc-soft:#fdeaee;
+  --ok:#12733b;--ok-bg:#e2f5e9;--near:#8a5a00;--near-bg:#fff1cc;--bad:#b3261e;--bad-bg:#fde7e5;
+  --focus:#1d5fd1;--chip:#edf0f4;--shadow:0 1px 2px rgba(16,24,40,.08);
+  --fs:1;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#10151b;--card:#1a212a;--ink:#e8edf2;--mut:#9ba8b5;--line:#303b47;
+    --acc:#ff7085;--acc-ink:#22080d;--acc-soft:#3a1b23;
+    --ok:#74d99e;--ok-bg:#14331f;--near:#f3c765;--near-bg:#3a2e10;--bad:#ff8f86;--bad-bg:#3e1a18;
+    --focus:#8ab4ff;--chip:#252e39;--shadow:none;
+  }
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{font-size:calc(16px * var(--fs));-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;line-height:1.5;overflow-wrap:anywhere}
+a{color:var(--acc)}
+button,input,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+h1{font-size:1.4rem;line-height:1.25;margin:0 0 .25rem}
+h2{font-size:1.1rem;margin:1.5rem 0 .5rem}
+h3{font-size:1rem;margin:0}
+h4{font-size:1rem;margin:1rem 0 .25rem}
+p{margin:.5rem 0}
+.mut{color:var(--mut)}
+.small{font-size:.875rem}
+
+.top{position:sticky;top:0;z-index:20;background:var(--card);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:4px;padding:0 max(8px,env(safe-area-inset-left));min-height:48px;font-size:16px}
+.brand{font-weight:700;text-decoration:none;color:var(--ink);padding:8px 4px;margin-right:auto;white-space:nowrap}
+.brand b{color:var(--acc)}
+.top nav{display:flex;gap:2px}
+.top nav a{display:inline-flex;align-items:center;gap:.25rem;min-height:40px;min-width:40px;justify-content:center;padding:0 8px;border-radius:8px;text-decoration:none;color:var(--ink);font-size:15px}
+.top nav a[aria-current="page"]{background:var(--acc-soft);color:var(--acc);font-weight:600}
+.badge{display:inline-block;min-width:20px;padding:0 5px;border-radius:999px;background:var(--acc);color:var(--acc-ink);font-size:12px;font-weight:700;text-align:center;line-height:20px}
+.top nav a{white-space:nowrap}
+@media (max-width:430px){.brand .long{display:none}.top nav a{padding:0 6px;font-size:14px}}
+
+main{max-width:820px;margin:0 auto;padding:1rem max(.75rem,env(safe-area-inset-left)) 2rem;outline:none}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:1rem;box-shadow:var(--shadow)}
+.card + .card{margin-top:.75rem}
+.row{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}
+.grow{flex:1 1 auto}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.375rem;min-height:44px;padding:0 1rem;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-weight:600;cursor:pointer;text-decoration:none;text-align:center}
+.btn:hover{border-color:var(--mut)}
+.btn.pri{background:var(--acc);border-color:var(--acc);color:var(--acc-ink)}
+.btn.ghost{background:transparent}
+.btn.sm{min-height:40px;padding:0 .75rem;font-size:.9375rem}
+.btn[disabled]{opacity:.5;cursor:default}
+.btn[aria-pressed="true"]{background:var(--acc-soft);border-color:var(--acc);color:var(--acc)}
+
+.bar{height:8px;border-radius:999px;background:var(--chip);overflow:hidden}
+.bar > i{display:block;height:100%;background:var(--ok);border-radius:999px}
+.grp{font-size:.8125rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);margin:1.5rem 0 .5rem}
+.tlist{display:grid;gap:.5rem}
+@media (min-width:640px){.tlist{grid-template-columns:1fr 1fr}}
+.tcard{display:block;text-decoration:none;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:12px;padding:.75rem 1rem;box-shadow:var(--shadow)}
+.tcard:hover{border-color:var(--acc)}
+.tcard .pl{font-weight:700}
+.tcard .ua{color:var(--mut);font-size:.875rem;margin-bottom:.5rem}
+.tcard .st{display:flex;justify-content:space-between;font-size:.8125rem;color:var(--mut);margin-top:.25rem}
+.hero{display:grid;gap:.75rem}
+@media (min-width:640px){.hero{grid-template-columns:1.4fr 1fr}}
+.big{font-size:2rem;font-weight:800;line-height:1.1}
+.tip{border-left:4px solid var(--acc);padding:.5rem .75rem;background:var(--acc-soft);border-radius:0 8px 8px 0}
+
+.elist{list-style:none;margin:0;padding:0;display:grid;gap:.5rem}
+.elist a{display:flex;align-items:center;gap:.75rem;min-height:56px;padding:.5rem .75rem;border:1px solid var(--line);border-radius:10px;background:var(--card);text-decoration:none;color:var(--ink)}
+.elist a:hover{border-color:var(--acc)}
+.elist .rn{font-weight:800;min-width:3.25rem;color:var(--acc)}
+.elist .inf{flex:1 1 auto;min-width:0}
+.elist .res{font-weight:700;white-space:nowrap}
+.res.done{color:var(--ok)}
+
+.crumb{display:inline-flex;align-items:center;min-height:40px;text-decoration:none;font-size:.9375rem}
+.meta{color:var(--mut);font-size:.875rem}
+.ins{margin:.75rem 0 .25rem;font-weight:600}
+.ins-ua{color:var(--mut);font-size:.9375rem;margin:0 0 .75rem}
+.box{border:1px solid var(--line);border-radius:10px;padding:.5rem .75rem;margin:.75rem 0;background:var(--card)}
+.box > .lbl{font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--mut)}
+.box.hint{border-color:var(--near);background:var(--near-bg)}
+.box.info{border-style:dashed}
+.bank{display:flex;flex-wrap:wrap;gap:.375rem;margin-top:.375rem}
+.bank .w{display:inline-flex;align-items:center;justify-content:center;min-height:40px;min-width:44px;padding:0 .75rem;border-radius:999px;border:1px solid var(--line);background:var(--chip);font-weight:600}
+.bank button.w{cursor:pointer}
+.bank button.w:hover{border-color:var(--acc)}
+.bankbar{position:sticky;top:48px;z-index:10;background:var(--bg);padding:.25rem 0;margin:0 0 .25rem}
+.bankbar .box{margin:0;padding:.375rem}
+.bankbar .lbl{display:none}
+.bankbar .bank{gap:.25rem;margin-top:0}
+.bankbar .w{padding:0 .5rem}
+.xbar ~ .bankbar{top:106px}
+
+.body{font-size:1.0625rem;line-height:2.5}
+.body p{margin:0}
+.body p + p{margin-top:.25rem}
+.body ol,.body ul{margin:.25rem 0;padding-left:1.75rem}
+.body li{padding-left:.125rem}
+.body.olnum sup.n{display:none}
+.body.static{line-height:1.7}
+.body.static p + p{margin-top:.375rem}
+u.ul{text-decoration-thickness:2px;text-underline-offset:3px}
+sup.n{font-size:.6875rem;color:var(--mut);font-weight:700;margin:0 1px 0 2px;vertical-align:super;line-height:0}
+.g{white-space:nowrap}
+input.gap{height:40px;max-width:100%;padding:0 .375rem;border:0;border-bottom:2px solid var(--mut);border-radius:6px 6px 0 0;background:var(--chip);text-align:center;font-weight:600;vertical-align:baseline}
+input.gap:focus{outline:none;border-bottom-color:var(--focus);box-shadow:0 0 0 2px var(--focus)}
+.mk{display:inline-block;font-weight:800;margin-left:2px;min-width:0}
+.ok input.gap,.ok textarea.sent{border-color:var(--ok);background:var(--ok-bg)}
+.near input.gap,.near textarea.sent{border-color:var(--near);background:var(--near-bg)}
+.bad input.gap,.bad textarea.sent{border-color:var(--bad);background:var(--bad-bg)}
+.ok > .mk{color:var(--ok)} .near > .mk{color:var(--near)} .bad > .mk{color:var(--bad)}
+.xmp{font-weight:700;border-bottom:2px solid var(--ink);padding:0 .25rem}
+.fill{font-weight:600;border-bottom:1px dashed var(--mut);padding:0 .125rem}
+.ch{display:inline-flex;flex-wrap:wrap;align-items:center;max-width:100%;white-space:normal;vertical-align:middle;padding:1px 2px;margin:2px 1px;border-radius:14px;background:var(--chip);line-height:1.2}
+.ch > sup.n{margin:0 3px 0 6px;vertical-align:baseline;line-height:1}
+.opt{display:inline-flex;align-items:center;justify-content:center;min-height:40px;min-width:44px;margin:2px;padding:0 .625rem;border:1px solid var(--line);border-radius:999px;background:var(--card);cursor:pointer;font-weight:500;line-height:1.2;vertical-align:middle;text-align:left}
+.opt:hover{border-color:var(--mut)}
+.opt[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--card);font-weight:700}
+.opt.st{cursor:default;min-height:32px}
+.opt.st.cor{border-color:var(--ink);font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.ch.ok .opt[aria-pressed="true"]{background:var(--ok);border-color:var(--ok);color:var(--card)}
+.ch.bad .opt[aria-pressed="true"]{background:var(--bad);border-color:var(--bad);color:var(--card)}
+.ch.bad.none .opt{border-color:var(--bad)}
+.g.rv{white-space:normal}
+.rv .ua{font-weight:700;padding:0 .25rem;border-radius:4px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.rv.ok .ua{background:var(--ok-bg);color:var(--ok)}
+.rv.near .ua{background:var(--near-bg);color:var(--near)}
+.rv.bad .ua{background:var(--bad-bg);color:var(--bad);text-decoration:line-through}
+.rv.bad .ua.empty{text-decoration:none}
+.rv .ca{font-weight:700;color:var(--ok);margin-left:.25rem;white-space:normal}
+.rv .ca::before{content:"→ ";font-weight:400;color:var(--mut)}
+
+.sitems{list-style:none;margin:0;padding:0;display:grid;gap:.75rem;line-height:1.5}
+.si{border:1px solid var(--line);border-radius:10px;padding:.625rem .75rem;background:var(--card)}
+.si .q{font-weight:500}
+.si .q .n{font-weight:800;color:var(--acc);margin-right:.375rem}
+.si .cue{display:inline-block;margin:.25rem 0;padding:0 .5rem;border-radius:6px;background:var(--chip);font-weight:700}
+.si .aw{display:flex;align-items:flex-start;gap:.25rem;margin-top:.25rem}
+textarea.sent{flex:1 1 auto;min-height:44px;width:100%;resize:none;overflow:hidden;padding:.5rem .625rem;border:1px solid var(--mut);border-radius:8px;background:var(--chip);line-height:1.4;font-weight:600}
+textarea.sent:focus{outline:none;border-color:var(--focus);box-shadow:0 0 0 2px var(--focus)}
+.si .mk{line-height:44px;min-width:1.25rem}
+.si .ans{margin-top:.25rem;font-weight:700}
+.si.x{border-style:dashed}
+
+.result{margin-top:1rem}
+.result .sc{font-size:1.25rem;font-weight:800}
+.legend{display:flex;flex-wrap:wrap;gap:.25rem 1rem;font-size:.875rem;color:var(--mut);margin-top:.25rem}
+.legend b.ok{color:var(--ok)} .legend b.near{color:var(--near)} .legend b.bad{color:var(--bad)}
+.key ol{columns:2;column-gap:1.5rem;margin:.25rem 0;padding-left:1.75rem}
+.key.wide ol{columns:1}
+.key li{break-inside:avoid;margin-bottom:.125rem}
+.key .alt{color:var(--mut);font-weight:400}
+@media (max-width:480px){.key ol{columns:1}}
+.pn{display:flex;gap:.5rem;margin-top:1.25rem}
+.pn .btn{flex:1 1 0;min-width:0}
+
+table.t{width:100%;border-collapse:collapse;font-size:.9375rem}
+table.t th,table.t td{border-bottom:1px solid var(--line);padding:.375rem .5rem;text-align:left;vertical-align:top}
+table.t td.num,table.t th.num{text-align:right;white-space:nowrap}
+.pass{color:var(--ok)} .fail{color:var(--bad)}
+
+.xbar{position:sticky;top:48px;z-index:15;display:flex;align-items:center;gap:.5rem;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:.375rem .5rem;margin-bottom:.75rem;box-shadow:var(--shadow)}
+.timer{font-variant-numeric:tabular-nums;font-weight:800;font-size:1.125rem;min-width:4.25rem;text-align:center}
+.timer.low{color:var(--bad)}
+.ovw{display:grid;grid-template-columns:repeat(5,1fr);gap:.5rem}
+.ovw .btn{flex-direction:column;padding:.25rem;min-height:56px}
+.ovw .btn small{font-weight:400;color:var(--mut)}
+
+#dock{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--card);border-top:1px solid var(--line);padding:.375rem max(.5rem,env(safe-area-inset-left)) calc(.375rem + env(safe-area-inset-bottom));box-shadow:0 -2px 8px rgba(16,24,40,.08)}
+#dock[hidden]{display:none}
+#dock .in{max-width:820px;margin:0 auto;display:grid;gap:.375rem}
+.letters{display:grid;grid-template-columns:repeat(10,1fr);gap:.25rem}
+.letters button{min-height:40px;min-width:0;border:1px solid var(--line);border-radius:8px;background:var(--chip);font-size:1.125rem;font-weight:700;cursor:pointer;padding:0;touch-action:manipulation}
+.letters button:active{background:var(--acc-soft)}
+.letters button[aria-pressed="true"]{background:var(--ink);color:var(--card)}
+@media (max-width:460px){.letters{grid-template-columns:repeat(5,1fr)}}
+.acts{display:flex;gap:.375rem}
+.acts .btn{flex:1 1 0;min-width:0;padding:0 .375rem;font-size:.9375rem;line-height:1.15}
+.acts .btn.pri{flex:1.6 1 0}
+body.kb .acts{display:none}
+@media (pointer:coarse){body:not(.typing) .letters{display:none}}
+
+.modal{position:fixed;inset:0;z-index:50;background:rgba(10,14,20,.55);display:flex;align-items:flex-end;justify-content:center}
+.modal[hidden]{display:none}
+@media (min-width:640px){.modal{align-items:center}}
+.dlg{background:var(--card);color:var(--ink);width:100%;max-width:760px;max-height:88vh;max-height:88dvh;display:flex;flex-direction:column;border-radius:16px 16px 0 0;border:1px solid var(--line)}
+@media (min-width:640px){.dlg{border-radius:16px}}
+.dlg > header{display:flex;align-items:center;gap:.5rem;padding:.5rem .5rem .5rem 1rem;border-bottom:1px solid var(--line)}
+.dlg > header h2{margin:0;flex:1 1 auto;font-size:1.0625rem}
+.dlg > .cnt{padding:.75rem 1rem 1rem;overflow:auto;-webkit-overflow-scrolling:touch}
+.dlg > footer{display:flex;gap:.5rem;justify-content:flex-end;flex-wrap:wrap;padding:.75rem 1rem;border-top:1px solid var(--line)}
+.sheet table{width:100%;border-collapse:collapse;font-size:.9375rem;margin:.5rem 0}
+.sheet th,.sheet td{border:1px solid var(--line);padding:.3rem .45rem;text-align:left;vertical-align:top}
+.sheet th{background:var(--chip);font-size:.8125rem}
+.sheet i{font-style:normal;font-weight:600;color:var(--acc)}
+.sheet ul{padding-left:1.25rem;margin:.375rem 0}
+.sheet .tw{overflow-x:auto}
+
+#toast{position:fixed;left:50%;top:60px;transform:translateX(-50%);z-index:60;max-width:min(92vw,520px);background:var(--ink);color:var(--card);padding:.625rem .875rem;border-radius:10px;font-weight:600;box-shadow:0 4px 16px rgba(0,0,0,.25)}
+#toast[hidden]{display:none}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.seg button{min-height:44px;min-width:56px;border:0;border-right:1px solid var(--line);background:var(--card);cursor:pointer;font-weight:700}
+.seg button:last-child{border-right:0}
+.seg button[aria-pressed="true"]{background:var(--acc);color:var(--acc-ink)}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="#/"><b>Polski B1</b><span class="long"> · Gramatyka</span></a>
+  <nav aria-label="Головне меню">
+    <a href="#/" data-nav="home">Теми</a>
+    <a href="#/errors" data-nav="errors">Помилки <span class="badge" id="errBadge" hidden></span></a>
+    <a href="#/exam" data-nav="exam">Іспит</a>
+    <a href="#/settings" data-nav="settings" aria-label="Налаштування" title="Налаштування">⚙</a>
+  </nav>
+</header>
+<main id="app" tabindex="-1"></main>
+<div id="dock" hidden><div class="in">
+  <div class="letters" id="letters" role="group" aria-label="Польські літери" hidden></div>
+  <div class="acts" id="acts"></div>
+</div></div>
+<div class="modal" id="modal" hidden><div class="dlg" role="dialog" aria-modal="true" aria-labelledby="dlgTitle">
+  <header><h2 id="dlgTitle"></h2><button class="btn sm ghost" id="dlgClose" type="button" aria-label="Закрити">✕</button></header>
+  <div class="cnt" id="dlgBody"></div>
+  <footer id="dlgFoot"></footer>
+</div></div>
+<div id="toast" role="status" aria-live="polite" hidden></div>
+<script id="b1-data">
+/* ===== ДАНІ: тексти вправ і ключ зі збірника «Poprawność gramatyczna B1» (6_B1_PG.pdf) =====
+   Розмітка тексту:
+   {{відповідь|варіант}}  пропуск для вписування (усі варіанти з ключа)
+   {=зразок}              заповнений приклад (пункт 0)
+   [[a|*b|c]]             вибір форми, * — правильна; [[=a|*b|c]] — приклад
+   __слово__              підкреслення, ^1^ — номер над словом
+   рядок «# …»            пункт нумерованого списку, «- …» — пункт списку
+*/
+const U = {
+  pod: 'Оберіть правильну форму слова (у збірнику — «підкресліть») за зразком.',
+  naw: 'Доповніть текст правильною формою слів у дужках за зразком.',
+  zai: 'Доповніть текст правильною формою потрібного займенника за зразком.',
+  prz: 'Перетворіть речення за зразком.'
+};
+
+const T_IM = [
+{id:'rz', g:0, pl:'Odmiana rzeczownika i przymiotnika', ua:'Відмінювання іменників і прикметників', ex:[
+ {n:'I', p:4, t:'c', pts:0.25,
+  ins:'Proszę podkreślić poprawną formę wyrazów zgodnie z podanym przykładem (odmiana rzeczowników).', ua:U.pod,
+  hint:'Дивіться на прийменник і питання: «куди?» (na, nad, w, za + знахідний) чи «де?» (nad + орудний, w/na/o/po + місцевий). Після «nie ma», «nie lubimy», «dużo» — родовий; після «dzięki» — давальний.',
+  text:`Od lat z [[=męża|mężowi|*mężem]] podróżujemy po [[Europa|Europę|*Europie]]. Cały rok z niecierpliwością czekamy na [[wakacjach|*wakacje|wakacji]], bo tylko wtedy możemy wyjechać za [[*granicę|granicą|granicy]]. Co dwa lata jeździmy nad [[morzem|*morze|morzu]], gdzie możemy uprawiać [[sportów wodnych|*sporty wodne|sportach wodnych]]. Kiedy jesteśmy nad [[morze|morzu|*morzem]], odpoczywamy i jednocześnie trenujemy. Często wybieramy się też w [[*góry|górę|górach]], ponieważ uwielbiamy [[*widoki|widoków|widoku]], które można podziwiać ze [[*szczytów|szczyty|szczytami]]. Ponadto chętnie zwiedzamy [[zabytków|zabytku|*zabytki]] w europejskich stolicach, chociaż nie lubimy [[ruch|*ruchu|ruchy]] na ulicach miast. W czasie wypraw robimy bardzo dużo [[zdjęcia|zdjęcie|*zdjęć]]. Po powrocie pokazujemy je [[znajomych|*znajomym|znajomi]] i opowiadamy im o [[*naszych przygodach|nasze przygody]]. Dzięki [[*wspomnieniom|wspomnienia|wspomnieniami]] jesteśmy pogodni nawet wtedy, kiedy za oknem nie ma [[słońcu|*słońca|słońce]].`},
+ {n:'II', p:4, t:'f', pts:0.5,
+  ins:'Proszę uzupełnić tekst poprawną formą wyrazów w nawiasach zgodnie z podanym przykładem (odmiana rzeczowników i przymiotników).', ua:U.naw,
+  hint:'Прикметник узгоджується з іменником у роді, числі й відмінку. «na» / «w» (де?) + місцевий множини: -ach і -ych/-ich; «wytwarza» (що?) + знахідний; після іменника («walory…», «postać…») — родовий.',
+  text:`Gdy trzy lata temu piękna Polka wychodziła za mąż podpisała {=intercyzę} {=małżeńską} (intercyza małżeńska). Zdjęcia aktorki można znaleźć na wielu {{stronach}} {{internetowych}} (strona internetowa) i w znanych {{czasopismach}} {{filmowych}} (czasopismo filmowe). Ona jednak uważa, że prawdziwe piękno nosimy w sobie. To ono wytwarza {{naszą}} {{aurę}} (nasza aura). Walory {{niepowtarzalnej}} {{urody}} (niepowtarzalna uroda) gwiazdy docenili producenci. W kolejnym filmie Grażyna Szapołowska wcieli się w postać {{najsłynniejszej}} {{trucicielki}} (najsłynniejsza trucicielka).`},
+ {n:'III', p:5, t:'f', pts:0.5,
+  ins:'Proszę uzupełnić tekst poprawną formą wyrazów w nawiasach zgodnie z podanym przykładem (odmiana rzeczowników).', ua:U.naw,
+  hint:'«na», «w», «po», «o» (де? про що?) + місцевий: -e з чергуванням (piętro → piętrze, sen → śnie), множина -ach. «z», «do» + родовий. «cieszyć się» + орудний. Підмет чоловічо-особовий у множині: -y/-i з чергуванням.',
+  text:`Nasze małe mieszkanko znajdowało się w centrum {=Warszawy} (Warszawa) na dziesiątym {{piętrze}} (piętro). Z jego {{okna|okien}} (okno) roztaczał się widok na Pałac Kultury, centrum i tory kolejowe. Rano wybiegaliśmy z niego każdy do swoich {{zajęć}} (zajęcie). Wieczorem po {{pracy}} (praca) wracaliśmy zmęczeni, żeby odpocząć we własnych czterech {{ścianach}} (ściana) i cieszyć się {{widokiem}} (widok) stolicy. Ale piękny widok nie mógł zrekompensować {{hałasu}} (hałas) przejeżdżających dołem {{pociągów}} (pociąg). Ich intensywne życie zaczynało się właśnie wtedy, kiedy wszyscy {{mieszkańcy}} (mieszkaniec) naszego bloku marzyli o {{śnie}} (sen).`},
+ {n:'IV', p:5, t:'f', pts:0.5,
+  ins:'Proszę uzupełnić tekst poprawną formą wyrazów w nawiasach zgodnie z podanym przykładem (odmiana rzeczowników).', ua:U.naw,
+  hint:'«do», «od», «nie ma», «wiele», «wystarczy», прикметник у родовому множини + іменник — родовий множини (часто нульове закінчення: kasa → kas). «dzięki» + давальний (-owi). «mieć» + знахідний (ж. р. -ę). «w ostatnim…» — місцевий.',
+  text:`Piotr i Małgorzata wybrali się do {=kina} (kino). Kolejki do {{kas}} (kasa) były tak długie, że bali się, czy wystarczy {{biletów}} (bilet). Na szczęście nie zabrakło, ale niestety okazało się, że nie ma już wolnych {{miejsc}} (miejsce) obok siebie. Musieli więc usiąść osobno w ostatnim {{rzędzie}} (rząd). Oboje mieli jednak {{nadzieję}} (nadzieja), że może dzięki {{filmowi}} (film) odpoczną od codziennych {{zajęć}} (zajęcie). Zresztą wszyscy {{widzowie}} (widz) spodziewali się niezwykłych {{wrażeń}} (wrażenie), gdyż film zdobył wiele {{nagród}} (nagroda).`},
+ {n:'V', p:6, t:'f', pts:0.5,
+  ins:'Proszę uzupełnić tekst poprawną formą wyrazów w nawiasach zgodnie z podanym przykładem (odmiana rzeczowników).', ua:U.naw,
+  ex:`Byłem w {=domu} (dom) już o 15.00.`,
+  hint:'Місяці: «w» + місцевий (-u). «z okazji», «wiele», «od… do…» + родовий. «cieszyć się» + орудний. «o» (про що?) і «po» (де?) + місцевий. «z» (з ким?) + орудний множини -ami. «dzięki» + давальний.',
+  text:`W {{czerwcu}} (czerwiec) Piotrek dostał z okazji {{urodzin}} (urodziny) wiele {{prezentów}} (prezent), ale najbardziej cieszył się {{rowerem|z roweru}} (rower). O {{rowerze}} (rower) marzył już dawno. Teraz od {{rana}} (rano) do {{nocy}} (noc) jeździ z {{kolegami}} (koledzy) po {{mieście}} (miasto). Dzięki {{sportowi}} (sport) stał się zdecydowanie zdrowszy.`},
+ {n:'VI', p:6, t:'f', pts:0.5,
+  ins:'Proszę uzupełnić tekst poprawną formą wyrazów w nawiasach zgodnie z podanym przykładem (odmiana rzeczowników).', ua:U.naw,
+  hint:'«szukać», «brak», «do» + родовий. «w» (де? коли?) + місцевий. «jeździć» (чим?) + орудний. «pomagać» (кому?) + давальний. «dwaj…» — називний чоловічо-особовий множини (-owie). Слова на -um в однині не відмінюються.',
+  text:`Ostatnio dużo zmienia się w naszym {=życiu} (życie). Mój mąż długo szukał {{pracy}} (praca) i w końcu ją znalazł. Teraz będzie pracował w {{fabryce}} (fabryka) porcelany. Codziennie będzie tam jeździł {{rowerem}} (rower). Mam nadzieję, że w końcu przestaniemy narzekać na brak {{pieniędzy}} (pieniądze). Nasi dwaj {{synowie}} (syn) ożenili się i wyprowadzają się do własnych {{mieszkań}} (mieszkanie). Nasza córka w przyszłym {{tygodniu}} (tydzień) po raz pierwszy pójdzie do {{gimnazjum}} (gimnazjum). Niedawno zmarła moja bratowa, dlatego teraz muszę trochę więcej pomagać {{bratu}} (brat). Myślimy nawet o tym, żeby zamieszkać w jego dużym {{domu}} (dom).`},
+ {n:'VII', p:6, t:'f', pts:0.5,
+  ins:'Proszę uzupełnić tekst poprawną formą wyrazów w nawiasach zgodnie z podanym przykładem (odmiana rzeczowników).', ua:U.naw,
+  ex:`On nie ma {=psa} (pies).`,
+  hint:'«życzyć» — кому? (давальний: -owi, ж. р. -e/-i) + чого? (родовий). Після «dużo» і «miłych» — теж родовий.',
+  text:`Uwielbiam składać życzenia. W tym miesiącu będą urodziny Marka, mojej siostry, babci i mamy. Chcę życzyć {{Markowi}} (Marek) {{sukcesów}} (sukcesy) w szkole i dużo {{radości}} (radość). Mojej {{siostrze}} (siostra) będę życzył {{powodzenia}} (powodzenie) na egzaminach i dużo {{miłości}} (miłość), a babci {{zdrowia}} (zdrowie) i {{szczęścia}} (szczęście). Dla mamy mam specjalne życzenia. Chcę jej życzyć miłych {{wakacji}} (wakacje).`},
+ {n:'VIII', p:7, t:'f', pts:0.5, kg:2,
+  ins:'Proszę uzupełnić tekst poprawną formą wyrazów w nawiasach zgodnie z podanym przykładem (odmiana rzeczowników).', ua:'Доповніть текст правильною формою слів у дужках за зразком. Кожне слово — окремий пропуск (20 × 0,5 б.).',
+  ex:`Maria i Antoni są bardzo {=towarzyskimi} {=ludźmi} (towarzyski człowiek).`,
+  hint:'Відмінюйте обидва слова разом. «wielu» + родовий (про людей) або давальний («wielu… podobają się» — кому?). «do» + родовий; «nad», «jest» (чим?) + орудний; «odwiedzać», «przez» + знахідний; «przy» + місцевий; «opowieści» (чиї?) + родовий.',
+  text:`Państwo Antoni i Maria Kowalscy mają wielu {{dobrych}} {{przyjaciół}} (dobry przyjaciel) i często zapraszają ich do {{swojego}} {{domu}} (swój dom), który stoi w lesie nad {{jeziorem}} {{mazurskim}} (jezioro mazurskie). Nic dziwnego, że goście lubią odwiedzać {{państwa}} {{Kowalskich}} (państwo Kowalscy) w tej pięknej i spokojnej okolicy. Wielu {{starym}} {{znajomym}} (stary znajomy) bardzo podobają się nie tylko mazurskie krajobrazy, ale także opowieści {{pana}} {{Antoniego}} (pan Antoni), którym przysłuchują się przy {{pysznej}} {{szarlotce}} (pyszna szarlotka) zrobionej przez {{panią}} {{Marię}} (pani Maria). Antoni i Maria są malarzami, dlatego {{najważniejszą}} {{atrakcją}} (najważniejsza atrakcja) każdego ze spotkań towarzyskich jest pokaz kilku {{ostatnich}} {{prac}} (ostatnia praca) gospodarzy.`},
+ {n:'IX', p:7, t:'b', pts:0.5, ins1:1,
+  ins:'Proszę uzupełnić tekst właściwą formą wyrazów z ramki zgodnie z podanym przykładem.', ua:'Доповніть текст правильною формою слів із рамки за зразком. Дотик по слову вставляє його в активний пропуск — далі змініть закінчення.',
+  bank:['monopolowy','apteka','delikatesy','księgarnia','obuwniczy','cukiernia','warsztat','jubilerski','kwiaciarnia','postój','przystanek'],
+  hint:'Спершу виберіть слово за змістом, потім поставте у відмінок: «na» (куди?) + знахідний; «obok», «do» + родовий; «w», «przy» + місцевий; «mam» (що?) + знахідний. «monopolowy», «obuwniczy» відмінюються як прикметники.',
+  text:`Moja żona ma jutro urodziny, mam więc do załatwienia parę spraw na mieście, a tu jak na złość musiałem oddać samochód do {=warsztatu} i naprawa potrwa kilka dni. Nie wiem teraz czy pójść na {{przystanek}} tramwajowy, czy lepiej od razu na {{postój}} taksówek. Muszę załatwić tyle spraw! Obok {{księgarni}}, do której zaglądam regularnie po nowe książki, jest sklep {{jubilerski}}, gdzie widziałem niedużą złotą broszkę. Bez samochodu będę tam jechał godzinę! Chyba jednak pojadę taksówką. Po drodze mam {{kwiaciarnię}}, więc zamówię na jutro kwiaty, w {{cukierni}} zamówię tort. Żona przygotowuje przyjęcie i pewnie jak zwykle będzie za dużo jedzenia, więc może poproszę taksówkarza, żeby zatrzymał na chwilę przy {{aptece}} i wezmę jakieś krople na żołądek – tak na wszelki wypadek. W {{delikatesach}} kupię dobrą kawę i jakiś koniak..., chociaż może lepiej po alkohole wybrać się do {{monopolowego}}. Odkąd samochód jest w naprawie, zauważyłem, że mam niezbyt wygodne buty, ale nie wiem, czy znajdę czas, żeby wejść do {{obuwniczego}} i kupić sobie jakieś wygodniejsze.`}
+]},
+
+{id:'zo', g:0, pl:'Zaimki osobowe', ua:'Особові займенники', ex:[
+ {n:'I', p:8, t:'f', pts:0.5,
+  ins:'Proszę uzupełnić tekst poprawną formą wyrazów w nawiasach zgodnie z podanym przykładem.', ua:U.naw,
+  ex:`Czekam na {=ciebie} (ty).`,
+  hint:'Після прийменника займенник 3-ї особи починається на n-. Перевірте відмінок: «o» + місцевий, «na» + знахідний, «z» + орудний; «przynosi» — кому? (давальний); «odprowadza» — кого? (знахідний).',
+  text:`Piotr zakochał się w Agnieszce. Myśli o {{niej}} (ona) cały czas. Codziennie czeka na {{nią}} (ona) przed uniwersytetem, przynosi {{jej}} (ona) róże, odprowadza {{ją}} (ona) do domu. Rozmawia z {{nią}} (ona) o wszystkim.`},
+ {n:'II', p:8, t:'f', pts:0.5,
+  ins:'Proszę uzupełnić tekst poprawną formą właściwego zaimka zgodnie z podanym przykładem.', ua:U.zai,
+  ex:`Wczoraj odwiedziłam moich rodziców. Często odwiedzam {=ich} w niedzielę.`,
+  hint:'Спершу визначте, про кого мова (я, вони, вона, він), потім відмінок: «z» + орудний, «za» (przepadać za) + орудний, «bez», «do» + родовий, «pomagać», «opowiadać», «być wdzięcznym» — кому? (давальний), «pytać», «kochać» — кого?',
+  text:`Rozmawiam z {{nimi}} o ich zdrowiu, a oni pytają {{mnie}} o moją pracę i rodzinę. Opowiadam {{im}} o mojej córce – ich wnuczce – Oli. Ola czasem przyjeżdża ze {{mną}} do dziadków, którzy po prostu za {{nią}} przepadają. Nic dziwnego, jest przecież ich jedyną wnuczką! Ona też bardzo {{ich}} kocha i uwielbia pomagać {{im}} w ogrodzie. Mój mąż pracuje za granicą, więc zwykle jeżdżę bez {{niego}}. On też lubi moich rodziców, więc telefonuje do {{nich}} regularnie i opowiada o tym, co się dzieje na świecie. Moi rodzice są {{mu}} za to bardzo wdzięczni.`},
+ {n:'III', p:9, t:'f', pts:0.5,
+  ins:'Proszę uzupełnić tekst poprawną formą właściwego zaimka zgodnie z podanym przykładem.', ua:U.zai,
+  hint:'Займенник заміняє іменник із попереднього речення: рід і число беріть від нього (życie — ono, warszawiacy — oni, dziewczyny — one). «o» + місцевий, «z» + орудний, «wśród», «według» + родовий; «miło jest», «podobają się», «wydają się», «smakują» — кому? (давальний).',
+  text:`Warszawa, 20 lipca 2006 r.
+Drogi Thomasie!
+Bardzo dziękuję za Twój długi i ciekawy list. Zadajesz tyle pytań! Nie mam dzisiaj zbyt dużo czasu, spróbuję jednak na niektóre z {=nich} odpowiedzieć.
+Chcesz wiedzieć, jak wygląda moje życie w Polsce. Dobrze, zaraz o {{nim}} opowiem, choć trudno {{je}} opisać w paru słowach. Po pierwsze: zaprzyjaźniłem się z wieloma warszawiakami najczęściej spędzam czas po pracy właśnie z {{nimi}}, najczęściej z dziewczynami, czuję się wśród {{nich}} zdecydowanie bardziej swojsko niż z mężczyznami. A szczególnie miło jest {{mi}} w towarzystwie pewnej Agnieszki. Zresztą, nie tylko {{mnie|mi}} podobają się polskie dziewczyny. Gdy zapytasz innych cudzoziemców, którzy mieszkają w Polsce, co o {{nich}} sądzą, usłyszysz, że Polki wydają {{im}} się ciepłe, otwarte i bardziej tolerancyjne od mężczyzn.
+Thomasie, liczę na rewanż, to znaczy na ciekawe opowieści o Twoim stażu w Hiszpanii. Przede wszystkim napisz, jak smakują {{Ci}} potrawy hiszpańskie. Są chyba w Twoim guście, uwielbiasz przecież pomidory!!! Według {{mnie}} najlepszymi polskimi potrawami są zupy. Najsmaczniejsza, którą jadłem, to „zupa babuni”, czyli niedzielny rosół przygotowany przez babcię Agnieszki. Mniam, mniam!
+Czekam na Twój kolejny list.
+Mike, po polsku Michał
+PS. Mniam, mniam znaczy, że coś było wyjątkowo smaczne i że chciałbyś jeszcze jedną porcję tego samego!!!`}
+]},
+
+{id:'zr', g:0, pl:'Zaimki – różne', ua:'Займенники: присвійні, вказівні, відносні, заперечні', ex:[
+ {n:'I', p:10, t:'c', pts:0.25,
+  ins:'Proszę podkreślić poprawną formę wyrazu zgodnie z podanym przykładem.', ua:U.pod,
+  hint:'«jego», «jej», «ich» як присвійні (чий?) не змінюються і не мають n-. Форми на n- (niego, niej, nim) — лише після прийменника. Короткі форми (go, mu) — після дієслова без наголосу. «twój», «wasz» відмінюються як прикметники.',
+  text:`Mężczyznę, którego wybrałaś na męża, cenisz za [[=*jego|niego|go]] urok, inteligencję, czułość. Prawdopodobnie, to właśnie jego matka nauczyła [[jego|*go|nim]] tego wszystkiego, co najbardziej cię w [[*nim|niego|niemu]] zachwyca. Postaraj się być [[*jej|niej|ją]] za to wdzięczna. Powinnaś poznać i szanować zasady panujące w [[ją|niej|*jej]] domu. Może niektóre warto przenieść do [[wasza|*waszej|waszą]] rodziny. Kochaj [[ją|niej|*jej]] syna i okazuj to - każda matka będzie ci wdzięczna za troskę o [[*jej|nią|ją]] nawet całkiem dorosłe dziecko. Zawsze pamiętaj, że matka [[twój|twoim|*twojego]] męża była przez kilkanaście lat najważniejszą kobietą [[niego|jemu|*jego]] życia i staraj się tego nie niszczyć. Pamiętaj, żebyście mieli dla [[*niej|nią|jej]] czas - tęskni za synem tak jak [[twoją|twojej|*twoja]] mama za [[*tobą|tobie|ciebie]].`},
+ {n:'II', p:10, t:'c', pts:0.25,
+  ins:'Proszę podkreślić poprawną formę wyrazu zgodnie z podanym przykładem.', ua:U.pod,
+  ex:`Czy powinien zbadać [[=*go|jego|niego]] lekarz?`,
+  hint:'На початку речення — повна форма (Jego, не Go). «niepokoi» — кого? (знахідний), «należy zrobić», «jest wygodnie» — кому? (давальний). Присвійні «mój», «nasz» узгоджуються з іменником («wnuka» — родовий).',
+  text:`Mój wnuczek jest bardzo żywym chłopcem, świetnie się rozwija, bo w wieku siedmiu lat ma 152 cm wzrostu i waży 38 kg. [[Im|*Jego|Niego]] rodzice także są wysocy. Trochę [[mną|mi|*mnie]] to niepokoi, że przy każdym większym wysiłku chłopiec strasznie się poci. Martwię się o stan zdrowia [[*mojego|moim|mojemu]] wnuka, dlatego chciałabym wiedzieć, czy należy [[jemu|*mu|niemu]] zrobić jakieś badania. Czy organizm [[naszemu|naszym|*naszego]] wnuka dojrzewa zbyt szybko? Najgorsze, że rodzice chłopca nie widzą w tym nic złego. Prawdopodobnie jest [[ich|*im|nich]] tak wygodnie. Liczą na to, że kiedy chłopiec podrośnie, [[*ich|im|nich]] problemy nagle się skończą. Proszę więc uprzejmie o fachową poradę, co mam robić w tej sytuacji, czy słuchać [[ich|moje|*moich]] dzieci, czy leczyć wnuka...`},
+ {n:'III', p:11, t:'c', pts:0.25,
+  ins:'Proszę podkreślić poprawną formę wyrazu zgodnie z podanym przykładem.', ua:U.pod,
+  hint:'«delfiny», «zwierzęta», «zajęcia» — не чоловічо-особові: te, one, same; знахідний — je. «uczyć» — кого? (je), «podawać» — кому? (im), «z» + орудний, «od» + родовий. «chcieć» — чого? Власник = підмет → swój.',
+  text:`Na świecie jest dużo delfinariów, czyli basenów, w których można oglądać delfiny. [[=*Te|Tych|Ci]] zwierzęta morskie interesują człowieka od bardzo dawna. Po umieszczeniu delfinów w basenie zaczyna się [[ich|*je|one]] uczyć. Początkowo opiekun, siedząc w łódce, podaje [[ich|nim|*im]] ryby z ręki, ale już po paru dniach pływa wraz z [[*nimi|nich|nie]], częstuje rybami, gładzi delikatnie [[nim|nich|*ich]] ciepłą skórę. Delfiny bardzo lubią [[ci|*te|tych]] zajęcia i wkrótce [[sami|*same|samych]] poszukują towarzystwa [[*swojego|twojego|jego]] opiekuna. Dopiero [[*taka|taki|takie]] bliska znajomość pozwala na rozpoczęcie właściwego treningu. Delfiny niezwykle szybko rozumieją, [[co|czemu|*czego]] chce od [[nim|*nich|nimi]] trener i nieraz po jednej lekcji potrafią powtórzyć całe zadanie.`},
+ {n:'IV', p:11, t:'f', pts:0.5,
+  ins:'Proszę uzupełnić zdania poprawną formą właściwych zaimków zgodnie z podanym przykładem.', ua:'Доповніть речення правильною формою потрібних займенників за зразком.',
+  ex:`Jan jest wspaniałym ojcem. Bardzo troszczy się o {=swoje} dzieci. Kiedy patrzę na {=jego} dzieci wierzę, że mężczyzna jest w stanie wychowywać je bez kobiety.`,
+  hint:'Якщо власник — підмет цього ж речення, вживайте «swój» (у потрібному відмінку). Якщо власник інший — nasz, wasz, twój, mój. Форму підкаже іменник після пропуску.',
+  note:'П. 5: ключ допускає також «z twoimi / z twymi» (тоді перед займенником «z», а не «ze»).',
+  text:`# Wpłaciliśmy wszystkie pieniądze na konto, gdyż mamy zaufanie do {{naszego|swojego|swego}} banku.
+# Zofia spędza każdą wolną chwilę w ogrodzie. Nie zaniedbuje {{swoich|swych}} roślin.
+# Jesteśmy dobrymi sąsiadami. Możecie iść dzisiaj do kina, zaopiekujemy się {{waszymi}} dziećmi.
+# Barbara często odwiedza wnuczęta i przy każdej okazji robi zdjęcia {{swojej|swej}} najmłodszej wnuczce.
+# Wiem, że uczysz w szkole, ale nie sądziłem, że co roku jeździsz ze {{swoimi|swymi|twoimi|twymi}} uczniami w góry.
+# Maria i Piotr zbierają znaczki, ale nikomu nie pokazują {{swojej|swej}} kolekcji.
+# Cieszę się, że bierzecie ślub. Z radością zatańczę na {{waszym}} weselu.
+# Andrzej buduje dom. Przeznaczył go dla {{swoich|swych}} synów.
+# Po latach odważyłam się pokazać, co maluję. Za tydzień otwieram wystawę {{swoich|swych|moich}} obrazów.
+# Musimy zmienić opiekunkę, zupełnie nie rozumie problemów {{naszych}} dzieci.`},
+ {n:'V', p:12, t:'s', pts:0.5,
+  ins:'Proszę przekształcić zdania zgodnie z podanym przykładem.', ua:'З’єднайте два речення в одне за допомогою «który» за зразком.',
+  hint:'«który» бере рід і число від іменника в головному реченні, а відмінок — від своєї ролі в підрядному (szukać + родовий, pomóc + давальний; чий? — родовий). Прийменник ставиться перед «który». Перед «który» — кома.',
+  exs:{q:'Sprzedajemy mieszkanie. Przeżyliśmy w nim dwadzieścia lat.', a:'Sprzedajemy mieszkanie, w którym przeżyliśmy dwadzieścia lat.'},
+  items:[
+   {q:'Znalazłem zeszyty. Szukałem ich od wczoraj.', a:['Znalazłem zeszyty, których szukałem od wczoraj.']},
+   {q:'Spotkałam znajomego. Pomogłam mu kiedyś w znalezieniu pracy.', a:['Spotkałam znajomego, któremu (pomogłam kiedyś|kiedyś pomogłam) w znalezieniu pracy.']},
+   {q:'Poznałem kobietę. Jej syn zginął w wypadku.', a:['Poznałem kobietę, której syn zginął w wypadku.']},
+   {q:'Wychowawca rozmawia z rodzicami. Ich dzieci pojadą do Zakopanego.', a:['Wychowawca rozmawia z rodzicami, których dzieci pojadą do Zakopanego.']},
+   {q:'Odwiedziłem kolegów. Chodziłem z nimi do szkoły.', a:['Odwiedziłem kolegów, z którymi chodziłem do szkoły.']}
+  ]},
+ {n:'VI', p:12, t:'c', pts:0.25,
+  ins:'Proszę podkreślić poprawną formę wyrazu zgodnie z podanym przykładem.', ua:U.pod,
+  ex:`Joanna jest [[=moja|*moją|swoją]] koleżanką od czasów szkoły podstawowej.`,
+  hint:'Подвійне заперечення: nikt / nic / nikomu + nie. «lubić» із запереченням — родовий (nie lubił jej). «który» узгоджується з іменником, відмінок — від дієслова. «tę książkę» (знахідний), «tej książki» (родовий). «siebie» — родовий/знахідний, «sobą» — орудний.',
+  text:`Znam [[ona|jej|*ją]] już zatem 30 lat. [[*Nikt|Żaden|Nikogo]] w klasie nie lubił [[ona|*jej|ją]], bo zawsze była najlepszą uczennicą, więc dzieci zazdrościły Joasi. Ja zaprzyjaźniłam się z [[*nią|ją|niej]] podczas wycieczki, [[który|której|*którą]] zorganizowała nasza wychowawczyni. Joasia usiadła w autobusie jak zwykle sama, a ja spóźniłam się trochę, więc nie miałam z [[czym|kogo|*kim]] usiąść. Nie lubiłam wtedy [[*siebie|sobie|sobą]] za to, że nie przyszłam na czas. Byłam nawet obrażona na [[naszą|naszej|*naszego]] kolegę, bo to on zaproponował, żebym siedziała z Joasią. Byłam tak bardzo zła, że [[nikt|*nic|nikomu]] nie powiedziałam, popatrzyłam tylko na [[jego|go|*niego]] z wyrzutem, a on zaczął się śmiać ze [[mną|*mnie|mi]]. Przez pół drogi obie milczałyśmy, aż w końcu Joasia wyciągnęła książkę i zaczęła [[jej|*ją|nią]] czytać. Okazało się, że moja sąsiadka czyta jedną z powieści Małgorzaty Musierowicz – [[*mojej|moja|moją]] ulubionej pisarki, ale [[ta|tą|*tej]] książki jeszcze nie znałam. Odważyłam się w końcu i zapytałam:
+– Czy mogę od [[*ciebie|cię|tobie]] pożyczyć [[*tę|tej|ta]] książkę, [[gdzie|skąd|*kiedy]] ją już przeczytasz?
+Joasia uśmiechnęła się, podała [[mnie|*mi|mną]] książkę, a sama z torby wyciągnęła kolejną. Nie zajęłyśmy się jednak lekturą, ale obie zaczęłyśmy z [[siebie|*sobą|sobie]] rozmawiać o naszych ulubionych książkach. I od [[temu|ten|*tego]] dnia zaczęła się nasza przyjaźń, która trwa już wiele lat.`}
+]},
+
+{id:'st', g:0, pl:'Stopniowanie przymiotnika i przysłówka', ua:'Ступені порівняння прикметників і прислівників', ex:[
+ {n:'I', p:13, t:'c', pts:0.25,
+  ins:'Proszę podkreślić poprawną formę wyrazu zgodnie z podanym przykładem.', ua:U.pod,
+  ex:`Po każdym praniu ten sweter robi się [[=długi|*dłuższy|najdłuższy]].`,
+  hint:'«niż» → вищий ступінь. «z całej…», «jaki w życiu…», «na roku» → найвищий. «z miesiąca na miesiąc», «po każdym…» → coraz + вищий ступінь. «nadzwyczaj» вживається зі звичайною формою.',
+  text:`# Kto jest [[starszy|coraz starszy|*najstarszy]] w rodzinie - ty czy Adam?
+# To był [[*najnudniejszy|coraz bardziej nudny|mniej nudny]] film, jaki w życiu widziałam.
+# Jarek jest [[zmęczony|*bardziej zmęczony|najmniej zmęczony]] po balu niż po pracy.
+# Przesyłam Ci [[bardziej gorące|gorętsze|*najgorętsze]] pozdrowienia i uściski.
+# Jej ojciec z miesiąca na miesiąc staje się [[*coraz bardziej siwy|najmniej siwy|najbardziej siwy]].
+# Z całej rodziny [[bardziej opalony|opalony|*najmniej opalony]] jest Piotrek.
+# Po każdym następnym kieliszku wina Jurek stawał się [[wesoły|*coraz weselszy|najweselszy]].
+# Wydaje mi się, że twój pies jest [[*bardziej posłuszny|coraz mniej posłuszny|najmniej posłuszny]] niż mój.
+# Poprzedni test był nadzwyczaj [[łatwiejszy|*łatwy|mniej łatwy]].
+# Adam jest bez wątpienia [[bardziej zdolnym|zdolniejszym|*najzdolniejszym]] studentem na roku.`},
+ {n:'II', p:14, t:'f', pts:0.75,
+  ins:'Proszę uzupełnić tekst poprawną formą wyrazów w nawiasach zgodnie z podanym przykładem.', ua:U.naw,
+  ex:`Udowodniono, że ci, którzy kochają sport, są {=pewniejsi} (pewny) siebie i {=łatwiej} (łatwo) pokonują trudności.`,
+  hint:'Порівняння двох («od Ewy», «od brata») → вищий ступінь. Прикметник: -szy / -ejszy (узгодьте рід), прислівник: -ej / -iej. Дієприкметникові форми на -any порівнюються описово: bardziej + слово.',
+  text:`Ewa i Adam to bliźnięta. Chodzą do jednej klasy. Adam jest {{spokojniejszy}} (spokojny) od Ewy, {{częściej}} (często) się uśmiecha i jest {{bardziej wysportowany}} (wysportowany) od niej. Za to Ewa {{ładniej}} (ładnie) śpiewa i gra na gitarze oraz jest {{odważniejsza}} (odważna) od brata.`},
+ {n:'III', p:14, t:'f', pts:0.75,
+  ins:'Proszę uzupełnić tekst poprawną formą wyrazów w nawiasach zgodnie z podanym przykładem.', ua:U.naw,
+  ex:`W szkole przyjaźniłam się z Olą, Gabrysią i Beatą. Ola była {=szczuplejsza} (szczupły) niż Gabrysia, ale Gabrysia biegała {=najszybciej} (szybko) ze wszystkich dziewcząt.`,
+  hint:'«z całej grupy», «w klasie», «w całej szkole» → найвищий ступінь (naj-). «niż», «od nas» → вищий. Узгодьте прикметник з іменником (рід, число, відмінок). «dobrze» порівнюється неправильно; слова на -ący — описово (najbardziej…).',
+  text:`Ja natomiast skakałam {{najwyżej}} (wysoko) z całej grupy. Beata była {{najzdolniejsza}} (zdolny) w klasie z przedmiotów artystycznych, chociaż {{lepiej}} (dobrze) rysowała niż malowała. Ola miała {{najbardziej interesujący}} (interesujący) głos w całej szkole. Wszystkie byłyśmy lubiane przez {{młodsze}} (młody) od nas koleżanki.`},
+ {n:'IV', p:15, t:'f', pts:0.75,
+  ins:'Proszę uzupełnić tekst poprawną formą wyrazów w nawiasach zgodnie z podanym przykładem.', ua:'Доповніть текст: утворіть вищий ступінь прикметника і порівняння (od + родовий або niż + називний) за зразком.',
+  ex:`Feliks i Felicja mają troje dzieci i chyba są (szczęśliwi, sąsiedzi), którzy nie mają dzieci.
+Feliks i Felicja mają troje dzieci i chyba są {=szczęśliwsi od sąsiadów}, którzy nie mają dzieci.`,
+  hint:'Вищий ступінь + «od» + родовий (od Basi, od sióstr) або + «niż» + називний (niż Basia). Прикметник узгоджується з підметом. «męczący» порівнюється описово (bardziej…).',
+  text:`Ich córki Ania i Basia są bliźniaczkami, ale Ania jest {{wyższa od Basi|wyższa niż Basia}} (wysoka, Basia). Syn Bartek jest {{młodszy od sióstr|młodszy niż siostry}} (młody, siostry). Czasem sąsiedzi skarżą się, że dziewczynki hałasują i są {{bardziej męczące od brata|bardziej męczące niż brat}} (męczące, brat). Bartek jest {{spokojniejszy od kolegów|spokojniejszy niż koledzy}} (spokojny, koledzy). Feliks i Felicja są lekarzami, a dzieci lekarzy zwykle są {{zdrowsze od rówieśników|zdrowsze niż rówieśnicy}} (zdrowe, rówieśnicy).`},
+ {n:'V', p:15, t:'f', pts:0.75,
+  ins:'Proszę uzupełnić tekst poprawną formą wyrazów w nawiasach zgodnie z podanym przykładem.', ua:U.naw,
+  ex:`Pawełek i Janeczka postanowili zająć się nareszcie swoimi sprawami. Dzień wydawał się {=właściwszy} (właściwy) niż wczoraj, trudno było wybrać {=lepszy} (dobry).`,
+  hint:'Усюди вищий ступінь. Прислівники: mało, krótko, długo мають форми з чергуванням (-ej). Прикметники узгоджуйте з «gruszki» (не чоловічо-особова множина: -e). «miękki» найчастіше порівнюється описово.',
+  text:`Dzisiaj Janeczka i Pawełek mieli {{mniej}} (mało) lekcji, byli więc w szkole {{krócej}} (krótko). Rafał natomiast zapowiedział, że będzie zajęty {{dłużej}} (długo) i pojawi się dopiero na obiedzie. Babcia na deser przygotowała gruszki, które w tym roku były {{słodsze}} (słodki) i {{bardziej miękkie}} (miękkie) niż zwykle.`},
+ {n:'VI', p:15, t:'f', pts:0.75,
+  ins:'Proszę uzupełnić tekst poprawną formą wyrazów w nawiasach zgodnie z podanym przykładem.', ua:U.naw,
+  hint:'«niż», «od», «o wiele», «znacznie» → вищий ступінь; «jedna z…», «w Polsce», «tamtych czasów», «należy do…» → найвищий. Потім поставте форму в потрібний відмінок і рід: «jest» + орудний, «z», «do» + родовий множини, чоловічо-особова множина -si.',
+  text:`Przewodniki po Polsce informują, że Gdańsk przez setki lat był {=największym} (duży) portem nad Bałtykiem, natomiast zamek w Malborku jest {=większy} (duży) niż inne gotyckie zamki w Europie. Ratusz w Toruniu to jedna z {{najpiękniejszych|piękniejszych}} (piękny) budowli tego typu w Europie. Wśród informacji o Warszawie czytamy, że Kolumna Zygmunta jest {{najstarszym}} (stary) polskim pomnikiem przedstawiającym osobę świecką. Dalej dowiadujemy się również, że przy urządzaniu pałacyku w Wilanowie pracowali {{najlepsi}} (dobry) artyści tamtych czasów. Na temat Zamościa napisano, iż jego {{najważniejsze|ważniejsze}} (ważny) obiekty zbudowano w ciągu dwudziestu lat. Przy opisie Krakowa znajdujemy informację, że figury ołtarza w Kościele Mariackim są {{większe}} (wielki) niż rzeczywiste ludzkie postacie. W części poświęconej polskiej przyrodzie czytamy, iż Ojcowski Park Narodowy jest o wiele {{mniejszy}} (mały) od innych parków narodowych w Polsce. Napisano tam również, że drzewa w Puszczy Białowieskiej są znacznie {{wyższe}} (wysoki) i {{grubsze}} (gruby) niż w innych polskich lasach, że Hańcza jest {{najgłębszym}} (głęboki) jeziorem w Polsce, a dolina Biebrzy należy do {{najdzikszych|dzikszych}} (dziki) obszarów w naszym kraju.`},
+ {n:'VII', p:16, t:'f', pts:0.5,
+  ins:'Proszę uzupełnić tekst poprawną formą wyrazów w nawiasach zgodnie z podanym przykładem.', ua:U.naw,
+  hint:'Усюди вищий ступінь. Узгодьте прикметник з іменником: ranki — множина (-e), zieleń і piosenka — жіночий рід (-a), wszystko — середній (-e). «wesoło» — прислівник (-ej). «dobry» і «drogi» мають особливі форми.',
+  text:`Być może, gdzie indziej są ziemie {=piękniejsze} (piękny),
+I noce gwiaździstsze, i ranki {{jaśniejsze}} (jasny),
+być może bujniejsza, {{zieleńsza}} (zielony) jest zieleń
+i ptaki w gałęziach śpiewają {{weselej}} (wesoło) (...).
+Być może, być może, że wszystko jest {{lepsze}} (dobry)
+i ptaki, i gwiazdy, i śpiew i powietrze (...).
+Być może, gdzie indziej... lecz sercu jest {{droższa}} (drogi)
+piosenka znad Wisły i piasek Mazowsza.
+S. R. Dobrowolski, Być może`}
+]}
+];
+const T_WE = [
+{id:'te', g:1, pl:'Odmiana czasownika w czasie teraźniejszym i przyszłym prostym', ua:'Теперішній і простий майбутній час', ex:[
+ {n:'I', p:17, t:'f', pts:0.5,
+  ins:'Proszę uzupełnić tekst czasownikami w czasie teraźniejszym zgodnie z podanym przykładem.', ua:'Доповніть текст дієсловами в теперішньому часі за зразком.',
+  hint:'Визначте підмет: Anna, Karol, pies → 3-тя особа однини; «oboje» → 3-тя особа множини. -ować / -ywać → -uje; brać → bierze; jeść → jedzą; jeździć → jeżdżą.',
+  text:`Anna {=wstaje} (wstawać) zwykle bardzo wcześnie rano. Najpierw {{gimnastykuje się}} (gimnastykować się) i {{bierze}} (brać) krótką kąpiel w wannie. Kiedy Anna {{myje się}} (myć się), jej mąż Karol {{przygotowuje}} (przygotowywać) poranną kawę. Potem oboje {{jedzą}} (jeść) śniadanie. Po śniadaniu Anna zwykle {{wyprowadza}} (wyprowadzać) na spacer psa, a o siódmej oboje {{opuszczają}} (opuszczać) dom. Do pracy {{jeżdżą}} (jeździć) najczęściej tramwajem, ale w pogodne dni {{chodzą}} (chodzić) do pracy pieszo. Domu {{pilnuje}} (pilnować) pies.`},
+ {n:'II', p:17, t:'f', pts:0.5,
+  ins:'Proszę uzupełnić tekst czasownikami w czasie teraźniejszym zgodnie z podanym przykładem.', ua:'Доповніть текст дієсловами в теперішньому часі за зразком.',
+  hint:'Оповідь від 1-ї особи (ja): -ę або -am. Winda, pan Stefan → 3-тя особа однини; sąsiedzi → 3-тя особа множини (-ą). -ować → -uję / -ują; musieć → muszę; móc → mogę, może.',
+  text:`Po ciężkiej pracy {=wracam} (wracać) do domu. Na uliczce pod blokiem nie {{znajduję}} (znajdować) wolnego miejsca na zaparkowanie samochodu. {{Muszę}} (Musieć) więc zostawić auto kilkadziesiąt metrów dalej. {{Wchodzę}} (Wchodzić) do klatki schodowej, {{chwytam}} (chwytać) drzwi od windy i w tym momencie winda {{rusza}} (ruszać) w górę. „Kto zabrał mi windę! Przecież w dół pan Stefan {{może|mógł}} (móc, on) zejść po schodach” – {{myślę|myślałam}} (myśleć, ja) ze złością. Sąsiedzi {{potrafią}} (potrafić) zepsuć humor nawet wtedy, gdy nie {{robią}} (robić) niczego złego. Czasem {{denerwują}} (denerwować) nas samą swoją obecnością.`},
+ {n:'III', p:18, t:'f', pts:0.5,
+  ins:'Proszę uzupełnić tekst czasownikami w czasie teraźniejszym zgodnie z podanym przykładem.', ua:'Доповніть текст дієсловами в теперішньому часі за зразком.',
+  hint:'Заперечення «być» у значенні наявності: nie ma + родовий. Rosa говорить про себе (ja) і про себе з подругою (my). Sąsiedzi, jedni, inni, panie → 3-тя особа множини. śmiać się → śmieją się, piec → pieką, bać się → boję się, brać → biorę.',
+  text:`A: Przepraszam, czy {=rozmawiam} (rozmawiać) z panią Ewą?
+B: W tej chwili {{nie ma}} (nie być) jej w domu.
+A: Jestem studentką pani Ewy i {{potrzebuję}} (potrzebować) jej pomocy.
+B: Proszę zadzwonić później. Mama powinna wrócić około dziewiątej. A może ja {{mogę}} (móc) pani pomóc?
+A: Bardzo pani miła. Pozwoli pani, że się przedstawię. {{Mam}} (Mieć) na imię Rosa i {{mieszkam}} (mieszkać) razem z moją koleżanką z Brazylii w akademiku dla cudzoziemców, na dziewiątym piętrze. Codziennie {{kładziemy się}} (my – kłaść się) spać o trzeciej nad ranem i dlatego zawsze {{spóźniam się|spóźniamy się}} (spóźniać się) na zajęcia. A to dlatego, że nasi sąsiedzi okropnie {{hałasują}} (hałasować). Jedni {{jeżdżą}} (jeździć) rowerami po korytarzu, inni {{krzyczą}} (krzyczeć) lub głośno {{śmieją się}} (śmiać się), jeszcze inni {{trenują}} (trenować) karate lub przez całą noc {{pieką}} (piec) i {{jedzą}} (jeść) jakieś potrawy. Już tego {{nie wytrzymujemy}} (my – nie wytrzymywać)! {{Boję się}} (ja – Bać się), że jeśli się nie wyprowadzimy, to niedługo zwariujemy. Moja koleżanka od kilku dni {{płacze}} (płakać), tak jest zmęczona tą sytuacją. Może panie {{wiedzą}} (wiedzieć), jak znaleźć niedrogie mieszkanie niedaleko szkoły?
+B: Proszę przygotować kartkę i długopis. Podam pani numer telefonu mojej koleżanki ze studiów, która właśnie {{poszukuje}} (poszukiwać) współlokatorek.
+A: Już {{biorę}} (brać)! Gotowe, słucham panią.
+B: Nazywa się Małgorzata Zasadzińska, tel. 0 - 42 - 667 - 985.
+A: Bardzo, bardzo dziękuję. Do widzenia!
+B: Do widzenia.`},
+ {n:'IV', p:19, t:'f', pts:0.5,
+  ins:'Proszę uzupełnić tekst czasownikami w czasie teraźniejszym zgodnie z podanym przykładem.', ua:'Доповніть текст дієсловами в теперішньому часі за зразком.',
+  hint:'Особа вказана в дужках (ty, my, wy). Де її немає — шукайте підмет: sekundy, naukowcy → 3-тя особа множини; ono → 3-тя однини. «Kilkadziesiąt tysięcy Polaków» + дієслово в 3-й особі однини. stać → stoi, móc → możecie.',
+  text:`Po zrobieniu zakupów {=wychodzisz} (wychodzić, ty) na parking przed supermarketem i długo {{rozglądasz się|się rozglądasz}} (ty – rozglądać się) w poszukiwaniu auta. {{Mijają}} (Mijać) sekundy, potem minuty. W głowie pustka. „Gdzie ono {{stoi}} (stać)?” – {{denerwujesz się}} (ty – denerwować się). Codziennie kilkadziesiąt tysięcy Polaków {{łapie}} (łapać) się na tym. {{Mamy}} (my – Mieć) jednak dobrą wiadomość: {{możecie}} (wy – móc) ulepszyć swą pamięć! Naukowcy {{polecają}} (polecać) proste ćwiczenia – także gimnastyczne! Bieganie, podobnie jak inne sporty {{poprawiają}} (poprawiać) również pracę umysłu. Nie {{wierzycie}} (wy – wierzyć)? Są na to dowody! Potwierdza się stara prawda, że w zdrowym ciele zdrowy duch.`}
+]},
+
+{id:'pr', g:1, pl:'Odmiana czasownika w czasie przeszłym', ua:'Минулий час', ex:[
+ {n:'I', p:19, t:'f', pts:0.5,
+  ins:'Proszę uzupełnić tekst czasownikami w czasie przeszłym zgodnie z podanym przykładem.', ua:'Доповніть текст дієсловами в минулому часі за зразком.',
+  hint:'Рід і число беріть від підмета: Tomasz, Adam → -ł; Anna → -ła; Beata i Anna, siostry (жінки) → -ły; «wy» про жінок → -łyście; «nic» → середній рід -ło. wziąć → wzięła, krzyknąć → krzyknęła, przyjść → przyszły.',
+  text:`Tomasz {=miał} (mieć) wczoraj urodziny i {{zaprosił}} (zaprosić) na przyjęcie wszystkich swych przyjaciół. Beata i Anna jak zwykle się {{spóźniły}} (spóźnić), a w dodatku {{zapomniały}} (zapomnieć) o prezencie.
+Beata: „{{Myślałam}} (myśleć), że ty go {{wzięłaś}} (wziąć), Aniu!”
+Ania: „To twoja wina!” – {{krzyknęła}} (krzyknąć) na siostrę Anna.
+Tomasz: „Dajcie spokój. Nic się przecież nie {{stało}} (stać)”.
+„Najważniejsze, że wy {{przyszłyście}} (przyjść)” – {{zapewniał}} (zapewniać) Adam.
+Siostry przez cały wieczór {{czuły}} (czuć) się jednak źle.`},
+ {n:'II', p:20, t:'f', pts:0.5,
+  ins:'Proszę uzupełnić tekst czasownikami w czasie przeszłym zgodnie z podanym przykładem.', ua:'Доповніть текст дієсловами в минулому часі за зразком.',
+  hint:'Авторка — жінка: ja → -łam. Mama, pani Halinka → -ła; pan Stanisław, pan Kazio → -ł; my (мішана група) → -liśmy. rozpocząć → rozpoczęła, znaleźć → znaleźli, zanieść → zaniósł, piec → piekła.',
+  text:`Gdy {=miałam} (mieć, ja) 7 lat, {{mieszkałam|mieszkaliśmy}} (mieszkać) z mamą i dwoma młodszymi braćmi. W tym czasie mama {{pracowała}} (pracować) w banku, a oprócz tego {{rozpoczęła}} (rozpocząć) studia podyplomowe. {{Miała}} (Mieć) dla nas mało czasu. Niespodziewanie {{znaleźliśmy}} (znaleźć, my) pomoc i przyjaźń u naszych sąsiadów, państwa Hanny i Stanisława Korniaków. Pan Stanisław pomimo choroby zawsze {{znajdował}} (znajdować) siłę i czas, by się z nami pobawić. Ich syn, pan Kazio, {{uratował}} (uratować) mi życie, gdy zimą {{zaniósł}} (zanieść) mnie na rękach do ośrodka zdrowia. Jego siostra, pani Halinka, {{piekła}} (piec) nam urodzinowe torty. Może to zwykłe historie, ale dla mnie bardzo ważne. Teraz mam 22 lata i własną rodzinę, ale do dziś jestem wdzięczna za wszystko Państwu Korniakom i pisząc ten list, {{chciałam}} (chcieć) im podziękować.`},
+ {n:'III', p:20, t:'f', pts:0.5,
+  ins:'Proszę uzupełnić tekst czasownikami w czasie przeszłym zgodnie z podanym przykładem.', ua:'Доповніть текст дієсловами в минулому часі за зразком.',
+  hint:'Tomek — чоловік: ja → -łem, ty → -łeś; my, wy, koledzy → -liśmy, -liście, -li. Безособове «okazało się», «zależało» → середній рід. iść: poszedł / poszła / przyszli; zacząć → zaczęliśmy; zająć → zająłem; zjeść → zjadłem; znaleźć → znaleźli.',
+  text:`Ala: Tomek, co {=robiłeś} (robić, ty) w sobotę wieczorem? Czy {{poszedłeś}} (pójść, ty) w końcu na ten nowy film Almodóvara?
+Tomek: O siódmej {{przyszła}} (przyjść) do mnie Marysia, z którą {{miałem}} (mieć) pójść do kina. Jednak, kiedy {{zaczęliśmy}} (zacząć, my) szykować się do wyjścia, {{okazało się}} (okazać się), że {{zginął}} (zginąć) mi klucz od mieszkania. Po prostu jak kamień w wodę, nigdzie nie {{mogliśmy}} (móc – my) go znaleźć.
+Ala: To znaczy, że {{przesiedzieliście}} (przesiedzieć, wy) cały wieczór w domu?
+Tomek: Beacie bardzo {{zależało}} (zależeć) na tym filmie, więc {{poszła}} (pójść) do kina sama, a ja najpierw coś {{zjadłem}} (zjeść), a potem {{zająłem się}} (zająć się) pisaniem pracy semestralnej.
+Ala: A co z kluczem?
+Tomek: W niedzielę rano {{przyszli}} (przyjść) do mnie koledzy i {{znaleźli}} (znaleźć) go pod stołem.`},
+ {n:'IV', p:21, t:'s', pts:1,
+  ins:'Proszę przekształcić zdania zgodnie z podanym przykładem.', ua:'Перепишіть речення, звертаючись до іншої особи (слово під реченням), за зразком.',
+  hint:'Змініть звертання й усі дієслова минулого часу: жінки → -łyście / -ły, чоловіки → -liście / -li, один чоловік → -łeś / -ł. До «pan / pani / państwo» дієслово стоїть у 3-й особі. iść: wyszedł / wyszła / wyszli / wyszły.',
+  exs:{q:'Aniu, dlaczego nie wyszłaś z psem na spacer? Nie wiedziałaś, że wrócę późno?', c:'Marku', a:'Marku, dlaczego nie wyszedłeś z psem na spacer? Nie wiedziałeś, że wrócę późno?'},
+  items:[
+   {q:'Drodzy koledzy, mieliście wyjść z przyjęcia o ósmej, więc dlaczego wyszliście o północy?', c:'Drogie koleżanki', a:['Drogie koleżanki, miałyście wyjść z przyjęcia o ósmej, więc dlaczego wyszłyście o północy?']},
+   {q:'Dlaczego mi panowie nie powiedzieli, że nie zanieśli panowie tych dokumentów do sekretariatu?', c:'pan', a:['Dlaczego mi pan nie powiedział, że nie zaniósł (pan |)tych dokumentów do sekretariatu?']},
+   {q:'Proszę pani, najpierw pani wysiadła na złym przystanku, a potem przeszła ulicę na czerwonym świetle!', c:'Moi panowie', a:['Moi panowie, najpierw panowie wysiedli na złym przystanku, a potem przeszli ulicę na czerwonym świetle!']},
+   {q:'Nie mogłyście, czy nie chciałyście powiedzieć prawdy?', c:'państwo', a:['Nie mogli państwo czy nie chcieli powiedzieć prawdy?']},
+   {q:'Koledzy, dlaczego nie zajęliście nam miejsc? Musiałyśmy stać w czasie koncertu.', c:'Tomku / ja', a:['Tomku, dlaczego nie zająłeś mi miejsca? (Musiałem|Musiałam) stać w czasie koncertu.']}
+  ]},
+ {n:'V', p:22, t:'f', pts:0.5,
+  ins:'Proszę uzupełnić tekst nr II formą czasu przeszłego czasowników podkreślonych w tekście nr I zgodnie z podanym przykładem.', ua:'Доповніть текст II формами минулого часу дієслів, підкреслених у тексті I, за зразком.',
+  hint:'Пані Анна планує від 1-ї особи, а в тексті II про все розповідають у 3-й особі: ona → -ła, on → -ł, Zosia i Kasia → -ły, oni → -li. «nie ma» → «nie było». wziąć → wzięła / wziął, iść → wyszły / wyszedł / doszedł, jeść → zjedli.',
+  note:'П. 11: у ключі «zebrali się», але «się» вже надруковано в тексті після пропуску — приймаються обидва записи.',
+  pre:`Tekst I
+Pani Anna planuje dzień swojej rodziny:
+Jutro __wstanę__^0^ wcześniej niż zwykle. __Muszę zrobić__^1^ zakupy, bo w lodówce nic __nie ma__^2^. Przy okazji __wezmę__^3^ Reksa na spacer. Niestety, __nie mogę__^4^ liczyć na Piotra, bo __musi__^5^ leżeć w łóżku. O wpół do ósmej Zosia i Kasia __wyjdą__^6^ do szkoły, a Piotruś __wyjdzie__^7^ dopiero o jedenastej. __Weźmie__^8^ ze sobą duże drugie śniadanie, bo tego dnia __ma__^9^ dużo lekcji. Ja __pobiegnę__^10^ do pracy zaraz po jego wyjściu. Wszyscy __zbierzemy__^11^ się razem dopiero wieczorem. __Zjemy__^12^ kolację i __opowiemy__^13^ sobie o tym, co przydarzyło się nam tego dnia. Mam nadzieję, że Piotr do tego czasu __dojdzie do siebie__^14^.`,
+  text:`Tekst II
+Następnego dnia wieczorem okazało się, że wszystko przebiegało zgodnie z planem.
+Pani Anna {=wstała} wcześniej niż zwykle. [Ona] {{musiała}} zrobić zakupy, bo w lodówce {{nie było}} nic. Przy okazji [ona] {{wzięła}} Reksa na spacer. Niestety, pani Anna nie {{mogła}} liczyć na Piotra, bo {{musiał}} leżeć w łóżku. O wpół do ósmej Zosia i Kasia {{wyszły}} do szkoły, a Piotruś {{wyszedł}} dopiero o jedenastej. [On] {{wziął}} ze sobą duże drugie śniadanie, bo tego dnia {{miał}} dużo lekcji. Anna {{pobiegła}} do pracy zaraz po jego wyjściu. Wszyscy [oni] {{zebrali|zebrali się}} się razem dopiero wieczorem. [Oni] {{zjedli}} kolację i {{opowiedzieli}} sobie o tym, co przydarzyło im się tego dnia. A Piotr, mąż pani Anny, do tego czasu {{doszedł}} do siebie.`}
+]},
+
+{id:'as', g:1, pl:'Aspekt czasownika', ua:'Вид дієслова (доконаний / недоконаний)', ex:[
+ {n:'I', p:22, t:'f', pts:0.5,
+  ins:'Proszę uzupełnić tekst właściwą formą jednego z czasowników w nawiasach zgodnie z podanym przykładem.', ua:'Доповніть текст правильною формою одного з дієслів у дужках за зразком.',
+  hint:'Тривала або повторювана дія в минулому («ciągle», «chętnie») → недоконаний вид. Підсумок за рік → доконаний. Майбутнє: недоконаний — będą + інфінітив, доконаний — проста форма. Узгодьте рід: Polacy → -li, salony → -ły.',
+  text:`Ostatni rok nie był rokiem dobrym dla producentów i sprzedawców samochodów w Polsce. Chociaż salony motoryzacyjne ciągle {=kierowały} (kierować/skierować) do klientów nowe, atrakcyjne oferty, to jednak Polacy nie {{decydowali się}} (decydować się/zdecydować się) na zakup nowego samochodu. Natomiast bardzo chętnie {{kupowali}} (kupować/kupić) samochody używane z zagranicy. W ubiegłym roku salony samochodowe w Polsce {{sprzedały}} (sprzedawać/sprzedać) o blisko połowę nowych aut mniej.
+Czy na naszych drogach będzie bezpieczniej?
+Jedno jest pewne. W najbliższych latach po naszych drogach {{będą jeździć|będą jeździły}} (jechać/jeździć) coraz starsze samochody. Ale czy to ostatecznie {{spowoduje}} (powodować/spowodować) większą ilość wypadków drogowych? Nie wiadomo.`},
+ {n:'II', p:23, t:'f', pts:0.5,
+  ins:'Proszę uzupełnić tekst właściwą formą jednego z czasowników w nawiasach zgodnie z podanym przykładem.', ua:'Доповніть текст правильною формою одного з дієслів у дужках за зразком.',
+  ex:`Zwykle Maria sama {=robiła} (robić/zrobić) zakupy, ale wczoraj źle się czuła.`,
+  hint:'Одноразові завершені дії вчора → доконаний вид. Слова «długo», «przez kilka minut» і «kiedy…» (тло для іншої дії) → недоконаний. «w końcu» → доконаний. Maria → -ła, Marek → -ł.',
+  text:`{{Poprosiła}} (Prosić/Poprosić) o pomoc męża i to Marek {{poszedł}} (iść/pójść) do sklepu. {{Wziął}} (Brać/Wziąć) ze sobą tylko 40 zł, bo od dawna nie był w sklepie i nie wiedział, co ile kosztuje. Najpierw długo {{oglądał}} (oglądać/obejrzeć) mięso i wędliny, aż w końcu {{kupił}} (kupować/kupić) kilogram szynki. Potem przez kilka minut {{wybierał}} (wybierać/wybrać) warzywa, ale nic nie kupił, bo {{zapomniał}} (zapominać/zapomnieć), o co prosiła żona. W końcu {{włożył}} (wkładać/włożyć) do koszyka jeszcze cztery chleby, kilogram sera i dwa masła. Kiedy {{płacił}} (płacić/zapłacić) za zakupy, okazało się, że zabrakło mu pieniędzy. Nie wiedział, z czego zrezygnować, więc wszystko {{zostawił}} (zostawiać/zostawić) w sklepie.`},
+ {n:'III', p:23, t:'f', pts:0.5,
+  ins:'Proszę uzupełnić tekst właściwą formą jednego z czasowników w nawiasach zgodnie z podanym przykładem.', ua:'Доповніть текст правильною формою одного з дієслів у дужках за зразком.',
+  hint:'Авторка — жінка (-łam). «zwykle», «pilnie», «codziennie» → недоконаний вид («codziennie… i mówię» — теперішній час). Рішення та одноразові події (закінчила, виїхала, знайшла) → доконаний. Після «aby ktoś» — форма на -ł.',
+  text:`Kiedy byłam dzieckiem, rodzice często się {=kłócili} (kłócić/pokłócić). Wieczorem, gdy zaczynali się awanturować, marzyłam, aby ktoś mnie {{zabrał}} (zabierać/zabrać) z domu. Zwykle {{słyszałam}} (słyszeć/usłyszeć) złośliwe komentarze na swój temat i było mi bardzo przykro. {{Postanowiłam}} (Postanowić/Postanawiać) więc udowodnić, że dzieci, które nigdy nie zaznały miłości, mogą wyrosnąć na porządnych ludzi. Gdy {{skończyłam}} (kończyć/skończyć) szkołę średnią, {{wyjechałam}} (wyjeżdżać/wyjechać) z domu. {{Znalazłam}} (Znajdować/Znaleźć) pracę i równocześnie pilnie {{uczyłam się}} (uczyć się/nauczyć się). Dziś jestem szczęśliwą żoną i matką. Codziennie {{przytulam}} (przytulać/przytulić) synka i mówię mu, że go kocham.`},
+ {n:'IV', p:24, t:'f', pts:0.5,
+  ins:'Proszę uzupełnić tekst właściwą formą jednego z czasowników w nawiasach zgodnie z podanym przykładem.', ua:'Доповніть текст правильною формою одного з дієслів у дужках за зразком.',
+  hint:'Ланцюжок одноразових дій одна за одною → доконаний вид (-ła). Після «chciała» — інфінітив. «W chwili gdy…», «Już…, gdy…» можуть описувати дію в процесі (недоконаний).',
+  text:`Anna była bardzo zmęczona, więc {=postanowiła} (postanawiać/postanowić) położyć się wcześniej spać.
+Zaraz po przyjściu z pracy {{wzięła}} (brać/wziąć) prysznic i mimo że była dopiero siódma, {{poszła}} (iść/pójść) do sypialni. W chwili gdy {{kładła się|położyła się}} (kłaść się/położyć się) do łóżka, {{zadzwonił}} (dzwonić/zadzwonić) telefon. Anna {{podniosła}} (podnosić/podnieść) słuchawkę. To była pomyłka. Znów {{znalazła się}} (znajdować się/znaleźć się) w łóżku. Już {{zamykała|zamknęła}} (zamykać/zamknąć) oczy, gdy {{usłyszała}} (słyszeć/usłyszeć) pukanie do drzwi. {{Wstała}} (Wstawać/Wstać) niechętnie, {{założyła}} (zakładać/założyć) szlafrok, {{podeszła}} (pochodzić/podejść) do drzwi i {{otworzyła}} (otwierać/otworzyć) je. Na korytarzu {{zobaczyła}} (widzieć/zobaczyć) sąsiadkę ze szklanką w ręku. Chciała {{pożyczyć}} (pożyczać/pożyczyć) trochę soli. Anna {{uśmiechnęła się}} (uśmiechać się/uśmiechnąć się), {{nasypała}} (nasypywać/nasypać) soli do szklanki i {{oddała}} (oddawać/oddać) ją sąsiadce. Potem {{włączyła}} (włączać/włączyć) telewizor, {{obejrzała}} (oglądać/obejrzeć) wiadomości, film i jakiś program. Anna {{usnęła}} (usypiać/usnąć) dopiero przed północą.`},
+ {n:'V', p:25, t:'s', pts:0.5,
+  ins:'Proszę uzupełnić tabelę czasownikami w czasie przeszłym dokonanym zgodnie z podanym przykładem.', ua:'Доповніть таблицю: запишіть те саме дієсловом доконаного виду в минулому часі, від 1-ї особи (жінка), за зразком.',
+  hint:'Знайдіть доконану пару: pisać → napisać, oglądać → obejrzeć, opowiadać → opowiedzieć, kłaść → położyć, brać → wziąć; інші утворюються префіксом (z-, wy-, prze-, za-, pod-). Форма: 1-ша особа, жіночий рід (-łam).',
+  pre:`Beata spędzała czas na wakacjach bardzo monotonnie. Wczoraj napisała do Magdy list, w którym opisała to, co wczoraj zrobiła.
+Co Beata robiła wczoraj wieczorem? → Co zrobiłam wczoraj wieczorem?`,
+  exs:{q:'pisała list', a:'Napisałam list.'},
+  items:[
+   {q:'oglądała film', a:['obejrzałam film']},
+   {q:'opowiadała bajkę córce', a:['opowiedziałam bajkę córce']},
+   {q:'kładła dziecko spać', a:['położyłam dziecko spać']},
+   {q:'prała bieliznę', a:['(wyprałam|uprałam|przeprałam) bieliznę']},
+   {q:'czytała listy od przyjaciółki', a:['przeczytałam listy od przyjaciółki']},
+   {q:'dzwoniła do matki', a:['zadzwoniłam do matki']},
+   {q:'robiła kolację', a:['zrobiłam kolację']},
+   {q:'piła mleko z miodem', a:['wypiłam mleko z miodem']},
+   {q:'podlewała kwiaty', a:['podlałam kwiaty']},
+   {q:'brała prysznic', a:['wzięłam prysznic']}
+  ]},
+ {n:'VI', p:25, t:'b', pts:0.75,
+  ins:'Proszę uzupełnić tekst formami czasu przyszłego odpowiednich czasowników z ramki zgodnie z podanym przykładem. Uwaga! Każdy wyraz może być użyty tylko raz.', ua:'Доповніть текст формами майбутнього часу відповідних дієслів із рамки за зразком. Увага! Кожне слово можна вжити лише раз.',
+  bank:['jeździć/jechać/pojechać','kupować/kupić','robić/zrobić','grać/zagrać','latać/lecieć/polecieć','zaczynać/zacząć','kończyć/skończyć','pracować/','zdawać/zdać','wracać/wrócić','studiować/'],
+  hint:'Одноразова дія з результатом → доконаний вид, проста форма (zdadzą, wróci). Тривала або повторювана дія («przez pięć lat», «od czerwca do września», «przez całe lata», «w każde wakacje») → недоконаний: będzie / będziemy + інфінітив або форма на -ł.',
+  text:`Tomek: Jak sądzisz, jak zmieni się nasze życie, gdy {=skończymy} szkołę średnią?
+Anka: Nietrudno przewidzieć, że Agnieszka i Mateusz, świetnie {{zdadzą}} maturę i wkrótce {{zaczną}} wymarzone studia. Agnieszka przez pięć lat {{będzie studiowała|będzie studiować}} matematykę i filozofię w którymś z europejskich uniwersytetów i trzy lata później, albo jeszcze wcześniej, {{zrobi}} doktorat. A Mateusz...
+Tomek: Mówił mi, że najpierw {{pojedzie}} do Anglii, żeby zarobić na nową gitarę.
+Anka: A jak chce to zrobić?
+Tomek: Od czerwca do września {{będzie grał|będzie grać}} w londyńskich klubach bluesowych. Zaprosili go ci Brytyjczycy, których poznał na konkursie „Kocham bluesa”. Ale po wakacjach {{wróci}} do Polski, żeby zacząć studia w szkole muzycznej w Katowicach. Jako laureat konkursu miejsce ma tam już zapewnione.
+Anka: A my, jako klasowi średniacy i dzieci niebogatych rodziców, przez całe lata {{będziemy pracowali|będziemy pracować}} wieczorami w jakichś pubach lub barach, żeby zarobić na pieniądze na studia w prywatnej uczelni.
+Anka: Ale w każde wakacje {{będziemy latali|będziemy latać}} do Londynu, oczywiście tanimi liniami, i słuchać gry Mateusza na tej gitarze, którą {{kupi}} sobie w te wakacje.
+Tomek: Spotkania naszej klasy w Londynie! To brzmi nieźle.
+Anka: Też tak myślę.`}
+]},
+
+{id:'ro', g:1, pl:'Tryb rozkazujący', ua:'Наказовий спосіб', ex:[
+ {n:'I', p:26, t:'f', pts:0.5,
+  ins:'Proszę uzupełnić tekst właściwą formą czasowników w nawiasach zgodnie z podanym przykładem.', ua:'Доповніть текст правильною формою дієслів у дужках (наказовий спосіб, ty) за зразком.',
+  pre:`Oto horoskop na nadchodzący tydzień:`,
+  ex:`{=Postaraj się} (postarać się) zacząć dobrze tydzień.`,
+  hint:'Форма «ty»: відкиньте закінчення 3-ї особи. Дієслова на -ać (-ają) → -aj; -ować → -uj; wstać → wstaną → wstań; przyjrzeć się → przyjrzy się → przyjrzyj się. Не забудьте «się».',
+  text:`11 maja {{wstań}} (wstać) prawą nogą i nie {{oglądaj się}} (oglądać się) na to, co już za Tobą. {{Skoncentruj się}} (Skoncentrować się) na tym, co robisz. {{Uważaj}} (Uważać) na finanse. Problemy nie rozwiążą się same, uważnie {{przyjrzyj się}} (przyjrzeć się) bezlitosnym cyfrom.`},
+ {n:'II', p:27, t:'f', pts:0.5,
+  ins:'Proszę uzupełnić tekst właściwą formą czasowników w nawiasach zgodnie z podanym przykładem.', ua:'Доповніть текст правильною формою дієслів у дужках (наказовий спосіб, wy) за зразком.',
+  ex:`{=Rozwiążcie} (Rozwiązać) wszystkie zadania.`,
+  hint:'Форма «wy» = форма «ty» + -cie: wpisz → wpiszcie, wyślij → wyślijcie, sprawdź → sprawdźcie. -ować → -ujcie.',
+  note:'П. 5: у ключі «kontaktujcie» (без «się»); повна правильна форма — «kontaktujcie się». Приймаються обидві.',
+  text:`Odpowiedzi {{wpiszcie}} (wpisać) na kartkę pocztową, {{naklejcie}} (nakleić) też na nią wypełniony kupon konkursowy i {{wyślijcie}} (wysłać) na adres redakcji. {{Sprawdźcie}} (Sprawdzić) nazwiska zwycięzców w lutowym numerze naszego pisma. Nie {{kontaktujcie się|kontaktujcie}} (kontaktować się) z nami telefonicznie w celu uzyskania informacji.`},
+ {n:'III', p:27, t:'f', pts:0.5,
+  ins:'Proszę uzupełnić tekst właściwą formą czasowników w nawiasach zgodnie z podanym przykładem.', ua:'Доповніть текст правильною формою дієслів у дужках (наказовий спосіб, ty) за зразком.',
+  ex:`{=Śmiej się} (Śmiać się) często.`,
+  hint:'Форма «ty» від основи теперішнього / майбутнього часу: pokaże → pokaż, zapłaci → zapłać, wybierze → wybierz, podleje → podlej. o → ó: pomoże → pomóż. Нерегулярне: wziąć → weź.',
+  text:`Kochana Ewuniu!
+Niespodziewanie muszę wyjechać na kilka dni w delegację. Nie mogłam Cię o tym wcześniej uprzedzić. Bardzo Cię proszę o załatwienie kilku spraw:
+# (pokazać) {{pokaż}} Zuzi Lublin,
+# (wyprowadzić) {{wyprowadź}} psa na spacer,
+# (zapłacić) {{zapłać}} rachunki na poczcie,
+# (pomóc) {{pomóż}} babci ugotować obiad,
+# (wybrać) {{wybierz}} pieniądze z bankomatu,
+# (odebrać) {{odbierz}} z pralni płaszcz,
+# (podlać) {{podlej}} kwiatki w ogrodzie,
+# (ubrać się) {{ubierz się}} elegancko do teatru,
+# (wziąć) {{weź}} ze sobą Zuzię,
+# (zadzwonić) {{zadzwoń}} do mnie wieczorem na komórkę!
+Całuję mocno
+Mama`},
+ {n:'IV', p:28, t:'f', pts:0.5,
+  ins:'Proszę uzupełnić tekst właściwą formą czasowników w nawiasach zgodnie z podanym przykładem.', ua:'Доповніть текст правильною формою дієслів у дужках (наказовий спосіб, ty) за зразком.',
+  hint:'Форма «ty»: wziąć → weź, wyjść → wyjdź, zrobić → zrób (o → ó), -ować → -uj, -ać → -aj, umyć → umyj, podrzeć → podrzyj, rzucić → rzuć.',
+  text:`Jak pokonać złość?
+Jeśli tylko możesz i wiesz, że nikogo tym nie skrzywdzisz, {=mów} (mówić) głośno o swojej złości. {{Weź}} (Wziąć) kilka oddechów, {{wyjdź}} (wyjść) na świeże powietrze i {{maszeruj}} (maszerować) szybkim krokiem przez 15 minut. {{Zrób}} (Zrobić) wielkie pranie i porządki w szafach, {{pozmywaj}} (pozmywać) naczynia i {{umyj}} (umyć) okna. {{Zadzwoń}} (Zadzwonić) do przyjaciółki i {{wygadaj się}} (wygadać się) przez telefon. {{Podrzyj}} (Podrzeć) na kawałki kilka starych gazet i {{rzuć}} (rzucić) czymś miękkim o ścianę. Zobaczysz, że poczujesz się lepiej.`},
+ {n:'V', p:28, t:'f', pts:0.5,
+  ins:'Proszę uzupełnić tekst właściwą formą czasowników w nawiasach zgodnie z podanym przykładem.', ua:'Доповніть текст правильною формою дієслів у дужках (наказовий спосіб; особа вказана) за зразком.',
+  hint:'Особа — в дужках. wy: форма «ty» + -cie. ty: przyjść → przyjdź, być → bądź, pomóc → pomóż. Для 3-ї особи (on): niech + теперішній / майбутній час (niech przyjdzie).',
+  text:`Jeśli chcecie otrzymać pracę, {=umówcie się} (umówić się, wy) na rozmowę z dyrektorem i nie {{zapomnijcie}} (zapomnieć, wy) o najprostszych zasadach.
+Oto kilka z nich:
+- {{przyjdź}} (przyjść, ty) punktualnie,
+- {{wyłącz}} (wyłączyć, ty) telefon komórkowy,
+- nie {{zaczynaj}} (zaczynać, ty) rozmowy od pytania o pieniądze,
+- dobrze {{przemyśl}} (przemyśleć, ty) każdą odpowiedź,
+- nie {{okazuj}} (okazywać, ty) zdenerwowania,
+- {{bądź}} (być, ty) pewny siebie,
+- {{pomóż}} (pomóc, ty) znaleźć dyrektorowi odpowiednią osobę,
+- {{niech pozna}} (poznać, on) cię jak najlepiej i
+- {{niech zadzwoni}} (zadzwonić, on) właśnie do ciebie!`},
+ {n:'VI', p:29, t:'f', pts:0.5,
+  ins:'Proszę uzupełnić tekst właściwą formą czasowników w nawiasach zgodnie z podanym przykładem.', ua:'Доповніть текст правильною формою дієслів у дужках (наказовий спосіб, my) за зразком.',
+  hint:'Форма «my» = форма «ty» + -my: planuj → planujmy, ustal → ustalmy, znajdź → znajdźmy, walcz → walczmy. Дієслова на -ać → -ajmy.',
+  note:'П. 5: у ключі «Nauczmy» (без «się»); повна правильна форма — «Nauczmy się». Приймаються обидві.',
+  text:`Aby dobrze gospodarować czasem, powinniśmy przestrzegać pewnych zasad. Najważniejsza z nich brzmi: {=spieszmy się} (spieszyć się – my) powoli.
+A oto pozostałe:
+- Dobrze się {{wysypiajmy}} (wysypiać – my) i {{planujmy}} (planować – my) swoje zajęcia.
+- Nie {{odkładajmy}} (odkładać – my) niczego na ostatnią chwilę i {{ustalmy}} (ustalić – my), co jest dla nas w życiu ważne.
+- {{Nauczmy się|Nauczmy}} (Nauczyć się – my) też wreszcie odmawiać i {{znajdźmy}} (znaleźć – my) czas na odpoczynek.
+- Nie {{poganiajmy}} (poganiać – my) siebie i codziennie {{walczmy}} (walczyć – my) z tak zwanymi złodziejami czasu.
+- Nie {{oglądajmy}} (oglądać – my) całymi dniami telewizji i nie {{plotkujmy}} (plotkować – my) godzinami przez telefon.`},
+ {n:'VII', p:29, t:'f', pts:0.5,
+  ins:'Proszę uzupełnić tekst właściwą formą czasowników w nawiasach zgodnie z podanym przykładem.', ua:'Доповніть текст правильною формою дієслів у дужках (наказовий спосіб, wy) за зразком.',
+  hint:'Учитель звертається до групи → форма «wy» (-cie): iść → idź → idźcie, wziąć → weź → weźcie, zrobić → zrób → zróbcie. Заперечення й «się» зберігаються.',
+  text:`Przed wycieczką nauczyciel zwrócił się do grupy uczniów:
+Kochani, nie {=żujcie} (żuć) gumy! Plecaki {{zostawcie}} (zostawić) w szatni! W czasie zwiedzania {{idźcie}} (iść) w grupie i {{nie oddalajcie się}} (nie oddalać się) ode mnie! {{Weźcie}} (Wziąć) tylko notesy i długopisy, a aparaty niech zostaną w szatni. Zdjęcia {{zróbcie}} (zrobić) albo przed wejściem do muzeum, albo potem.`},
+ {n:'VIII', p:30, t:'f', pts:0.75,
+  ins:'Proszę uzupełnić tekst właściwą formą czasowników w nawiasach zgodnie z podanym przykładem.', ua:'Доповніть текст правильною формою одного з дієслів у дужках (наказовий спосіб + вибір виду) за зразком.',
+  hint:'Спершу вид: регулярна дія («codziennie», «co dwa dni», «co rano») → недоконаний; одноразова («w piątek», «we wtorek», «w sobotę rano») → доконаний. Потім особа: до одного — ty, до «Kochani», «Dzieci» — wy (-cie).',
+  text:`Barbara musiała wyjechać na tydzień. Swoje obowiązki domowe rozdzieliła między męża i dzieci. Oto list, który im zostawiła:
+Jacku, we wtorek {=umów się} (umawiać się/umówić się) na wizytę u dentysty, a ty, Aniu, codziennie {=zażywaj} (zażywać/zażyć) leki przeciwalergiczne!
+Kochani, {{pamiętajcie}} (pamiętać/zapamiętać) o codziennym sprzątaniu swoich pokoi!
+Aniu, co dwa dni {{podlewaj}} (podlewać/podlać) kwiaty!
+Jacku, {{wyprowadzaj}} (wyprowadzać/wyprowadzić) psa co rano!
+Marku, {{zrób}} (robić/zrobić) zakupy w piątek i koniecznie {{kup}} (kupować/kupić) prezent dla cioci!
+Dzieci, {{odwiedźcie}} (odwiedzać/odwiedzić) we wtorek babcię i {{oddajcie}} (oddawać/oddać) jej ten niebieski garnek!
+Drogi Mężu, {{zapłać}} (płacić/zapłacić) rachunek za telefon!
+Córeczko, w sobotę rano {{wykąp}} (kąpać/wykąpać) psa!
+Kochani, {{dzwońcie}} (dzwonić/zadzwonić) do mnie codziennie!
+Kocham Was
+Mama`},
+ {n:'IX', p:30, t:'f', pts:0.5,
+  ins:'Proszę uzupełnić tekst właściwą formą czasowników zgodnie z podanym przykładem.', ua:'Доповніть текст правильною формою дієслів (наказовий спосіб, ty) за зразком. Інфінітив із лівої колонки збірника подано в дужках.',
+  info:'У збірнику ця вправа помилково позначена номером «XI» (с. 30); за порядком і ключем це вправа IX. Дві колонки збірника зведено в один список.',
+  pre:`Porady dla turysty wybierającego się za granicę.
+Przed wyjazdem za granicę trzeba: → Turysto, gdy wybierasz się za granicę:`,
+  ex:`(Dowiedzieć się) {=Dowiedz się} jak najwięcej o kraju, do którego jedziesz;`,
+  hint:'Форма «ty»: -ować → -uj; wykupić → wykup; zabrać → zabierz; zrobić → zrób; sprawdzić → sprawdź. Нерегулярні: wziąć → weź, mieć → miej, być → bądź.',
+  text:`# (przygotować) {{przygotuj}} adresy i telefony polskich konsulatów i ambasad;
+# (wykupić) {{wykup}} ubezpieczenie;
+# (wziąć) {{weź}} ze sobą adresy i numery telefonów bliskich w Polsce;
+# (aktywować) {{aktywuj}} usługę roamingu i Poland Direct;
+# (zabrać) {{zabierz}} karty płatnicze, czeki podróżne i gotówkę;
+# (zanotować) {{zanotuj}} numery kart płatniczych i czeków podróżnych;
+# (zrobić) {{zrób}} kserokopie dokumentów, które zabierasz ze sobą;
+# (sprawdzić) {{sprawdź}} datę ważności paszportu;
+# (mieć) {{miej}} ze sobą kilka zdjęć paszportowych;
+# (być) {{bądź}} na lotnisku dwie godziny przed odlotem.`},
+ {n:'X', p:31, t:'f', pts:0.5,
+  ins:'Proszę uzupełnić tekst właściwą formą czasowników zgodnie z podanym przykładem.', ua:'Доповніть текст: замініть підкреслені інфінітиви з рецепта на наказовий спосіб (ty) за зразком.',
+  ex:`Pomidory __zalać__^0^ wrzątkiem.
+Pomidory {=zalej} wrzątkiem.`,
+  hint:'Форма «ty»: rozgrzać → rozgrzeje → rozgrzej; dodać → dodaj; smażyć → smaż; mieszać → mieszaj; zmniejszyć → zmniejsz.',
+  pre:`SOS POMIDOROWY
+3/4 kg zielonej fasolki szparagowej
+5 średnich pomidorów bez skóry
+ząbek czosnku
+olej, sól, pieprz
+Na patelni __rozgrzać__^1^ olej, __dodać__^2^ drobno pokrojony czosnek. Dodać drobno pokrojone w kostkę pomidory, oraz sól, pieprz. __Smażyć__^3^ i __mieszać__^4^ ok. 8 min. __Zmniejszyć__^5^ ogień, wrzucić fasolę, wymieszać i danie gotowe. Można dodać świeże zioła: bazylię, oregano. Sos najlepiej smakuje z plackami ziemniaczanymi.`,
+  text:`Na patelni {{rozgrzej}} olej, {{dodaj}} drobno pokrojony czosnek. Dodać drobno pokrojone w kostkę pomidory, oraz sól, pieprz. {{Smaż}} i {{mieszaj}} ok. 8 min. {{Zmniejsz}} ogień, wrzucić fasolę, wymieszać i danie gotowe. Można dodać świeże zioła: bazylię, oregano. Sos najlepiej smakuje z plackami ziemniaczanymi.`},
+ {n:'XI', p:32, t:'f', pts:0.5,
+  ins:'Proszę uzupełnić tekst właściwą formą czasowników w nawiasach zgodnie z podanym przykładem.', ua:'Доповніть текст правильною формою дієслів у дужках (наказовий спосіб, ty) за зразком.',
+  hint:'Форма «ty»: wrzucić → wrzuć, wybrać → wybierz, poczekać → poczekaj. Після збігу приголосних додається -ij: przycisnąć → przyciśnij, wyjąć → wyjmij.',
+  text:`– Przepraszam, {=powiedz} (powiedzieć) mi, jak skorzystać z tego automatu.
+– Najpierw {{wrzuć}} (wrzucić) monetę do tego otworu. Potem {{wybierz}} (wybrać) napój, na który masz ochotę. Następnie {{przyciśnij}} (przycisnąć) guzik obok nazwy tego napoju. {{Poczekaj}} (Poczekać) chwilkę i {{wyjmij}} (wyjąć) puszkę z automatu. Powodzenia!
+– Dziękuję bardzo!`},
+ {n:'XII', p:32, t:'f', pts:0.5,
+  ins:'Proszę zamienić czasowniki w nawiasach na formy trybu rozkazującego zgodnie z podanym przykładem.', ua:'Замініть дієслова в дужках на форми наказового способу (ty) за зразком.',
+  hint:'Форма «ty»: -ywać → -uj (zapisywać → zapisuj); -ać → -aj; sprawdzić → sprawdź; sporządzić → sporządź; zacząć → zacznij; wyłączyć → wyłącz; wyznaczyć → wyznacz; mieć → miej; umieścić → umieść.',
+  text:`Jeśli czujesz, że za dużo czasu spędzasz przed telewizorem, {=skorzystaj} (skorzystać) z naszych rad:
+- {{zapisuj}} (zapisywać) przez kilka dni wszystkie oglądane programy,
+- {{sprawdź}} (sprawdzić), czy oglądasz tylko to, co uważasz za wartościowe,
+- {{sporządź}} (sporządzić) listę rzeczy, które mógłbyś robić zamiast oglądania telewizji,
+- {{zacznij}} (zacząć) chodzić na basen,
+- {{umawiaj się}} (umawiać się) ze znajomymi,
+- gdy jakiś program wydaje ci się mało interesujący, {{wyłącz}} (wyłączyć) telewizor,
+- nie {{przełączaj}} (przełączać) na inny kanał,
+- {{wyznacz}} (wyznaczyć) sobie limit czasowy na oglądanie telewizji,
+- {{miej}} (mieć) tylko jeden telewizor w domu,
+- {{umieść}} (umieścić) go w miejscu, które nie jest wygodne do oglądania.`},
+ {n:'XIII', p:33, t:'f', pts:0.5,
+  ins:'Proszę zamienić czasowniki w nawiasach na formy trybu rozkazującego zgodnie z podanym przykładem.', ua:'Замініть дієслова в дужках на форми наказового способу (ty) за зразком.',
+  hint:'Форма «ty»: podnieść → podniesie → podnieś; przykryć → przykryj; zaufać → zaufaj; położyć → połóż (o → ó); powiesić → powieś; zasłonić → zasłoń; znaleźć → znajdź; wyrzucić → wyrzuć; cieszyć się → ciesz się.',
+  text:`{=Poczuj} (Poczuć) atmosferę japońskiego minimalizmu! Osiągniesz to prostymi metodami:
+- {{Podnieś}} (Podnieść) poziom podłogi i {{przykryj}} (przykryć) ją matami.
+- {{Zaufaj}} (Zaufać) bieli ścian, brązowi i czerni prostych drewnianych mebli.
+- Zamiast łóżka {{połóż}} (położyć) materac, zamiast żyrandola {{powieś}} (powiesić) papierowy lampion, a okno {{zasłoń}} (zasłonić) bambusową zasłoną lub lnianą roletą.
+- {{Znajdź}} (Znaleźć) w sklepie z porcelaną kilka prostych, szklanych naczyń.
+- {{Wyrzuć}} (Wyrzucić) wszystkie niepotrzebne ozdoby.
+- {{Postaraj się}} (Postarać się) o bonsai i {{ciesz się}} (cieszyć się) nowym wystrojem swojego mieszkania!`}
+]},
+
+{id:'pp', g:1, pl:'Tryb przypuszczający', ua:'Умовний спосіб', ex:[
+ {n:'I', p:33, t:'f', pts:0.5,
+  ins:'Proszę zamienić czasowniki w nawiasach na formy trybu przypuszczającego zgodnie z podanym przykładem.', ua:'Замініть дієслова в дужках на форми умовного способу за зразком.',
+  ex:`Gdyby nie jechali tak szybko nie {=mieliby} (oni – mieć) tego wypadku.`,
+  hint:'Форма минулого часу 3-ї особи + by + закінчення особи: -bym, -byś, -by, -byśmy, -byście, -by. Рід: Ewa → -łaby; my (мішана група) → -libyśmy; Haniu → -łabyś; Zosiu i Beato → -łybyście; Krzyś i Tomek → -liby. Безособово: byłoby.',
+  text:`Gdyby Ewa miała zdrowe kolano, {{pojechałaby}} (ona – pojechać) w tym roku z nami w góry. Tam całymi dniami {{jeździlibyśmy}} (my – jeździć) na nartach, a wieczorami {{bawilibyśmy się}} (my – bawić się) na dyskotece. Kochani, bardzo {{chciałbym|chciałabym}} (ja – chcieć) was prosić, abyście z nią porozmawiali. Może ty, Haniu, {{namówiłabyś}} (namówić) ją na rehabilitację? Zosiu i Beato, czy {{mogłybyście}} (wy – móc) przyjść jutro do nas na kolację? A może Krzyś i Tomek też {{przyszliby}} (przyjść) razem z wami? Myślę, że najlepiej {{byłoby}} (być), gdybyśmy wspólnie przekonali Ewę, że rehabilitacja jest niezbędna.`},
+ {n:'II', p:34, t:'f', pts:0.5,
+  ins:'Proszę zamienić czasowniki w nawiasach na formy trybu przypuszczającego zgodnie z podanym przykładem.', ua:'Замініть дієслова в дужках на форми умовного способу за зразком.',
+  ex:`Gdybym był bogaty, {=pojechałbym} (pojechać) w podróż dookoła świata.`,
+  hint:'Оповідач — чоловік («Gdybym był»): ja → -łbym. «Wiatr i drzewa» — не чоловічо-особова множина → -łyby. Не забудьте «się».',
+  text:`Gdybym był ptakiem, nie {{miałbym}} (mieć) żadnych obowiązków, ani problemów. {{Latałbym}} (latać) pod niebem i z góry {{przyglądałbym się}} (przyglądać się) ludziom. Wiatr i drzewa {{opowiadałyby}} (opowiadać) mi różne ciekawe historie, a ja {{śpiewałbym}} (śpiewać) im wesołe piosenki.`},
+ {n:'III', p:34, t:'f', pts:0.5,
+  ins:'Proszę zamienić czasowniki w nawiasach na formy trybu przypuszczającego zgodnie z podanym przykładem.', ua:'Замініть дієслова в дужках на форми умовного способу за зразком.',
+  hint:'ty (чоловік) → -łbyś. Узгодьте з підметом: żona, sekretarka, odpowiedzialność, rodzina → -łaby; zarząd → -łby; zarobki, dzieci (не чоловічо-особові) → -łyby. wynająć → wynajął-.',
+  text:`Gdybyś został szefem koncernu, twoje życie {=zmieniłoby się} (zmienić się) radykalnie. Bez wątpienia {{przeprowadziłbyś się}} (ty – przeprowadzić się) do stolicy. Żeby nie tracić czasu na dojazd do pracy, {{wynająłbyś}} (ty – wynająć) mieszkanie blisko biura. Wasz prywatny samochód {{zatrzymałaby}} (zatrzymać) żona, a tobie zarząd firmy {{przydzieliłby}} (przydzielić) służbowe auto z kierowcą. Oczywiście, {{miałbyś}} (ty – mieć) też własną sekretarkę, która {{przygotowywałaby}} (przygotowywać) dla ciebie kawę, ale na tobie {{spoczywałaby}} (spoczywać) pełna odpowiedzialność za finanse i kontrakty. Oczywiście, twoje zarobki {{byłyby}} (być) kilka razy wyższe niż dotychczas, ale po roku takiego życia dzieci {{nie poznawałyby}} (nie poznawać) własnego ojca. Jak długo twoja rodzina {{wytrzymałaby}} (wytrzymać) takie tempo życia?`},
+ {n:'IV', p:35, t:'s', pts:1, ext:1,
+  ins:'Proszę przekształcić zdania zgodnie z podanym przykładem (tryb przypuszczający).', ua:'Перетворіть речення за зразком: «Gdyby…, …» (умовний спосіб).',
+  hint:'Схема: Gdyby + закінчення особи + форма на -ł, …-łby + закінчення. Перша частина — умова («Gdybym miał…», «Gdyby przyszli…»), друга — наслідок («zaprosiłbym…»). Між частинами кома.',
+  info:'У реченнях від 1-ї особи приймаються і чоловічі, і жіночі форми.',
+  note:'Офіційний ключ подає лише початки речень («Gdybym miał wielki dom, zaprosiłbym…»); тут їх доповнено до повних за текстом завдання.',
+  exs:{q:'Wygram na loterii i kupię sobie wielki dom.', a:'Gdybym wygrał na loterii, kupiłbym sobie wielki dom.'},
+  items:[
+   {q:'Będę mieć wielki dom i zaproszę do niego wszystkich przyjaciół.', a:['Gdybym miał wielki dom, zaprosiłbym do niego wszystkich przyjaciół.','Gdybym miała wielki dom, zaprosiłabym do niego wszystkich przyjaciół.']},
+   {q:'Moi przyjaciele przyjdą i urządzę dla nich wielkie przyjęcie.', a:['Gdyby (przyszli moi przyjaciele|moi przyjaciele przyszli), urządziłbym dla nich wielkie przyjęcie.','Gdyby (przyszli moi przyjaciele|moi przyjaciele przyszli), urządziłabym dla nich wielkie przyjęcie.']},
+   {q:'Przyjęcie będzie udane i powtórzę je kilka razy.', a:['Gdyby przyjęcie było udane, powtórzyłbym je kilka razy.','Gdyby przyjęcie było udane, powtórzyłabym je kilka razy.']},
+   {q:'Kupię autobus i zabiorę przyjaciół w podróż po Europie.', a:['Gdybym kupił autobus, zabrałbym przyjaciół w podróż po Europie.','Gdybym kupiła autobus, zabrałabym przyjaciół w podróż po Europie.']},
+   {q:'Podróż spodoba się wszystkim i pojedziemy w podróż dookoła świata.', a:['Gdyby podróż (spodobała się wszystkim|wszystkim się spodobała|się wszystkim spodobała), pojechalibyśmy w podróż dookoła świata.']}
+  ]},
+ {n:'V', p:36, t:'s', pts:1,
+  ins:'Proszę przekształcić zdania zgodnie z podanym przykładem (tryb przypuszczający).', ua:'Перетворіть речення за зразком: «Gdyby…, …» (умовний спосіб).',
+  hint:'Заперечення зникає, а ствердження стає запереченням: «nie mam» → «Gdybym miał…», «muszę» → «nie musiałbym». Після заперечення знахідний змінюється на родовий (robić porządki → nie robić porządków), і навпаки (nie mam lepszej pracy → miałbym lepszą pracę).',
+  info:'У п. 2 і 3 приймаються також жіночі форми (вихідне речення не задає рід).',
+  exs:{q:'Nie jestem milionerem i dlatego nie podróżuję po całym świecie.', a:'Gdybym był milionerem, podróżowałbym po całym świecie.'},
+  items:[
+   {q:'Ponieważ nie poszedłem na spotkanie z prezesem, nie mam lepszej pracy.', a:['Gdybym poszedł na spotkanie z prezesem, miałbym lepszą pracę.']},
+   {q:'Nie mam lepszej pracy, więc nie zarabiam dużo pieniędzy.', a:['Gdybym miał lepszą pracę, zarabiałbym dużo pieniędzy.','Gdybym miała lepszą pracę, zarabiałabym dużo pieniędzy.']},
+   {q:'Ponieważ nie zarabiam dużo, nie mogę kupić sobie mieszkania.', a:['Gdybym zarabiał dużo, mógłbym kupić sobie mieszkanie.','Gdybym zarabiała dużo, mogłabym kupić sobie mieszkanie.']},
+   {q:'Ponieważ nie kupiłem mieszkania, nie mieszkam sam.', a:['Gdybym kupił mieszkanie, mieszkałbym sam.']},
+   {q:'Ponieważ nie mieszkam sam, codziennie muszę robić porządki.', a:['Gdybym mieszkał sam, nie musiałbym codziennie robić porządków.']}
+  ]}
+]}
+];
+const T_PV = [
+{id:'pi', g:2, pl:'Przyimki', ua:'Прийменники', ex:[
+ {n:'I', p:36, t:'c', pts:0.25,
+  ins:'Proszę podkreślić właściwy wyraz zgodnie z podanym przykładem.', ua:'Оберіть правильне слово (у збірнику — «підкресліть») за зразком.',
+  hint:'Дивіться на відмінок слова після пропуску: знахідний (куди? як довго?) — na, przez; родовий — według, wokół, podczas, do; орудний (де?) — nad; місцевий — w, po. Сталі вирази: w pobliżu, po powrocie.',
+  text:`[[=*Od|Przez|W]] kilku ostatnich lat jeździmy na wakacje [[*na|do|nad]] Mazury. Zatrzymujemy się [[*w|na|koło]] pobliżu Mikołajek w domu [[pod|przy|*nad]] jeziorem. Często wylegujemy się na pobliskiej łące [[za|bez|*przez]] cały dzień, od rana do wieczora. Jest to [[*według|bez|w]] nas najlepszy sposób na odpoczynek. Czasami wędrujemy godzinami [[po|do|*przez]] okoliczne lasy, wiatr szumi, a [[*wokół|pod|u]] nas jest nietknięta ludzką ręką natura. [[*Podczas|Przez|Koło]] takich wędrówek nabieramy sił [[*do|przy|w]] pracy. [[Na|Przy|*Po]] powrocie do domu wciąż wspominamy chwile spędzone na urlopie.`},
+ {n:'II', p:37, t:'b', pts:0.5, ins1:2,
+  ins:'Proszę uzupełnić tekst wyrazami z ramki zgodnie z podanym przykładem. Uwaga! Niektóre wyrazy mogą być użyte więcej niż jeden raz.', ua:'Доповніть текст словами з рамки за зразком. Увага! Деякі слова можна вжити більше ніж один раз. Торкніться пропуску, а потім слова в рамці.',
+  bank:['do','dzięki','za','wszystko','na','przez','u','w','z','za'],
+  hint:'Звідки? — z + родовий. Регіон — na (na Pomorzu). У кого? — u + родовий. За кордон — za granicę. Навчальний заклад: na uniwersytecie, w szkole. З ким? — z + орудний. dzięki + давальний. Як довго? — przez + знахідний.',
+  text:`{=Do} Warszawy przyjechałam {{z}} Wejherowa, niedużego miasta {{na}} Pomorzu. Moje siostry były tu już wcześniej, mieszkały {{u}} kuzynki, której córki wyjechały {{za}} granicę. Starsza siostra zaczęła studiować {{na|w}} uniwersytecie, a średnia {{w}} Szkole Teatralnej. Nie mogłam {{z}} nimi zamieszkać, bo mieszkanie nie było dość duże. {{Dzięki}} pomocy szkolnej koleżanki mogłam {{przez}} kilka miesięcy pomieszkać {{w}} ładnej i wygodnej kawalerce jej brata.`},
+ {n:'III', p:37, t:'f', pts:0.25,
+  ins:'Proszę uzupełnić tekst właściwymi przyimkami zgodnie z podanym przykładem.', ua:'Доповніть текст потрібними прийменниками за зразком.',
+  pre:`Jakie jest twoje hobby?`,
+  ex:`Marzena: Wolne chwile najczęściej spędzam {=w} parku: spaceruję i podziwiam przyrodę.`,
+  hint:'Грати на інструменті — na + місцевий; грати в гру — w + знахідний. До моря (куди?) — nad + знахідний. «…rana …wieczora» — від і до. У клубі — w; у селі — na wsi; у знайомих — u + родовий.',
+  text:`Marta: Pasjonuję się muzyką i dlatego w wolnym czasie gram {{na}} skrzypcach.
+Tomek: Kiedy mogę trochę odpocząć, najchętniej gram z kolegami {{w}} koszykówkę.
+Magda: Odpoczywam tylko w wakacje. Jeżdżę wtedy {{nad}} morze.
+Romek: {{Od}} rana {{do}} wieczora uczę się lub pracuję. Nie mam czasu na hobby.
+Jarek: Najlepiej relaksuję się {{w}} klubie muzycznym.
+Karolina: Wolny czas najchętniej spędzam {{na}} wsi {{u}} znajomych.`},
+ {n:'IV', p:38, t:'b', pts:0.5, ins1:2,
+  ins:'Proszę uzupełnić tekst wyrazami z ramki zgodnie z podanym przykładem. Uwaga! Każdego słowa można użyć tylko raz. Jeden z nich jest niepotrzebny!', ua:'Доповніть текст словами з рамки за зразком. Увага! Кожне слово можна вжити лише раз. Одне з них зайве! Торкніться пропуску, а потім слова в рамці.',
+  bank:['z','po','od','na','u','w','dla','przy','ze','bez','o','nad'],
+  hint:'Перед збігом приголосних — ze (ze znajomymi). До озера (куди?) — nad + знахідний. Через якийсь час — po + місцевий. Сталі вирази: u celu, w samą porę, bez końca, iść na ryby. Біля вогнища — przy; о котрій? — o + місцевий; для кого? — dla.',
+  text:`Damian postanowił odpocząć {=od} swych ciężkich obowiązków i wraz {{ze}} znajomymi wyjechał {{nad}} jezioro. Gdy {{po}} dwóch godzinach znalazł się {{u}} celu podróży, zaczął przygotowywać ognisko. Zresztą {{w}} samą porę, bo już robiło się coraz ciemniej i chłodniej. {{Przy}} ognisku i dźwiękach gitary mógłby bawić się {{bez}} końca, ale dość szybko poszedł spać, gdyż obiecał sobie, że wstanie {{o}} wschodzie słońca, weźmie wędkę i pójdzie {{na}} ryby, a następnie przygotuje śniadanie {{dla}} swoich znajomych.`},
+ {n:'V', p:38, t:'f', pts:0.75,
+  ins:'Proszę uzupełnić tekst właściwymi przyimkami zgodnie z podanym przykładem.', ua:'Доповніть текст потрібними прийменниками за зразком.',
+  hint:'Керування дієслів: zarobić na (що), wyjść za mąż, przygotowywać się do (чого), zdawać na studia, pomyśleć o (кому), brakuje pieniędzy na (що), pożyczać od (кого), prosić o (що). «…rana …wieczora» — від і до.',
+  text:`{=Po} nagłej śmierci męża pani Wanda musiała pracować {{od}} rana {{do}} wieczora, żeby zarobić {{na}} utrzymanie gospodarstwa domowego i wykształcenie dzieci. Córka właśnie kończyła studia i planowała wyjść {{za}} mąż. Syn przygotowywał się {{do}} egzaminu maturalnego i chciał zdawać {{na}} studia. Mogłoby się wydawać, że kiedy dzieci skończą studia, pani Wanda będzie mogła w końcu pomyśleć {{o}} sobie. Nic bardziej błędnego! Córce ciągle brakuje pieniędzy {{na}} opiekunkę do dziecka, więc pożycza je {{od}} matki. Syn wziął kredyt z banku na kupno mieszkania i co miesiąc prosi ją {{o}} kilka złotych.`},
+ {n:'VI', p:39, t:'f', pts:0.5,
+  ins:'Proszę uzupełnić tekst właściwymi przyimkami zgodnie z podanym przykładem.', ua:'Доповніть текст потрібними прийменниками за зразком.',
+  hint:'Відколи? — od + родовий (або «у якийсь період» — w / we). Ходити куди? — do + родовий. Де? — w + місцевий. wpływ na (кого / що) + знахідний. «jeden z…» + родовий множини.',
+  text:`– Kiedy zaczął Pan myśleć {=o} zawodzie aktora?
+– {{Od|We}} wczesnej młodości czytałem poezję. Bardzo pragnąłem zostać aktorem. Poczułem to, kiedy zacząłem chodzić {{do}} teatru. Później, już {{w}} szkole teatralnej wielki wpływ {{na}} moje aktorstwo wywarł jeden {{z}} moich mistrzów – wykładowców.`}
+]},
+
+{id:'va', g:3, pl:'Varia', ua:'Різне: числівники, словотвір, сполучники, перетворення речень', ex:[
+ {n:'I', p:39, t:'c', pts:0.25,
+  ins:'Proszę podkreślić poprawną formę wyrazu zgodnie z podanym przykładem.', ua:U.pod,
+  hint:'Підмет — у називному. Після «gdyby» в головному реченні — умовний спосіб. «dziękować» — кому? (sobie). «od», «dla» + родовий. Загальна істина — теперішній час. Чоловічо-особова множина прикметника: -i.',
+  text:`[[=Psychologów|*Psychologowie|Psychologom]] odkryli, że małżeństwo [[mogło|może|*mogłoby]] polepszyć wzajemne relacje, gdyby zaczęło dziękować [[siebie|*sobie|sobą]] za różne domowe przysługi. Dotyczy [[*to|tego|temu]] nie tylko małżeństw, ale rodzin w ogóle. „Dziękuję”, jako słówko [[domowego|domowym|*domowe]], jest odświeżaczem [[*atmosfery|atmosferą|atmosferze]]. Dziękujmy nie tylko wtedy, gdy wstajemy od [[stole|*stołu|stołem]]. „Dziękuję” znaczy, że [[*rozumiemy|zrozumiemy|zrozumielibyśmy]], że ktoś starał się dla [[nam|nami|*nas]]. Na tym, między innymi, [[polegało|*polega|będzie polegało]] życie rodzinne, by zauważać, że nasi bliscy są dla nas [[uprzejme|uprzejmymi|*uprzejmi]].`},
+ {n:'II', p:39, t:'c', pts:0.5,
+  ins:'Proszę podkreślić poprawną formę wyrazu zgodnie z podanym przykładem.', ua:U.pod,
+  hint:'Числівник 5+ із неособовим іменником: pięć pytań, sześć osób. Із чоловічо-особовим іменником у родовому: trzech uczestników (дієслово в однині). «z» + орудний: siedmioma. Підмет чоловічо-особовий у називному: dwaj.',
+  text:`Pan Adam wystąpił w teleturnieju „Jeden z [[=dziesięć|*dziesięciu|dziesiąty]]”. Odpowiedział poprawnie na [[*pięć|pięciu|pięcioma]] pytań i doszedł do finału, w którym walczy już tylko [[trzy|trzej|*trzech]] uczestników. Pan Adam okazał się więc lepszy niż [[*sześć|sześciu|sześcioma]] innych osób – a może po prostu miał więcej szczęścia. W finale poradził sobie z [[siedem|siedmiu|*siedmioma]] pytaniami, ale to nie wystarczyło, by wygrać – jego [[dwa|*dwaj|dwóch]] przeciwnicy odpowiedzieli na znacznie więcej.`},
+ {n:'III', p:40, t:'f', pts:0.5,
+  ins:'Proszę uzupełnić tekst właściwą formą liczebników w nawiasach zgodnie z podanym przykładem.', ua:'Доповніть текст правильною формою числівників у дужках (словами) за зразком.',
+  hint:'Кількісний чи порядковий? «rocznicę» (котру?) — порядковий у знахідному жіночого роду; «przed… wieczorem» — година, порядковий в орудному. «kolegów» — чоловічо-особова форма в родовому; «róż» — кількісний (5+ + родовий).',
+  text:`Maj to szczególny miesiąc dla naszej rodziny. Ja obchodzę urodziny {=piątego} (5) maja, a moi {=dwaj} (2) bracia, którzy są bliźniakami, dzień później. Zwykle zapraszają do domu swoich ulubionych {{trzech}} (3) kolegów i bawią się aż do rana. Pod koniec miesiąca moi rodzice będą świętowali {{dwudziestą}} (20) rocznicę ślubu. Mama dostanie na pewno od taty {{dwadzieścia}} (20) róż, a przed {{siódmą}} (7) wieczorem wybiorą się do restauracji.`},
+ {n:'IV', p:40, t:'f', pts:0.75,
+  ins:'Proszę uzupełnić tekst przymiotnikami utworzonymi od wyrazów w nawiasach zgodnie z podanym przykładem.', ua:'Доповніть текст прикметниками, утвореними від слів у дужках, за зразком.',
+  ex:`Już od tygodnia można oglądać w kinach nowy {=polski} (Polska) film.`,
+  hint:'Прикметники від назв країн — на -ski / -cki, пишуться з малої літери. Узгодьте з іменником: kuchnię (знахідний ж. р.), wina (родовий), miasta (множина), mistrzów (родовий множини), w kurorcie (місцевий).',
+  text:`Podróże to moje największe hobby. Dzięki nim bardzo polubiłem {{czeską}} (Czechy) kuchnię, a zwłaszcza pyszne knedliki. Nie zapomnę też smaku {{francuskiego}} (Francja) wina. W czasie letnich wakacji zwiedziłem dokładnie wspaniałe {{włoskie}} (Włochy) miasta, a w Amsterdamie obejrzałem obrazy {{holenderskich}} (Holandia) mistrzów. Zimowe ferie planuję spędzić na nartach w jakimś {{austriackim}} (Austria) kurorcie.`},
+ {n:'V', p:40, t:'f', pts:0.75,
+  ins:'Proszę uzupełnić tekst właściwymi rzeczownikami utworzonymi od wyrazów w nawiasach zgodnie z podanym przykładem (nazwy mieszkańców krajów).', ua:'Доповніть текст іменниками, утвореними від слів у дужках (назви мешканців країн), за зразком.',
+  ex:`{=Polacy} (Polska) mają bigos i pierogi. A z jakich potraw są znane kraje Europy?`,
+  hint:'Назви мешканців пишуться з великої літери. Потрібен називний множини чоловічо-особовий: -i / -y з чергуванням (Czech → Czesi, Węgier → Węgrzy), -e (Hiszpan → Hiszpanie), -cy (Ukrainiec → Ukraińcy).',
+  text:`{{Czesi}} (Czechy) mają knedliki, a {{Hiszpanie}} (Hiszpania) paellę. {{Szwajcarzy}} (Szwajcaria) są znani z sera, a {{Ukraińcy}} (Ukraina) z ukraińskiego barszczu. {{Węgrzy}} (Węgry) oferują wspaniały gulasz.`},
+ {n:'VI', p:41, t:'f', pts:0.5,
+  ins:'Proszę uzupełnić tekst właściwą formą wyrazów w nawiasach zgodnie z podanym przykładem.', ua:U.naw,
+  hint:'Іменники: «nawiązywanie» (чого?) — родовий; «na», «w» (де?) — місцевий; «dzięki» — давальний; «zwracać» (що?) — знахідний. Дієслова: ludzie → 3-тя особа множини, kto → 3-тя особа однини. Прикметник узгодьте з «łącza» (родовий).',
+  text:`W ostatnich {=latach} (rok) coraz częstszym sposobem nawiązywania {{kontaktu}} (kontakt) z drugą osobą jest Internet. Na {{czatach}} (czat) internetowych wszystko jest łatwiejsze, ponieważ rozmówca jest anonimowy. W każdym {{momencie}} (moment) można nie odpowiadać na niewygodne pytania lub wyłączyć komputer. Są ludzie, którzy {{poznali się|poznają się}} (poznać się) dzięki {{komputerowi}} (komputer), a następnie {{pobrali się|pobierają się}} (pobrać się). Jednak trudno sprawdzić, kto {{siedzi}} (siedzieć) po drugiej stronie {{internetowego}} (internetowy) łącza i jakie ma zamiary. Dlatego psychologowie ostrzegają rodziców, żeby zwracać {{uwagę}} (uwaga) na swoje dzieci przesiadujące przed ekranem komputera. Niekiedy internetowe znajomości mogą okazać się tragiczne w {{skutkach}} (skutek, l. mn).`},
+ {n:'VII', p:41, t:'c', pts:0.5,
+  ins:'Proszę podkreślić właściwą formę czasownika zgodnie z podanym przykładem.', ua:'Оберіть правильну форму дієслова (у збірнику — «підкресліть») за зразком.',
+  ex:`Ania i Kasia [[=*miały|mieli|będą mieli]] trudną podróż do Poznania.`,
+  hint:'Розповідь про минуле: одноразові завершені дії — доконаний вид. Узгодьте рід і число: Ania i Kasia → -ły, Ania → -ła, pociąg, konduktor, tłok → -ł. «wiele osób» + дієслово в середньому роді однини.',
+  text:`4 listopada Ania i Kasia wracały z Krakowa do Poznania. [[Przychodziły|*Przyszły|Będą przychodziły]] na dworzec pół godziny przed odjazdem pociągu, ale niestety w kasie nie sprzedano im ani biletów, ani miejscówek, ponieważ wszystkie miejsca były już zarezerwowane. Gdy pociąg [[wjedzie|będzie wjeżdżał|*wjechał]] na stację i zatrzymał się na peronie, Ania [[*znalazła|znalazły|znajdą]] konduktora i [[zapytają|*zapytała|zapytały]] go, czy [[mogła|*może|mogli]] z koleżanką wsiąść do pociągu bez biletu i miejscówki. Konduktor [[*pozwolił|pozwalał|pozwoli]] jej na to. W pociągu [[panuje|*panował|panowali]] tłok, ponieważ wiele osób, tak jak Ania i Kasia, [[wsiedli|*wsiadło|wsiądą]] do pociągu za zgodą konduktora. Ania postawiła torbę na korytarzu, rozpięła kurtkę i [[*zaczęła|zaczną|zacznie]] zastanawiać się, jak zniesie tę podróż. Kasia tymczasem już wesoło [[rozmawia|będzie rozmawiała|*rozmawiała]] z jakimś przystojnym chłopakiem.`},
+ {n:'VIII', p:42, t:'b', pts:0.5, ins1:2,
+  ins:'Proszę uzupełnić tekst wyrazami z ramki zgodnie z podanym przykładem. Uwaga! Niektóre wyrazy mogą być użyte dwa razy.', ua:'Доповніть текст словами з рамки за зразком. Увага! Деякі слова можна вжити двічі. Торкніться пропуску, а потім слова в рамці.',
+  bank:['a','albo','chociaż','ale','czy','i','bo','że','żeby'],
+  hint:'a — зіставлення; ale — протиставлення; chociaż — хоча; że — після «myślą», «mam nadzieję»; żeby — після «chciałbym» (далі форма на -ł); bo — причина; czy — після «nie wiem»; i — додавання; albo — вибір.',
+  text:`Ania jest moją siostrą {=i} Marta jest moją siostrą. Ania jest starsza, {{a}} Marta młodsza. {{Chociaż}} są siostrami, to wcale nie są do siebie podobne. Wszyscy myślą, {{że}} to Marta jest starsza, {{bo}} jest bardzo poważna. Chciałbym, {{żeby}} obie były tak wesołe jak Ania, {{ale}} Marta nie umie się niestety śmiać. Nie wiem, {{czy}} to się kiedyś zmieni. Teraz Marta kończy szkołę {{i}} chce zdawać na studia. Zamierza studiować informatykę – na uniwersytecie {{albo}} na politechnice. Mam nadzieję, {{że}} życie studenckie poprawi jej humor.`},
+ {n:'IX', p:42, t:'s', pts:1,
+  ins:'Proszę przekształcić zdania zgodnie z przykładem tak, by nie zmieniły sensu.', ua:'Перетворіть речення за зразком так, щоб зміст не змінився. Використайте подане слово.',
+  hint:'Порівняння навпаки: «mniej… od» ↔ «bardziej… od / niż». «bezbłędnie» = «nie zrobić ani jednego błędu» (заперечення + родовий). «nie ma» + родовий. «oprócz» + родовий. «między» + орудний.',
+  note:'У п. 2 ключ допускає інший порядок слів; у п. 3 — «ani jednego Europejczyka»; у п. 5 — «a» або «i», «w środku» можна пропустити.',
+  exs:{q:'Pani Małgorzata jest wyższa niż pani Grażyna.', c:'Pani Grażyna', a:'Pani Grażyna jest niższa niż pani Małgorzata (od pani Małgorzaty).'},
+  items:[
+   {q:'Jestem mniej inteligentny od moich braci.', c:'ode mnie', a:['Moi bracia są (ode mnie bardziej inteligentni|bardziej inteligentni ode mnie).']},
+   {q:'Brawo, napisał pan tę pracę bezbłędnie!', c:'ani jednego', a:['Brawo, nie zrobił pan (w tej pracy ani jednego błędu|ani jednego błędu w tej pracy)!','Brawo, w tej pracy nie zrobił pan ani jednego błędu!']},
+   {q:'W naszej grupie nie uczą się Europejczycy.', c:'nie ma', a:['W naszej grupie nie ma (Europejczyków|ani jednego Europejczyka).']},
+   {q:'Na imieninach Tomka nie było tylko was.', c:'oprócz', a:['Na imieninach Tomka byli wszyscy oprócz was.']},
+   {q:'Proszę usiąść w środku, obok tej Japonki i tego Amerykanina!', c:'między', a:['Proszę usiąść (w środku |)między tą Japonką (a|i) tym Amerykaninem!']}
+  ]},
+ {n:'X', p:43, t:'s', pts:1,
+  ins:'Proszę przekształcić zdania zgodnie z podanym przykładem (negacja).', ua:'Перетворіть речення на заперечні за зразком. Почніть із поданого слова.',
+  hint:'Подвійне заперечення: nikt / nigdy / nikogo / nikomu / nic + nie. Після заперечення знахідний → родовий (listy → listów). «już» → «jeszcze». «i» → «ani». «są» → «nie ma» + родовий. Після «proszę nie» — недоконаний вид.',
+  note:'У п. 2 ключ допускає інший порядок слів.',
+  exs:{q:'Dlaczego zawsze jesz na obiad frytki i hamburgery?', c:'nigdy', a:'Dlaczego nigdy nie jesz na obiad frytek ani/i hamburgerów?'},
+  items:[
+   {q:'Wszyscy wysłali już listy do rodziców.', c:'Nikt', a:['Nikt nie wysłał jeszcze listów do rodziców.']},
+   {q:'Zawsze mam na wszystko czas.', c:'Nigdy', a:['Nigdy nie mam (na nic czasu|czasu na nic).','Nigdy na nic nie mam czasu.']},
+   {q:'Wszystkich lubię i wszystkim ufam.', c:'Nikogo', a:['Nikogo nie lubię i nikomu nie ufam.']},
+   {q:'W naszej grupie są śliczne dziewczyny i przystojni chłopcy.', c:'nie ma', a:['W naszej grupie nie ma ślicznych dziewczyn ani przystojnych chłopców.']},
+   {q:'Proszę nauczyć się na pamięć dialogu i napisać ćwiczenie nr 7!', c:'Proszę nie', a:['Proszę nie uczyć się na pamięć dialogu ani nie pisać ćwiczenia nr 7!']}
+  ]}
+]}
+];
+
+/* ===== Przykładowy zestaw zadań (с. 46–50), 40 б. ===== */
+const EXAM = [
+ {n:'I', p:46, t:'f', pts:0.5, tp:'rz',
+  ins:'Proszę uzupełnić tekst właściwą formą wyrazów w nawiasach zgodnie z podanym przykładem (odmiana rzeczowników i przymiotników).', ua:U.naw,
+  hint:'«od trzech» + родовий множини; «z» (звідки?) + родовий, «z» (з ким?) + орудний; «w» + місцевий. Підмет чоловічо-особовий у множині: -y / -i / -e з чергуванням (і в прикметниках).',
+  text:`W {=Polsce} (Polska) jestem od trzech {{tygodni}} (tydzień). Przyjechałam tu z {{Francji}} (Francja), żeby zrobić reportaż o polsko-francuskich małżeństwach. Trochę czasu spędzam w {{bibliotece}} (biblioteka), ale przede wszystkim spotykam się z takimi małżeństwami oraz z {{ludźmi}} (ludzie), którzy je znają. Pomagają mi w tym {{koledzy}} (kolega) – {{dziennikarze}} (dziennikarz) z polskich {{gazet}} (gazeta) i polskiego {{radia}} (radio). Są to {{wspaniali}} (wspaniały) specjaliści i {{dobrzy}} (dobry) przyjaciele.`},
+ {n:'II', p:46, t:'c', pts:0.25, tp:'zo',
+  ins:'Proszę podkreślić właściwą formę wyrazów zgodnie z podanym przykładem.', ua:U.pod,
+  ex:`Ewa nie widziała [[=oni|*ich|one]] od pięciu lat.`,
+  hint:'Після прийменника — форми на n- (dla nich, dzięki niemu, bez niej, z nimi, o nich). На початку речення — повна форма (Jego, Ją). Підмет — у називному.',
+  text:`Ewa ma pięcioro siostrzeńców. Bardzo [[one|*ich|je]] kocha i jest gotowa wiele dla [[ich|*nich|nim]] zrobić. Szczególnie dla Jacka i Basi, którzy są najmłodsi. [[Go|*Jego|Niego]] zawsze zaprasza na weekendy, bo – jak mówi – dom dzięki [[mu|jemu|*niemu]] staje się weselszy. [[*Ją|Jej|Niej]] też często zaprasza, ale Basia bardzo tęskni za swoją mamą i nie chce bez [[nią|*niej|jej]] nigdzie chodzić. Ewa bierze dzieci do kina, chodzi z [[one|nich|*nimi]] na długie spacery i kupuje [[ich|nimi|*im]] zabawki. Lubi też opowiadać o [[ich|*nich|nimi]] znajomym, którzy pytają czasami, czy Ewa nie jest jeszcze [[nich|*nimi|nim]] zmęczona. [[Jej|*Ona|Ją]] jednak zaprzecza.`},
+ {n:'III', p:47, t:'f', pts:0.5, tp:'te',
+  ins:'Proszę uzupełnić właściwą formą wyrazów w nawiasach zgodnie z podanym przykładem (czas teraźniejszy i przyszły prosty).', ua:'Доповніть правильною формою слів у дужках (теперішній і простий майбутній час) за зразком.',
+  ex:`Tomku, {=przepraszam} (przepraszać) za spóźnienie. {=Zadzwonię} (zadzwonić) później.`,
+  hint:'Визначте підмет: Ela i Jacek → oni; Ty; my z tatą → my; ty i babcia → wy. dać: dam, dasz… dadzą. «powinien» має особові закінчення: powinienem, powinieneś.',
+  text:`Monika rozmawia z synem przez telefon:
+„Marku, za godzinę Ela i Jacek {{dadzą}} (dać) Ci dokumenty, które Ty z kolei {{powinieneś}} (powinien) przekazać do banku. My z tatą teraz {{jedziemy}} (jechać) ulicą Legnicką, a właściwie {{stoimy}} (stać) w korku, więc ty i babcia sami {{musicie|będziecie musieli}} (musieć) wszystko załatwić.”`},
+ {n:'IV', p:47, t:'f', pts:0.75, tp:'as',
+  ins:'Proszę uzupełnić tekst właściwą formą jednego z czasowników w nawiasie zgodnie z podanym przykładem.', ua:'Доповніть текст правильною формою одного з дієслів у дужках за зразком.',
+  hint:'Одноразові завершені дії вчора → доконаний вид. «aż 20 minut» (тривалість) → недоконаний. «często» → недоконаний (тут — теперішній час). Після «musiał», «będzie musiał» — інфінітив. Marek → -ł, sekretarka → -ła.',
+  text:`Wczoraj Marek {=zaspał} (zasypiać/zaspać) do pracy. Było bardzo późno, kiedy {{wyszedł}} (wychodzić/wyjść) z domu. Na przystanku {{czekał}} (czekać/poczekać) aż 20 minut, a kiedy autobus w końcu {{przyjechał}} (przyjeżdżać/przyjechać), Marek {{przypomniał}} (przypominać/przypomnieć) sobie, że bilet miesięczny {{zostawił}} (zostawiać/zostawić) w domu. Niestety, Marek często {{zapomina}} (zapominać/zapomnieć) o różnych rzeczach. Musiał więc {{kupić}} (kupować/kupić) bilet jednorazowy. Punktualnie o 10.00 {{wszedł}} (wchodzić/wejść) do biura i szybko zabrał się do pracy. Po chwili zauważył, że sekretarka {{położyła}} (kłaść/położyć) na jego biurku polecenie od kierownika – dziś Marek będzie musiał {{zostać}} (zostawać/zostać) w pracy dłużej.`},
+ {n:'V', p:48, t:'f', pts:0.75, tp:'st',
+  ins:'Proszę uzupełnić tekst właściwą formą wyrazów w nawiasach zgodnie z podanym przykładem (stopniowanie przymiotników i przysłówków).', ua:'Доповніть текст правильною формою слів у дужках (ступені порівняння) за зразком.',
+  hint:'Усюди вищий ступінь. Прислівники: -ej з чергуванням (długo, szybko). Прикметники узгодьте: wybór — чоловічий рід, książka — жіночий, «bądź» до чоловіка — чоловічий. mały → mniejszy, miły → milszy.',
+  text:`A: Dlaczego nie przyszedłeś {=wcześniej} (wcześnie) i nie kupiłeś Basi {=ładniejszych} (ładny) kwiatów?
+B: Dzisiejsze zebranie trwało {{dłużej}} (długo) niż zwykle, a wybór kwiatów był {{mniejszy}} (mały) niż normalnie. Wiesz przecież, że te imieniny są bardzo popularne.
+A: Chodźmy {{szybciej}} (szybko), bo się spóźnimy. Na szczęście mam dla niej dobrą książkę.
+B: Mam nadzieję, że będzie {{ciekawsza}} (ciekawa) od zeszłorocznej.
+A: Bądź trochę {{milszy}} (miły)! Na drugi raz możesz sam kupować prezenty.`},
+ {n:'VI', p:48, t:'b', pts:0.5, ins1:2, tp:'va',
+  ins:'Proszę uzupełnić tekst wyrazami z ramki zgodnie z podanym przykładem. Uwaga! Niektóre spójniki mogą być użyte dwa razy.', ua:'Доповніть текст словами з рамки за зразком. Увага! Деякі сполучники можна вжити двічі. Торкніться пропуску, а потім слова в рамці.',
+  bank:['żeby','bo','chociaż','że','czy','a','albo'],
+  ex:`A: Po co Karol poszedł na targ?
+B: {=Żeby} kupić wiśnie do ciasta.`,
+  hint:'czy — вибір у питанні й після «nie wiem»; albo — «або»; bo — причина; chociaż — «хоча»; że — після «wiesz»; a — зіставлення.',
+  text:`A: Co wolisz – kawę {{czy}} herbatę?
+B: Wszystko mi jedno. Może być to {{albo}} to.
+A: W takim razie dostaniesz herbatę, {{bo}} jest już gotowa. Masz ochotę na ciasto z wiśniami?
+B: {{Chociaż}} uwielbiam twoje ciasto, muszę powiedzieć „nie”. Wiesz przecież, {{że}} się odchudzam.
+A: Naprawdę?
+B: Naprawdę, nie wiem tylko, {{czy}} będę długo konsekwentna.
+A: Zastanów się jeszcze. To ciasto nie ma dużo kalorii, {{a}} wiśnie w tym roku już się kończą. To ostatnia okazja!`},
+ {n:'VII', p:49, t:'b', pts:0.5, ins1:2, tp:'pi',
+  ins:'Proszę uzupełnić tekst wyrazami z ramki zgodnie z podanym przykładem. Uwaga! Niektóre przyimki mogą się powtarzać.', ua:'Доповніть текст словами з рамки за зразком. Увага! Деякі прийменники можуть повторюватися. Торкніться пропуску, а потім слова в рамці.',
+  bank:['z','przez','na','w','dla','do','nad','po'],
+  hint:'przygotowywać się do (чого) і з ким? — z + орудний; wyjść na środek; для кого? — dla; над чим? — nad + орудний; przez cały czas; uderzyć w głowę; після чого? — po + місцевий; podejść do (кого); czekać na (кого).',
+  text:`Wczoraj był {=w} naszej szkole koncert z okazji świąt. {{Do}} tego koncertu przygotowywaliśmy się {{z}} panią Dianą bardzo długo. Ja i Magda wyszliśmy {{na}} środek sali i śpiewaliśmy {{dla}} wszystkich dzieci. {{Nad}} moją głową wisiał duży mikrofon i {{przez}} cały czas bałem się, że spadnie i uderzy mnie {{w}} głowę. Śpiewaliśmy nie tylko po polsku, były też teksty angielskie i francuskie. {{Po}} występie dostaliśmy brawa i kwiaty. Podszedł też {{do}} nas dyrektor i bardzo serdecznie nam pogratulował. W domu czekał {{na}} nas wspaniały tort.`},
+ {n:'VIII', p:49, t:'f', pts:0.5, tp:'ro',
+  ins:'Proszę uzupełnić tekst właściwą formą trybu rozkazującego utworzonego od podkreślonych czasowników zgodnie z podanym przykładem.', ua:'Доповніть текст формами наказового способу (ty), утвореними від підкреслених дієслів, за зразком.',
+  hint:'Форма «ty»: zostawić → zostaw; zabrać → zabierz; -ować → -uj; znaleźć → znajdź.',
+  pre:`Trzeba dobrze __zaplanować__^0^ wyjście w góry. Trzeba __zostawić__^1^ informację o planowanym wyjściu. Trzeba __zabrać__^2^ ciepłe rzeczy. Trzeba __przygotować__^3^ wodę i kanapki. Trzeba __zapakować__^4^ odpowiedni sprzęt. Trzeba __znaleźć__^5^ bezpieczne miejsce na nocleg.`,
+  text:`Rady dla turysty:
+{=Zaplanuj} dobrze wyjście w góry! {{Zostaw}} informację o planowanym wyjściu! {{Zabierz}} ciepłe rzeczy! {{Przygotuj}} wodę i kanapki! {{Zapakuj}} odpowiedni sprzęt! {{Znajdź}} bezpieczne miejsce na nocleg!`},
+ {n:'IX', p:49, t:'f', pts:0.5, tp:'pp',
+  ins:'Proszę uzupełnić tekst właściwą formą czasowników w nawiasach zgodnie z podanym przykładem (tryb przypuszczający).', ua:'Доповніть текст правильною формою дієслів у дужках (умовний спосіб) за зразком.',
+  hint:'Пише жінка (Ewa): ja → -łabym; я з Касею (дві жінки) → -łybyśmy; Paweł → -łby. wziąć → wzięła-, móc → mogła-.',
+  text:`Cześć, Anka!
+Mam do Ciebie ogromną prośbę. Czy {=pożyczyłabyś} (pożyczyć) mi tę książkę o Adamie Mickiewiczu? Chętnie {{wzięłabym}} (wziąć) ją od Ciebie na kilka dni, gdyż niedługo mam egzamin z literatury, który {{mogłabym}} (móc) właściwie zdać później. Profesor nawet pytał mnie i Kasię, czy nie {{chciałybyśmy}} (chcieć) go zdawać w innym terminie, ale {{wolałybyśmy|wolałabym}} (woleć) tego nie robić, bo przed nami jeszcze 4 trudne egzaminy. Paweł, mój brat, {{oddałby}} (oddać) Ci podręcznik w następną środę. Dobrze?
+Ewa`},
+ {n:'X', p:50, t:'s', pts:1, tp:'va',
+  ins:'Proszę przekształcić zdania zgodnie z podanym przykładem tak, by nie zmieniły sensu.', ua:'Перетворіть речення за зразком так, щоб зміст не змінився. Використайте подане слово.',
+  hint:'«Nikt nie jest…» + порівняння. Рух (pojechać): nad + знахідний, w + знахідний. «grać w» + знахідний. «nie wiem, jak…». Умовний спосіб: «gdybyśmy mogli».',
+  exs:{q:'Adam i Jacek są moimi kolegami.', c:'to', a:'Adam i Jacek to moi koledzy.'},
+  items:[
+   {q:'Mój dziadek jest najmądrzejszy ze wszystkich!', c:'Nikt', a:['Nikt nie jest tak mądry jak mój dziadek.','Nikt nie jest mądrzejszy (od mojego dziadka|niż mój dziadek)!']},
+   {q:'W czasie wakacji byliśmy nad morzem i w górach.', c:'pojechaliśmy', a:['W czasie wakacji pojechaliśmy nad morze i w góry.']},
+   {q:'Mój brat jest świetnym piłkarzem.', c:'gra', a:['Mój brat świetnie gra w piłkę.']},
+   {q:'Naprawdę nie znam jej imienia.', c:'nie wiem', a:['Naprawdę nie wiem, jak ona ma na imię.']},
+   {q:'Chcemy ci pomóc, ale nie możemy.', c:'gdybyśmy', a:['Pomoglibyśmy ci, gdybyśmy mogli.','Gdybyśmy mogli, pomoglibyśmy ci.']}
+  ]}
+];
+
+const GROUPS = ['Fleksja imienna','Fleksja werbalna','Przyimki','Varia'];
+const TOPICS = [].concat(T_IM, T_WE, T_PV);
+/* ===== Шпаргалки українською (польські приклади — у тегах <i>) ===== */
+const SHEETS = {
+rz: `
+<p>Щоб вибрати відмінок, шукайте «керуюче» слово: прийменник або дієслово перед пропуском.</p>
+<table>
+<tr><th>Відмінок</th><th>Коли</th><th>Типові закінчення</th></tr>
+<tr><td><b>Dopełniacz</b><br>kogo? czego?</td><td><i>do, od, z</i> (звідки), <i>bez, dla, u, obok, koło, podczas</i>; <i>nie ma, szukać, brak</i>; після кількості: <i>dużo, wiele, kilka, pięć…</i>; «чий?»: <i>widok stolicy</i></td><td>ч. р. <i>-a / -u</i> (<i>psa, hałasu</i>), ж. р. <i>-y / -i</i> (<i>pracy, księgarni</i>), с. р. <i>-a</i>; мн. <i>-ów</i> (<i>biletów</i>), нульове (<i>kas, miejsc, zdjęć, nagród</i>), <i>-i / -y</i> (<i>wakacji</i>)</td></tr>
+<tr><td><b>Celownik</b><br>komu? czemu?</td><td><i>dzięki</i>; <i>pomagać, życzyć, dać, opowiadać, podobać się</i></td><td>ч. р. <i>-owi</i> (<i>Markowi, filmowi</i>), але <i>bratu, ojcu, panu</i>; ж. р. <i>-e / -i</i> (<i>siostrze, babci</i>); мн. <i>-om</i></td></tr>
+<tr><td><b>Biernik</b><br>kogo? co?</td><td><i>mieć, lubić, kupić</i>…; <i>na, w, nad, za, przez</i> — коли «куди?»: <i>na wakacje, nad morze, w góry, za granicę</i></td><td>ж. р. <i>-ę</i> (прикм. <i>-ą</i>): <i>naszą aurę</i>; ч. р. істоти = родовий, неістоти = називний</td></tr>
+<tr><td><b>Narzędnik</b><br>kim? czym?</td><td><i>z</i> (з ким), <i>nad, pod, przed, za, między</i> — коли «де?»; <i>być kim, cieszyć się, jeździć czym</i></td><td>ч. і с. р. <i>-em</i> (<i>rowerem</i>), ж. р. <i>-ą</i>; мн. <i>-ami</i> (<i>kolegami</i>); прикм. <i>-ym / -im, -ą, -ymi</i></td></tr>
+<tr><td><b>Miejscownik</b><br>o kim? o czym?</td><td><i>w, na, o, po, przy</i> — коли «де?», «про що?»</td><td><i>-e</i> з чергуванням (<i>piętro → piętrze, miasto → mieście, sen → śnie, apteka → aptece</i>); <i>-u</i> після <i>k, g, ch</i> і м’яких (<i>w czerwcu, w tygodniu, w domu</i>); ж. р. м’які <i>-i / -y</i> (<i>w pracy, w cukierni</i>); мн. <i>-ach</i></td></tr>
+</table>
+<h4>Куди? чи де?</h4>
+<p><i>nad morze</i> (їду — знахідний) ↔ <i>nad morzem</i> (я там — орудний); <i>w góry</i> ↔ <i>w górach</i>; <i>za granicę</i> ↔ <i>za granicą</i>.</p>
+<h4>Називний множини про чоловіків</h4>
+<p><i>-owie</i>: <i>synowie, widzowie</i>; <i>-i / -y</i> з чергуванням: <i>kolega → koledzy, mieszkaniec → mieszkańcy</i>; <i>-e</i>: <i>dziennikarze</i>. Прикметники: <i>dobry → dobrzy, wspaniały → wspaniali</i>.</p>
+<h4>Запам’ятайте</h4>
+<p><i>życzyć</i> — кому? + чого?: <i>życzę Markowi sukcesów</i>. Прикметник завжди має той самий рід, число й відмінок, що й іменник: <i>na stronach internetowych</i>.</p>`,
+
+zo: `
+<table>
+<tr><th></th><th>D. (кого?)</th><th>C. (кому?)</th><th>B. (кого?)</th><th>N. (ким?)</th><th>Msc. (о кім?)</th></tr>
+<tr><td><b>ja</b></td><td><i>mnie</i></td><td><i>mi / mnie</i></td><td><i>mnie</i></td><td><i>mną</i></td><td><i>mnie</i></td></tr>
+<tr><td><b>ty</b></td><td><i>cię / ciebie</i></td><td><i>ci / tobie</i></td><td><i>cię / ciebie</i></td><td><i>tobą</i></td><td><i>tobie</i></td></tr>
+<tr><td><b>on, ono</b></td><td><i>go / jego / niego</i></td><td><i>mu / jemu / niemu</i></td><td>on: <i>go / jego / niego</i><br>ono: <i>je / nie</i></td><td><i>nim</i></td><td><i>nim</i></td></tr>
+<tr><td><b>ona</b></td><td><i>jej / niej</i></td><td><i>jej / niej</i></td><td><i>ją / nią</i></td><td><i>nią</i></td><td><i>niej</i></td></tr>
+<tr><td><b>my</b></td><td><i>nas</i></td><td><i>nam</i></td><td><i>nas</i></td><td><i>nami</i></td><td><i>nas</i></td></tr>
+<tr><td><b>wy</b></td><td><i>was</i></td><td><i>wam</i></td><td><i>was</i></td><td><i>wami</i></td><td><i>was</i></td></tr>
+<tr><td><b>oni</b></td><td><i>ich / nich</i></td><td><i>im / nim</i></td><td><i>ich / nich</i></td><td><i>nimi</i></td><td><i>nich</i></td></tr>
+<tr><td><b>one</b></td><td><i>ich / nich</i></td><td><i>im / nim</i></td><td><i>je / nie</i></td><td><i>nimi</i></td><td><i>nich</i></td></tr>
+</table>
+<h4>Три правила</h4>
+<ul>
+<li><b>Після прийменника</b> — форма на <i>n-</i>: <i>do niego, dla niej, o nich, z nimi, bez niego, dzięki niemu</i>.</li>
+<li><b>Короткі форми</b> (<i>go, mu, mi, ci, cię</i>) стоять після дієслова й не бувають на початку речення: <i>Kocham go. Daj mi.</i></li>
+<li><b>Довгі форми</b> (<i>jego, jemu, mnie, ciebie, tobie</i>) — на початку речення або з наголосом: <i>Jego zapraszam, a ją nie.</i></li>
+</ul>
+<h4>Дієслова, що вимагають «кому?»</h4>
+<p><i>pomagać, opowiadać, przynosić, kupować, podobać się, smakować, wydawać się, być wdzięcznym</i>: <i>Pomagam im. Podoba mi się.</i></p>`,
+
+zr: `
+<h4>Присвійні</h4>
+<ul>
+<li><i>mój, twój, nasz, wasz</i> відмінюються як прикметники: <i>do waszej rodziny, mojego wnuka, naszych dzieci</i>.</li>
+<li><i>jego, jej, ich</i> — «його, її, їхній» — <b>не змінюються</b> і ніколи не мають <i>n-</i>: <i>jej syn, w jej domu, ich problemy</i>.</li>
+<li><i>swój</i> — коли власник і є підметом речення: <i>Zofia nie zaniedbuje swoich roślin.</i> Якщо власник інший — <i>jego / jej / ich</i>: <i>Patrzę na jego dzieci.</i></li>
+</ul>
+<h4>Вказівні</h4>
+<p><i>ten, ta, to</i>; множина: <i>ci</i> (про чоловіків) / <i>te</i> (усе інше: <i>te zwierzęta, te zajęcia</i>). Жіночий рід: знахідний <i>tę książkę</i>, родовий <i>tej książki</i>. <i>sam / sama / same / sami</i>, <i>taki / taka / takie</i> узгоджуються з іменником.</p>
+<h4>który</h4>
+<p>Рід і число — від іменника, якого стосується; відмінок — від ролі в підрядному реченні. Прийменник стоїть перед <i>który</i>, перед ним — кома.</p>
+<ul>
+<li><i>zeszyty, <b>których</b> szukałem</i> (szukać + родовий)</li>
+<li><i>znajomego, <b>któremu</b> pomogłam</i> (pomóc + давальний)</li>
+<li><i>kobietę, <b>której</b> syn…</i> (чий? — родовий)</li>
+<li><i>kolegów, <b>z którymi</b> chodziłem</i></li>
+</ul>
+<h4>Заперечні — завжди з «nie»</h4>
+<p><i>nikt nie…, nic nie…, nikogo nie…, nikomu nie…, nigdy nie…</i>: <i>Nikt jej nie lubił. Nic nie powiedziałam.</i> Після заперечення знахідний змінюється на родовий: <i>lubił ją → nie lubił jej</i>.</p>
+<h4>siebie</h4>
+<p><i>siebie</i> (кого?), <i>sobie</i> (кому? про кого?), <i>sobą</i> (ким?): <i>lubię siebie, dziękować sobie, rozmawiać ze sobą</i>.</p>`,
+
+st: `
+<h4>Прикметник</h4>
+<table>
+<tr><th>Звичайний</th><th>Вищий</th><th>Найвищий</th></tr>
+<tr><td><i>stary</i></td><td><i>starszy</i></td><td><i>najstarszy</i></td></tr>
+<tr><td><i>ładny, spokojny, zdolny</i></td><td><i>ładniejszy, spokojniejszy, zdolniejszy</i></td><td><i>naj-…</i></td></tr>
+<tr><td><i>wesoły, miły, drogi, gorący</i></td><td><i>weselszy, milszy, droższy, gorętszy</i></td><td><i>naj-…</i></td></tr>
+<tr><td><i>wysoki, niski, głęboki, słodki, krótki</i></td><td><i>wyższy, niższy, głębszy, słodszy, krótszy</i> (зникає <i>-k-, -ok-</i>)</td><td><i>naj-…</i></td></tr>
+<tr><td><i>dobry, zły, duży / wielki, mały</i></td><td><i>lepszy, gorszy, większy, mniejszy</i></td><td><i>najlepszy…</i></td></tr>
+<tr><td><i>interesujący, zmęczony, opalony, męczący</i></td><td><i>bardziej…</i> (<i>mniej…</i>)</td><td><i>najbardziej…</i> (<i>najmniej…</i>)</td></tr>
+</table>
+<p>Вищий ступінь відмінюється як прикметник: <i>młodsza, zdrowsze, najstarszym pomnikiem</i>; про чоловіків у множині: <i>lepsi, pewniejsi, najlepsi</i>.</p>
+<h4>Прислівник</h4>
+<p><i>-ej / -iej</i>: <i>ładnie → ładniej, często → częściej, szybko → szybciej, wesoło → weselej, wcześnie → wcześniej, wysoko → wyżej, długo → dłużej, krótko → krócej</i>. Неправильні: <i>dobrze → lepiej, źle → gorzej, dużo → więcej, mało → mniej</i>.</p>
+<h4>Слова-підказки</h4>
+<ul>
+<li><i>niż</i> + називний або <i>od</i> + родовий → <b>вищий</b>: <i>wyższa niż Basia = wyższa od Basi</i>.</li>
+<li><i>z / ze</i> + родовий множини, <i>w klasie, w Polsce, na świecie, jaki w życiu…</i> → <b>найвищий</b>: <i>najzdolniejszy na roku</i>.</li>
+<li><i>coraz</i> + вищий — «дедалі»: <i>coraz weselszy, coraz bardziej siwy</i>.</li>
+<li><i>o wiele, znacznie, trochę</i> + вищий: <i>o wiele mniejszy</i>.</li>
+</ul>`,
+
+te: `
+<h4>Чотири моделі відмінювання</h4>
+<table>
+<tr><th></th><th><i>-ę, -esz</i></th><th><i>-ę, -isz / -ysz</i></th><th><i>-am, -asz</i></th><th><i>-em, -esz</i></th></tr>
+<tr><td>ja</td><td><i>piszę</i></td><td><i>robię</i></td><td><i>czytam</i></td><td><i>jem</i></td></tr>
+<tr><td>ty</td><td><i>piszesz</i></td><td><i>robisz</i></td><td><i>czytasz</i></td><td><i>jesz</i></td></tr>
+<tr><td>on / ona</td><td><i>pisze</i></td><td><i>robi</i></td><td><i>czyta</i></td><td><i>je</i></td></tr>
+<tr><td>my</td><td><i>piszemy</i></td><td><i>robimy</i></td><td><i>czytamy</i></td><td><i>jemy</i></td></tr>
+<tr><td>wy</td><td><i>piszecie</i></td><td><i>robicie</i></td><td><i>czytacie</i></td><td><i>jecie</i></td></tr>
+<tr><td>oni / one</td><td><i>piszą</i></td><td><i>robią</i></td><td><i>czytają</i></td><td><i>jedzą</i></td></tr>
+</table>
+<h4>Суфікси</h4>
+<ul>
+<li><i>-ować</i> → <i>-uję</i>: <i>pracować → pracuję, pracuje, pracują</i>; так само <i>-ywać / -iwać</i>: <i>przygotowywać → przygotowuje, wytrzymywać → wytrzymujemy, poszukiwać → poszukuje</i>.</li>
+<li><i>-awać</i> → <i>-aję</i>: <i>wstawać → wstaję, wstaje</i>.</li>
+</ul>
+<h4>Дієслова з чергуванням</h4>
+<p><i>brać: biorę, bierzesz, biorą</i> · <i>móc: mogę, możesz, mogą</i> · <i>jechać: jadę, jedziesz, jadą</i> · <i>jeździć: jeżdżę, jeździsz, jeżdżą</i> · <i>stać: stoję, stoi, stoją</i> · <i>bać się: boję się</i> · <i>śmiać się: śmieję się, śmieją się</i> · <i>myć: myję, myje</i> · <i>piec: piekę, pieczesz, pieką</i> · <i>kłaść: kładę, kładziemy</i> · <i>płakać: płaczę, płacze</i> · <i>łapać: łapię, łapie</i> · <i>musieć: muszę, musisz</i> · <i>wiedzieć: wiem, wiedzą</i> · <i>mieć: mam, mają</i></p>
+<h4>Хто підмет?</h4>
+<ul>
+<li><i>oboje, sąsiedzi, jedni, inni</i> → 3-тя особа множини.</li>
+<li><i>pan, pani</i> → 3-тя особа однини; <i>panie, panowie, państwo</i> → 3-тя особа множини: <i>Czy panie wiedzą…?</i></li>
+<li><i>kilkadziesiąt, wiele, pięć</i> + родовий → дієслово в <b>однині</b>: <i>wielu Polaków łapie się</i>.</li>
+<li>Немає когось / чогось: <i>nie ma</i> + родовий: <i>Nie ma jej w domu.</i></li>
+</ul>
+<h4>Простий майбутній час</h4>
+<p>Доконані дієслова відмінюються так само, але означають майбутнє: <i>dać: dam, dasz, da, damy, dacie, dadzą</i>. <i>powinien</i>: <i>powinienem / powinnam, powinieneś / powinnaś, powinien / powinna</i>.</p>`,
+
+pr: `
+<h4>Як утворити</h4>
+<p>Інфінітив без <i>-ć</i> + <i>-ł-</i> + рід + особа.</p>
+<table>
+<tr><th></th><th>чоловік</th><th>жінка</th><th></th><th>чоловіки / мішана група</th><th>жінки, речі</th></tr>
+<tr><td>ja</td><td><i>robiłem</i></td><td><i>robiłam</i></td><td>my</td><td><i>robiliśmy</i></td><td><i>robiłyśmy</i></td></tr>
+<tr><td>ty</td><td><i>robiłeś</i></td><td><i>robiłaś</i></td><td>wy</td><td><i>robiliście</i></td><td><i>robiłyście</i></td></tr>
+<tr><td>on / ona / ono</td><td><i>robił</i></td><td><i>robiła</i> / <i>robiło</i></td><td>oni / one</td><td><i>robili</i></td><td><i>robiły</i></td></tr>
+</table>
+<h4>Чергування</h4>
+<ul>
+<li><i>-eć</i> → <i>-ał, -ała, -eli, -ały</i>: <i>mieć: miał, mieli</i>; <i>chcieć, musieć, myśleć, zapomnieć, przesiedzieć, zależeć</i>.</li>
+<li><i>-ąć</i> → <i>-ął, -ęła, -ęli, -ęły</i>: <i>wziąć: wziął, wzięła</i>; <i>zacząć, zająć, rozpocząć, zginąć, krzyknąć</i>.</li>
+<li><i>iść</i>: <i>szedł, szła, szli, szły</i> → <i>poszedł, przyszła, wyszli, doszedł</i>.</li>
+<li><i>jeść: jadł, jadła, jedli</i> · <i>móc: mógł, mogła, mogli</i> · <i>nieść: niósł, niosła, nieśli</i> · <i>znaleźć: znalazł, znalazła, znaleźli</i> · <i>piec: piekł, piekła</i> · <i>wysiąść: wysiadł, wysiedli</i> · <i>biec: biegł, pobiegła</i></li>
+</ul>
+<h4>Рід у множині</h4>
+<p>Є хоч один чоловік → <i>-li</i> (<i>koledzy przyszli</i>). Лише жінки, діти, речі → <i>-ły</i> (<i>siostry się spóźniły</i>).</p>
+<h4>Ввічливі форми</h4>
+<p><i>pan / pani / państwo / panowie</i> + 3-тя особа: <i>Dlaczego pan nie powiedział? Nie mogli państwo…?</i></p>
+<h4>Безособово</h4>
+<p>Середній рід: <i>okazało się, zależało mi, nic się nie stało</i>. Не було: <i>nie było</i> + родовий.</p>`,
+
+as: `
+<table>
+<tr><th>Недоконаний (niedokonany)</th><th>Доконаний (dokonany)</th></tr>
+<tr><td>процес, тривалість, повторення</td><td>результат, одноразова завершена дія</td></tr>
+<tr><td><i>zwykle, często, zawsze, codziennie, co rano, długo, przez godzinę, całymi dniami, ciągle</i></td><td><i>nagle, w końcu, wreszcie, raz, zaraz, potem</i>; ланцюжок дій одна за одною</td></tr>
+<tr><td><i>Długo oglądał mięso.</i></td><td><i>W końcu kupił szynkę.</i></td></tr>
+</table>
+<h4>Майбутній час</h4>
+<ul>
+<li>Недоконаний — складена форма: <i>będę + інфінітив</i> або <i>będę + форма на -ł</i>: <i>będzie grać = będzie grał</i>.</li>
+<li>Доконаний — проста форма: <i>zrobi, kupi, pojedzie, wróci, zdadzą, zaczną</i>. <b>Ніколи</b> <i>będę + доконане</i>.</li>
+</ul>
+<h4>Тільки недоконаний</h4>
+<p>Після <i>zacząć, zaczynać, skończyć, przestać</i>: <i>zaczęła czytać</i>.</p>
+<h4>Тло і подія</h4>
+<p><i>Kiedy płacił</i> (тло — недоконаний), <i>okazało się…</i> (подія — доконаний).</p>
+<h4>Пари</h4>
+<p><i>robić / zrobić · pisać / napisać · czytać / przeczytać · pić / wypić · prać / wyprać · dzwonić / zadzwonić · płacić / zapłacić</i><br>
+<i>kupować / kupić · sprzedawać / sprzedać · dawać / dać · wstawać / wstać · zamykać / zamknąć · otwierać / otworzyć · zapominać / zapomnieć · wybierać / wybrać · zostawiać / zostawić · wracać / wrócić · podlewać / podlać</i><br>
+Різні корені: <i>brać / wziąć · kłaść / położyć · mówić / powiedzieć · widzieć / zobaczyć · oglądać / obejrzeć · iść / pójść · znajdować / znaleźć</i></p>`,
+
+ro: `
+<h4>Форма «ty»</h4>
+<p>Беремо 3-тю особу теперішнього (або простого майбутнього) часу й відкидаємо закінчення.</p>
+<table>
+<tr><th>Тип</th><th>Приклади</th></tr>
+<tr><td><i>-ać</i> (oni <i>-ają</i>) → <i>-aj</i></td><td><i>czekać → czekaj, uważać → uważaj, oglądać → oglądaj</i></td></tr>
+<tr><td><i>-ować, -ywać</i> → <i>-uj</i></td><td><i>planować → planuj, zapisywać → zapisuj</i></td></tr>
+<tr><td>основа на одну приголосну — без закінчення, приголосна м’якшає</td><td><i>pisze → pisz, zapłaci → zapłać, wyprowadzi → wyprowadź, zostawi → zostaw, wybierze → wybierz</i></td></tr>
+<tr><td><i>o → ó</i></td><td><i>robi → rób, pomoże → pomóż, położy → połóż, mówi → mów</i></td></tr>
+<tr><td>основа на голосну → <i>-j</i></td><td><i>myje → myj, podleje → podlej, przykryje → przykryj</i></td></tr>
+<tr><td>збіг приголосних → <i>-ij / -yj</i></td><td><i>zacznie → zacznij, zapomni → zapomnij, przyciśnie → przyciśnij, wyjmie → wyjmij</i></td></tr>
+<tr><td>нерегулярні</td><td><i>być → bądź, mieć → miej, jeść → jedz, wziąć → weź, dać → daj, powiedzieć → powiedz, wstać → wstań, iść → idź, wyjść → wyjdź, przyjść → przyjdź, znaleźć → znajdź</i></td></tr>
+</table>
+<h4>Інші особи</h4>
+<ul>
+<li><b>my</b>: + <i>-my</i>: <i>planujmy, znajdźmy, nie oglądajmy</i>.</li>
+<li><b>wy</b>: + <i>-cie</i>: <i>wpiszcie, idźcie, weźcie, dzwońcie</i>.</li>
+<li><b>on, ona, pan, pani</b>: <i>niech</i> + 3-тя особа: <i>niech zadzwoni, niech pan wejdzie</i>.</li>
+</ul>
+<h4>Вид</h4>
+<p>Одноразове конкретне доручення — доконаний: <i>kup prezent, zrób zakupy w piątek</i>. Регулярне — недоконаний: <i>podlewaj kwiaty co dwa dni, dzwońcie codziennie</i>. Заборона — зазвичай недоконаний: <i>nie zaczynaj, nie przełączaj</i>.</p>
+<p>Частка <i>się</i> і заперечення <i>nie</i> зберігаються: <i>ubierz się, nie oddalajcie się</i>.</p>`,
+
+pp: `
+<h4>Як утворити</h4>
+<p>Форма минулого часу 3-ї особи + <i>by</i> + закінчення особи.</p>
+<table>
+<tr><th></th><th>чоловік</th><th>жінка</th><th></th><th>чоловіки / мішана група</th><th>жінки, речі</th></tr>
+<tr><td>ja</td><td><i>zrobiłbym</i></td><td><i>zrobiłabym</i></td><td>my</td><td><i>zrobilibyśmy</i></td><td><i>zrobiłybyśmy</i></td></tr>
+<tr><td>ty</td><td><i>zrobiłbyś</i></td><td><i>zrobiłabyś</i></td><td>wy</td><td><i>zrobilibyście</i></td><td><i>zrobiłybyście</i></td></tr>
+<tr><td>on / ona / ono</td><td><i>zrobiłby</i></td><td><i>zrobiłaby</i> / <i>zrobiłoby</i></td><td>oni / one</td><td><i>zrobiliby</i></td><td><i>zrobiłyby</i></td></tr>
+</table>
+<h4>Умовне речення</h4>
+<p><i><b>Gdybym</b> miał czas, <b>pojechałbym</b> w góry.</i> — «Якби я мав час, я поїхав би в гори».</p>
+<ul>
+<li>У частині з <i>gdyby</i> закінчення особи приєднується до <i>gdyby</i>: <i>gdybym, gdybyś, gdyby, gdybyśmy, gdybyście, gdyby</i> + форма на <i>-ł</i>.</li>
+<li>У другій частині — звичайний умовний спосіб. Між частинами — кома.</li>
+<li>Підмет-іменник: <i>Gdyby przyjęcie było udane, powtórzyłbym je.</i></li>
+</ul>
+<h4>Зміна заперечення</h4>
+<p>Реальність: <i>Nie mam czasu, więc nie jadę.</i> → Умова: <i>Gdybym miał czas, pojechałbym.</i> Після заперечення знахідний стає родовим і навпаки: <i>nie mam lepszej pracy → miałbym lepszą pracę</i>; <i>muszę robić porządki → nie musiałbym robić porządków</i>.</p>
+<h4>Ввічливі прохання</h4>
+<p><i>Czy mógłbyś…? Chciałabym… Czy pożyczyłabyś mi…? Najlepiej byłoby…</i></p>`,
+
+pi: `
+<table>
+<tr><th>Прийменник</th><th>Відмінок</th><th>Приклади</th></tr>
+<tr><td><i>do, od, z</i> (звідки), <i>bez, dla, u, obok, koło, wokół, podczas, według, oprócz</i></td><td>родовий</td><td><i>do teatru, od rana do wieczora, z Wejherowa, u znajomych, bez końca, dla dzieci, według nas</i></td></tr>
+<tr><td><i>dzięki</i></td><td>давальний</td><td><i>dzięki pomocy, dzięki niemu</i></td></tr>
+<tr><td><i>przez</i></td><td>знахідний</td><td><i>przez cały dzień, przez lasy, przez kilka miesięcy</i></td></tr>
+<tr><td><i>z</i> (з ким), <i>między</i></td><td>орудний</td><td><i>z kolegami, ze znajomymi, między nami</i></td></tr>
+<tr><td><i>o, po, przy</i></td><td>місцевий</td><td><i>myśleć o sobie, po powrocie, po dwóch godzinach, przy ognisku, o wschodzie słońca</i></td></tr>
+<tr><td><i>na, w</i></td><td>куди? — знахідний<br>де? — місцевий</td><td><i>na Mazury ↔ na Mazurach, w góry ↔ w górach, na wieś ↔ na wsi</i></td></tr>
+<tr><td><i>nad, pod, za, przed</i></td><td>куди? — знахідний<br>де? — орудний</td><td><i>nad morze ↔ nad morzem, za granicę ↔ za granicą, nad głową</i></td></tr>
+</table>
+<h4>Сталі сполучення</h4>
+<ul>
+<li><i>grać <b>na</b> skrzypcach</i> (інструмент) · <i>grać <b>w</b> koszykówkę</i> (гра)</li>
+<li><i>studiować <b>na</b> uniwersytecie</i> · <i>uczyć się <b>w</b> szkole</i> · <i>zdawać <b>na</b> studia</i></li>
+<li><i>wyjść <b>za</b> mąż</i> · <i>przygotowywać się <b>do</b> egzaminu</i> · <i>zarobić <b>na</b> utrzymanie</i> · <i>pieniądze <b>na</b> opiekunkę</i></li>
+<li><i>prosić <b>o</b> pomoc</i> · <i>czekać <b>na</b> kogoś</i> · <i>pożyczać <b>od</b> matki</i> · <i>wpływ <b>na</b> coś</i> · <i>jeden <b>z</b> mistrzów</i></li>
+<li><i><b>w</b> pobliżu</i> · <i><b>u</b> celu</i> · <i><b>w</b> samą porę</i> · <i>iść <b>na</b> ryby</i> · <i>uderzyć <b>w</b> głowę</i> · <i>podejść <b>do</b> kogoś</i></li>
+</ul>
+<h4>ze, we</h4>
+<p>Перед збігом приголосних: <i>ze znajomymi, ze mną, we wtorek, we wczesnej młodości</i>.</p>`,
+
+va: `
+<h4>Числівники</h4>
+<ul>
+<li>2–4 + називний множини: <i>dwa pytania, trzy osoby</i>; про чоловіків: <i>dwaj bracia</i> або <i>dwóch braci</i>.</li>
+<li>5 і більше + <b>родовий множини</b>: <i>pięć pytań, sześć osób, dwadzieścia róż</i>.</li>
+<li>Про чоловіків — форма на <i>-u</i> + родовий, дієслово в однині: <i>walczy trzech uczestników, pięciu kolegów przyszło</i>.</li>
+<li>Числівник теж відмінюється: <i>z siedmioma pytaniami</i> (орудний), <i>jeden z dziesięciu</i> (родовий).</li>
+<li>Порядкові — як прикметники: <i>piątego maja, dwudziestą rocznicę, przed siódmą</i> (година).</li>
+</ul>
+<h4>Країна → прикметник → мешканці</h4>
+<p>Прикметник — з малої літери, мешканці — з великої: <i>Polska → polski → Polacy · Czechy → czeski → Czesi · Francja → francuski → Francuzi · Włochy → włoski → Włosi · Holandia → holenderski → Holendrzy · Austria → austriacki → Austriacy · Hiszpania → hiszpański → Hiszpanie · Szwajcaria → szwajcarski → Szwajcarzy · Ukraina → ukraiński → Ukraińcy · Węgry → węgierski → Węgrzy</i></p>
+<h4>Сполучники</h4>
+<table>
+<tr><td><i>i</i></td><td>додавання</td><td><i>a</i></td><td>зіставлення: <i>Ania jest starsza, a Marta młodsza</i></td></tr>
+<tr><td><i>ale</i></td><td>протиставлення</td><td><i>albo</i></td><td>або (вибір у ствердженні)</td></tr>
+<tr><td><i>czy</i></td><td>«чи» в питанні; після <i>nie wiem</i></td><td><i>bo</i></td><td>тому що</td></tr>
+<tr><td><i>że</i></td><td>що: <i>myślę, że…</i></td><td><i>żeby</i></td><td>щоб: <i>chcę, żeby</i> + форма на <i>-ł</i>; <i>żeby</i> + інфінітив</td></tr>
+<tr><td><i>chociaż</i></td><td>хоча</td><td></td><td></td></tr>
+</table>
+<h4>Заперечення</h4>
+<ul>
+<li>Подвійне: <i>nikt nie, nigdy nie, nic nie, nikogo nie, nikomu nie</i>.</li>
+<li>Після <i>nie</i> знахідний → родовий: <i>jem frytki → nie jem frytek</i>.</li>
+<li><i>jest / są</i> → <i>nie ma</i> + родовий: <i>nie ma Europejczyków</i>.</li>
+<li><i>i</i> → <i>ani</i>; <i>już</i> → <i>jeszcze nie</i>; <i>wszystko</i> → <i>nic</i>; <i>zawsze</i> → <i>nigdy</i>.</li>
+</ul>
+<h4>Перетворення речень</h4>
+<p><i>wyższy niż ↔ niższy od</i> · <i>oprócz</i> + родовий · <i>między</i> + орудний (<i>między tą Japonką a tym Amerykaninem</i>) · <i>być nad morzem ↔ pojechać nad morze</i> · <i>znać imię ↔ wiedzieć, jak ma na imię</i>.</p>`
+};
+</script>
+<script>
+(function () {
+'use strict';
+
+/* ================= Утиліти ================= */
+const $ = (s, r) => (r || document).querySelector(s);
+const $$ = (s, r) => Array.from((r || document).querySelectorAll(s));
+function h(tag, attrs, ...kids) {
+  const e = document.createElement(tag);
+  if (attrs) for (const k in attrs) {
+    const v = attrs[k];
+    if (v == null || v === false) continue;
+    if (k === 'class') e.className = v;
+    else if (k === 'html') e.innerHTML = v;
+    else if (k.slice(0, 2) === 'on') e.addEventListener(k.slice(2), v);
+    else if (v === true) e.setAttribute(k, '');
+    else e.setAttribute(k, v);
+  }
+  for (const c of kids.flat(Infinity)) {
+    if (c == null || c === false) continue;
+    e.append(c.nodeType ? c : document.createTextNode(String(c)));
+  }
+  return e;
+}
+const r2 = x => Math.round(x * 100) / 100;
+const fmt = n => String(r2(n)).replace('.', ',');
+const pct = (a, b) => b ? Math.round(a / b * 100) : 0;
+const fmtDate = ts => new Date(ts).toLocaleString('uk-UA', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+const fmtDur = s => Math.floor(s / 60) + ' хв ' + String(s % 60).padStart(2, '0') + ' с';
+const shuffle = a => { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+
+/* ================= Перевірка відповідей ================= */
+const normA = s => String(s).toLowerCase().replace(/[.,!?;:"„”«»…()]/g, ' ').replace(/\s[–—-]\s/g, ' ').replace(/\s+/g, ' ').trim();
+const strip = s => normA(s).normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/ł/g, 'l');
+function expand(p) {
+  const m = p.match(/\(([^()]*\|[^()]*)\)/);
+  if (!m) return [p];
+  let out = [];
+  for (const o of m[1].split('|')) out = out.concat(expand(p.slice(0, m.index) + o + p.slice(m.index + m[0].length)));
+  return out;
+}
+function judge(g, val) {
+  if (g.kind === 'c') return val === g.ok ? 'ok' : 'bad';
+  const v = normA(val == null ? '' : val);
+  if (!v) return 'bad';
+  if (g.a.indexOf(v) >= 0) return 'ok';
+  if (g.an.indexOf(strip(val)) >= 0) return 'near';
+  return 'bad';
+}
+const MARK = { ok: '✓', near: '≈', bad: '✗' };
+const MARK_UA = { ok: 'правильно', near: 'майже — перевірте польські літери', bad: 'помилка' };
+
+/* ================= Підготовка даних ================= */
+const TYPE_UA = { c: 'Вибір форми', f: 'Вписування', b: 'Слова з рамки', s: 'Трансформація' };
+const gapW = L => L <= 3 ? 5 : L <= 6 ? 8 : L <= 10 ? 12 : L <= 14 ? 16 : L <= 20 ? 22 : 28;
+
+function parseInline(s, ctr, gaps, bi) {
+  const toks = [];
+  const re = /\{\{([^}]*)\}\}|\{=([^}]*)\}|\[\[([^\]]*)\]\]|__(.+?)__|\^(\d+)\^/g;
+  let last = 0, m;
+  while ((m = re.exec(s))) {
+    if (m.index > last) toks.push({ k: 't', s: s.slice(last, m.index) });
+    last = m.index + m[0].length;
+    if (m[1] !== undefined) {
+      const raw = m[1].split('|');
+      const g = { i: ctr.n++, kind: 'f', raw, a: raw.map(normA), an: raw.map(strip), show: raw, w: gapW(Math.max.apply(null, raw.map(x => x.length))), bi };
+      if (gaps) gaps.push(g);
+      toks.push({ k: 'g', g });
+    } else if (m[2] !== undefined) toks.push({ k: 'x', s: m[2] });
+    else if (m[3] !== undefined) {
+      const isEx = m[3][0] === '=';
+      const opts = (isEx ? m[3].slice(1) : m[3]).split('|');
+      const ok = opts.findIndex(o => o[0] === '*');
+      const clean = opts.map(o => o.replace(/^\*/, ''));
+      if (isEx) toks.push({ k: 'xc', opts: clean, ok });
+      else {
+        const g = { i: ctr.n++, kind: 'c', opts: clean, ok, raw: [clean[ok]], show: [clean[ok]], bi };
+        if (gaps) gaps.push(g);
+        toks.push({ k: 'g', g });
+      }
+    } else if (m[4] !== undefined) toks.push({ k: 'u', s: m[4] });
+    else toks.push({ k: 'sup', s: m[5] });
+  }
+  if (last < s.length) toks.push({ k: 't', s: s.slice(last) });
+  return toks;
+}
+function parseBlocks(src, ctr, gaps) {
+  return src.split('\n').map((line, bi) => {
+    let type = 'p', s = line;
+    if (s.slice(0, 2) === '# ') { type = 'ol'; s = s.slice(2); }
+    else if (s.slice(0, 2) === '- ') { type = 'ul'; s = s.slice(2); }
+    return { type, toks: parseInline(s, ctr, gaps, bi) };
+  });
+}
+function prep(ex, id, topic) {
+  ex.id = id; ex.topic = topic; ex.gaps = [];
+  if (ex.t === 's') {
+    ex.items.forEach((it, i) => {
+      const all = it.a.reduce((acc, p) => acc.concat(expand(p)), []);
+      ex.gaps.push({ i, kind: 's', raw: all, a: all.map(normA), an: all.map(strip), show: it.a.map(p => expand(p)[0]), q: it.q, c: it.c });
+    });
+    ex.blocks = [];
+  } else ex.blocks = parseBlocks(ex.text, { n: 0 }, ex.gaps);
+  ex.preB = ex.pre ? parseBlocks(ex.pre, { n: 0 }, null) : null;
+  ex.exB = ex.ex ? parseBlocks(ex.ex, { n: 0 }, null) : null;
+  ex.olNum = ex.blocks.length > 0 && ex.blocks.filter(b => b.type === 'ol').length === ex.gaps.length;
+  ex.max = r2(ex.gaps.length * ex.pts);
+  ex.typed = ex.gaps.some(g => g.kind !== 'c');
+}
+const EXMAP = {}, TMAP = {}, ALL = [];
+TOPICS.forEach(t => { TMAP[t.id] = t; t.ex.forEach((e, k) => { prep(e, t.id + '-' + e.n, t); e.idx = k; ALL.push(e); EXMAP[e.id] = e; }); });
+EXAM.forEach((e, k) => { prep(e, 'ex-' + e.n, null); e.idx = k; EXMAP[e.id] = e; });
+const TOTAL_MAX = r2(ALL.reduce((s, e) => s + e.max, 0));
+const EXAM_MAX = r2(EXAM.reduce((s, e) => s + e.max, 0));
+const EXAM_GAPS = EXAM.reduce((s, e) => s + e.gaps.length, 0);
+const EXAM_SEC = 45 * 60;
+const exTitle = ex => 'Zadanie ' + ex.n;
+const exWhere = ex => ex.topic ? ex.topic.pl : 'Przykładowy zestaw zadań (іспит)';
+
+/* ================= Збереження ================= */
+const LS_KEY = 'pl_b1_v2';
+let storageOK = true, warned = false, saveT = 0;
+const fresh = () => ({ v: 2, ex: {}, err: {}, exam: { cur: null, last: null, hist: [] }, last: null, font: 0 });
+function validState(o) {
+  return o && o.v === 2 && o.ex && typeof o.ex === 'object' && !Array.isArray(o.ex) &&
+    o.err && typeof o.err === 'object' && o.exam && typeof o.exam === 'object' && Array.isArray(o.exam.hist);
+}
+function load() {
+  try {
+    const raw = localStorage.getItem(LS_KEY);
+    if (raw) { const o = JSON.parse(raw); if (validState(o)) return o; }
+  } catch (e) { storageOK = false; }
+  return fresh();
+}
+function saveNow() {
+  clearTimeout(saveT); saveT = 0;
+  try { localStorage.setItem(LS_KEY, JSON.stringify(S)); }
+  catch (e) { storageOK = false; if (!warned) { warned = true; toast('Сховище браузера недоступне — прогрес не збережеться після закриття сторінки.'); } }
+}
+function save() { if (!saveT) saveT = setTimeout(saveNow, 300); }
+let S = load();
+window.addEventListener('pagehide', saveNow);
+document.addEventListener('visibilitychange', () => { if (document.hidden) saveNow(); });
+const exState = id => S.ex[id] || (S.ex[id] = { a: {}, m: null, first: null, best: null, key: false });
+const peek = id => S.ex[id] || { a: {}, m: null, first: null, best: null, key: false };
+
+function noteErrors(ex, marks, answers) {
+  const any = ex.gaps.some(g => { const v = answers[g.i]; return v !== undefined && v !== ''; });
+  if (!any) return;                       // вправу навіть не починали — нема чого тренувати
+  for (const g of ex.gaps) if (marks[g.i] !== 'ok') {
+    const k = ex.id + '#' + g.i, e = S.err[k] || (S.err[k] = { w: 0, s: 0 });
+    e.w++; e.s = 0; e.t = Date.now();
+  }
+}
+const errKeys = () => Object.keys(S.err).filter(k => { const p = k.split('#'); return EXMAP[p[0]] && EXMAP[p[0]].gaps[+p[1]]; });
+
+/* ================= Прогрес ================= */
+function topicStat(t) {
+  let done = 0, pts = 0, max = 0, dmax = 0;
+  for (const e of t.ex) { const st = S.ex[e.id]; max += e.max; if (st && st.best != null) { done++; pts += st.best; dmax += e.max; } }
+  return { done, n: t.ex.length, pts: r2(pts), max: r2(max), dmax: r2(dmax) };
+}
+function overall() {
+  let done = 0, pts = 0;
+  for (const e of ALL) { const st = S.ex[e.id]; if (st && st.best != null) { done++; pts += st.best; } }
+  return { done, n: ALL.length, pts: r2(pts), max: TOTAL_MAX };
+}
+
+/* ================= Тост, модальне вікно ================= */
+const app = $('#app'), dock = $('#dock'), lettersEl = $('#letters'), actsEl = $('#acts');
+const modal = $('#modal'), toastEl = $('#toast');
+let toastT = 0;
+function toast(msg) {
+  toastEl.textContent = msg; toastEl.hidden = false;
+  clearTimeout(toastT); toastT = setTimeout(() => { toastEl.hidden = true; }, 4200);
+}
+let modalBack = null;
+function openModal(title, body, foot) {
+  modalBack = document.activeElement;
+  $('#dlgTitle').textContent = title;
+  const b = $('#dlgBody'); b.textContent = ''; b.append(body); b.scrollTop = 0;
+  const f = $('#dlgFoot'); f.textContent = '';
+  if (foot && foot.length) { f.hidden = false; f.append(...foot); } else f.hidden = true;
+  modal.hidden = false;
+  (foot && foot.length ? foot[foot.length - 1] : $('#dlgClose')).focus();
+}
+function closeModal() {
+  if (modal.hidden) return;
+  modal.hidden = true;
+  if (modalBack && document.contains(modalBack)) modalBack.focus();
+  modalBack = null;
+}
+$('#dlgClose').addEventListener('click', closeModal);
+modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+document.addEventListener('keydown', e => {
+  if (modal.hidden) return;
+  if (e.key === 'Escape') { closeModal(); return; }
+  if (e.key === 'Tab') {
+    const f = $$('button, [href], input', modal).filter(x => !x.disabled && x.offsetParent !== null);
+    if (!f.length) return;
+    const first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  }
+});
+function confirmBox(title, text, okLabel, onOk) {
+  openModal(title, h('p', null, text), [
+    h('button', { class: 'btn', type: 'button', onclick: closeModal }, 'Скасувати'),
+    h('button', { class: 'btn pri', type: 'button', onclick: () => { closeModal(); onOk(); } }, okLabel)
+  ]);
+}
+function openSheet(tid) {
+  const t = TMAP[tid];
+  const body = h('div', { class: 'sheet', html: SHEETS[tid] });
+  $$('i', body).forEach(i => i.setAttribute('lang', 'pl'));
+  $$('table', body).forEach(tb => { const w = h('div', { class: 'tw' }); tb.replaceWith(w); w.append(tb); });
+  openModal('Шпаргалка: ' + t.ua, body);
+}
+
+/* ================= Док: польські літери й дії ================= */
+const PL = ['ą', 'ć', 'ę', 'ł', 'ń', 'ó', 'ś', 'ź', 'ż'];
+let lastInput = null, shift = false;
+function buildLetters() {
+  lettersEl.textContent = '';
+  PL.forEach(ch => lettersEl.append(h('button', { type: 'button', tabindex: '-1', 'data-ch': ch, lang: 'pl', 'aria-label': 'Літера ' + ch }, ch)));
+  lettersEl.append(h('button', { type: 'button', tabindex: '-1', id: 'shiftBtn', 'aria-pressed': 'false', 'aria-label': 'Великі літери', title: 'Великі літери' }, '⇧'));
+}
+buildLetters();
+function setShift(on) {
+  shift = on; $('#shiftBtn').setAttribute('aria-pressed', String(on));
+  $$('button[data-ch]', lettersEl).forEach(b => { b.textContent = on ? b.dataset.ch.toUpperCase() : b.dataset.ch; });
+}
+// не забираємо фокус із поля
+['pointerdown', 'mousedown', 'touchstart'].forEach(ev => dock.addEventListener(ev, e => { if (e.target.closest('#letters')) e.preventDefault(); }, { passive: false }));
+lettersEl.addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  if (b.id === 'shiftBtn') { setShift(!shift); return; }
+  let inp = lastInput && document.contains(lastInput) && !lastInput.disabled ? lastInput : $('input.gap, textarea.sent', app);
+  if (!inp) return;
+  if (document.activeElement !== inp) inp.focus();
+  const ch = shift ? b.dataset.ch.toUpperCase() : b.dataset.ch;
+  const s = inp.selectionStart == null ? inp.value.length : inp.selectionStart, en = inp.selectionEnd == null ? s : inp.selectionEnd;
+  inp.setRangeText(ch, s, en, 'end');
+  inp.dispatchEvent(new Event('input', { bubbles: true }));
+  if (shift) setShift(false);
+});
+const isField = x => !!(x && x.matches && x.matches('input.gap, textarea.sent'));
+document.addEventListener('focusin', e => { if (isField(e.target)) { lastInput = e.target; document.body.classList.add('typing'); placeDock(); } });
+document.addEventListener('focusout', () => setTimeout(() => { if (!isField(document.activeElement)) { document.body.classList.remove('typing'); placeDock(); } }, 0));
+function setDock(cfg) {
+  actsEl.textContent = '';
+  if (!cfg) { dock.hidden = true; document.body.style.paddingBottom = ''; return; }
+  lettersEl.hidden = !cfg.letters;
+  (cfg.acts || []).forEach(a => actsEl.append(h('button', { class: 'btn ' + (a.cls || ''), type: 'button', id: a.id || null, onclick: a.on, 'aria-pressed': a.pressed == null ? null : String(a.pressed) }, a.t)));
+  dock.hidden = false;
+  placeDock();
+}
+function placeDock() {
+  const vv = window.visualViewport;
+  let off = 0;
+  if (vv) off = Math.max(0, Math.round(window.innerHeight - vv.height - vv.offsetTop));
+  dock.style.transform = off ? 'translateY(' + (-off) + 'px)' : '';
+  document.body.classList.toggle('kb', off > 120);
+  if (!dock.hidden) document.body.style.paddingBottom = (dock.offsetHeight + 24) + 'px';
+}
+if (window.visualViewport) { visualViewport.addEventListener('resize', placeDock); visualViewport.addEventListener('scroll', placeDock); }
+window.addEventListener('resize', placeDock);
+
+/* ================= Рендер тексту вправи ================= */
+function setMark(wrap, mark) {
+  wrap.classList.remove('ok', 'near', 'bad', 'none');
+  const mk = $('.mk', wrap);
+  if (mark) wrap.classList.add(mark);
+  if (mk) { mk.textContent = mark ? MARK[mark] : ''; if (mark) mk.setAttribute('aria-label', MARK_UA[mark]); else mk.removeAttribute('aria-label'); }
+  if (mark === 'bad' && wrap.classList.contains('ch') && !$('.opt[aria-pressed="true"]', wrap)) wrap.classList.add('none');
+}
+function growTA(ta) { ta.style.height = 'auto'; ta.style.height = Math.max(44, ta.scrollHeight) + 'px'; }
+
+// o: { mode:'ex'|'exam'|'review'|'train', ans:{}, marks:{}|null, onChange(i,val,wrap), only:number }
+function gapNode(ex, g, o) {
+  const val = o.ans[g.i], mark = o.marks ? o.marks[g.i] : null;
+  const num = h('sup', { class: 'n' }, g.i + 1);
+  if (o.mode === 'train' && o.only !== g.i) return h('span', { class: 'fill' }, g.show[0]);
+  if (o.mode === 'review') {
+    const shown = g.kind === 'c' ? (val == null ? '' : g.opts[val]) : (val || '');
+    const w = h('span', { class: 'g rv ' + (mark || 'bad') }, num,
+      h('span', { class: 'ua' + (shown ? '' : ' empty') }, shown || '—'),
+      h('span', { class: 'mk', 'aria-label': MARK_UA[mark || 'bad'] }, MARK[mark || 'bad']));
+    if (mark !== 'ok') w.append(h('span', { class: 'ca' }, g.show.join(' / ')));
+    return w;
+  }
+  if (g.kind === 'c') {
+    const wrap = h('span', { class: 'g ch', role: 'group', 'aria-label': 'Вибір ' + (g.i + 1), 'data-i': g.i }, o.mode === 'train' ? null : num);
+    g.opts.forEach((t, k) => {
+      const b = h('button', { type: 'button', class: 'opt', 'aria-pressed': String(val === k) }, t);
+      b.addEventListener('click', () => {
+        const nv = o.ans[g.i] === k ? undefined : k;
+        $$('.opt', wrap).forEach((x, j) => x.setAttribute('aria-pressed', String(j === nv)));
+        o.onChange(g.i, nv, wrap);
+      });
+      wrap.append(b);
+    });
+    wrap.append(h('span', { class: 'mk' }));
+    if (mark) setMark(wrap, mark);
+    return wrap;
+  }
+  const inp = h('input', {
+    class: 'gap', type: 'text', value: val || '', style: 'width:' + g.w + 'ch', autocomplete: 'off', autocorrect: 'off',
+    autocapitalize: 'none', spellcheck: 'false', lang: 'pl', enterkeyhint: 'next', 'aria-label': 'Пропуск ' + (g.i + 1),
+    inputmode: ex.ins1 === 2 && coarse ? 'none' : null
+  });
+  const wrap = h('span', { class: 'g', 'data-i': g.i }, o.mode === 'train' ? null : num, inp, h('span', { class: 'mk' }));
+  inp.addEventListener('input', () => o.onChange(g.i, inp.value, wrap));
+  if (mark) setMark(wrap, mark);
+  return wrap;
+}
+function renderToks(ex, toks, o) {
+  return toks.map(t => {
+    switch (t.k) {
+      case 't': return t.s;
+      case 'x': return h('span', { class: 'xmp' }, t.s);
+      case 'xc': return h('span', { class: 'ch' }, t.opts.map((x, k) => h('span', { class: 'opt st' + (k === t.ok ? ' cor' : '') }, x)));
+      case 'u': return h('u', { class: 'ul' }, t.s);
+      case 'sup': return h('sup', { class: 'n' }, t.s);
+      case 'g': return o ? gapNode(ex, t.g, o) : h('span', { class: 'fill' }, t.g.show[0]);
+    }
+  });
+}
+function renderBlocks(ex, blocks, o, cls) {
+  const root = h('div', { class: 'body ' + (cls || ''), lang: 'pl' });
+  let list = null, ltype = '';
+  blocks.forEach(b => {
+    if (b.type === 'p') { list = null; root.append(h('p', null, renderToks(ex, b.toks, o))); return; }
+    if (!list || ltype !== b.type) { list = h(b.type); ltype = b.type; root.append(list); }
+    list.append(h('li', null, renderToks(ex, b.toks, o)));
+  });
+  return root;
+}
+function sentItem(ex, g, o) {
+  const val = o.ans[g.i] || '', mark = o.marks ? o.marks[g.i] : null;
+  const li = h('li', { class: 'si', 'data-i': g.i },
+    h('div', { class: 'q' }, h('span', { class: 'n' }, (g.i + 1) + '.'), g.q),
+    g.c ? h('div', { class: 'cue' }, g.c) : null);
+  if (o.mode === 'review') {
+    li.classList.add('rv', mark || 'bad');
+    li.append(h('div', { class: 'aw' }, h('span', { class: 'ua' + (val ? '' : ' empty') }, val || '—'),
+      h('span', { class: 'mk', 'aria-label': MARK_UA[mark || 'bad'] }, MARK[mark || 'bad'])));
+    if (mark !== 'ok') g.show.forEach(sx => li.append(h('div', { class: 'ans' }, h('span', { class: 'ca' }, sx))));
+    if (o.selfBtn) { const sb = o.selfBtn(g, mark); if (sb) li.append(sb); }
+    return li;
+  }
+  const ta = h('textarea', { class: 'sent', rows: '1', autocomplete: 'off', autocorrect: 'off', autocapitalize: 'none', spellcheck: 'false', lang: 'pl', enterkeyhint: 'next', 'aria-label': 'Відповідь ' + (g.i + 1) });
+  ta.value = val;
+  const aw = h('div', { class: 'aw' }, ta, h('span', { class: 'mk' }));
+  li.append(aw);
+  ta.addEventListener('input', () => { growTA(ta); o.onChange(g.i, ta.value, li); });
+  requestAnimationFrame(() => growTA(ta));
+  if (mark) setMark(li, mark);
+  return li;
+}
+function renderBody(ex, o) {
+  if (ex.t === 's') {
+    const root = h('div', { class: 'body', lang: 'pl', style: 'line-height:1.5' });
+    const ol = h('ol', { class: 'sitems' });
+    if (ex.exs) ol.append(h('li', { class: 'si x' },
+      h('div', { class: 'small mut', lang: 'uk' }, 'Przykład'),
+      h('div', { class: 'q' }, h('span', { class: 'n' }, '0.'), ex.exs.q),
+      ex.exs.c ? h('div', { class: 'cue' }, ex.exs.c) : null,
+      h('div', { class: 'ans' }, ex.exs.a)));
+    ex.gaps.forEach(g => ol.append(sentItem(ex, g, o)));
+    root.append(ol);
+    return root;
+  }
+  return renderBlocks(ex, ex.blocks, o, ex.olNum ? 'olnum' : '');
+}
+function renderIntro(ex, o) {
+  const f = document.createDocumentFragment();
+  if (ex.preB) f.append(h('div', { class: 'box' }, renderBlocks(ex, ex.preB, null, 'static')));
+  if (ex.exB) f.append(h('div', { class: 'box' }, h('div', { class: 'lbl', lang: 'pl' }, 'Przykład'), renderBlocks(ex, ex.exB, null, 'static')));
+  if (ex.bank) {
+    const ins = ex.ins1 && o && o.insert;
+    const box = h('div', { class: 'box' }, h('div', { class: 'lbl' }, 'Ramka · рамка слів'),
+      h('div', { class: 'bank', lang: 'pl' }, ex.bank.map(w => ins
+        ? h('button', { type: 'button', class: 'w', tabindex: '-1', onclick: () => o.insert(w), onpointerdown: e => e.preventDefault(), onmousedown: e => e.preventDefault() }, w)
+        : h('span', { class: 'w' }, w))));
+    f.append(ins ? h('div', { class: 'bankbar' }, box) : box);
+  }
+  return f;
+}
+const coarse = !!(window.matchMedia && matchMedia('(pointer: coarse)').matches);
+function makeInsert(ex) {
+  return w => {
+    let inp = lastInput && document.contains(lastInput) && !lastInput.disabled ? lastInput : null;
+    if (!inp || !inp.matches('input.gap')) inp = $$('input.gap', app).find(x => !x.value) || $('input.gap', app);
+    if (!inp) return;
+    const g = ex.gaps[+inp.closest('[data-i]').dataset.i];
+    const up = g && /^[A-ZĄĆĘŁŃÓŚŹŻ]/.test(g.show[0]);
+    inp.focus({ preventScroll: true });
+    inp.value = up ? w.charAt(0).toUpperCase() + w.slice(1) : w;
+    inp.dispatchEvent(new Event('input', { bubbles: true }));
+    if (ex.ins1 === 2) {
+      const all = $$('input.gap', app), nx = all.slice(all.indexOf(inp) + 1).find(x => !x.value) || all.find(x => !x.value);
+      if (nx) { nx.focus({ preventScroll: true }); lastInput = nx; nx.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); }
+    }
+  };
+}
+// Enter → наступний пропуск
+app.addEventListener('keydown', e => {
+  if (e.key !== 'Enter' || e.shiftKey || !e.target.matches('input.gap, textarea.sent')) return;
+  e.preventDefault();
+  const all = $$('input.gap, textarea.sent, .g.ch', app).filter(x => !x.closest('.rv'));
+  const cur = all.indexOf(e.target), nx = all[cur + 1];
+  if (nx) (nx.matches('.ch') ? $('.opt', nx) : nx).focus();
+  else { e.target.blur(); setTimeout(() => { const p = $('.pri', actsEl) || $('.btn.pri', app); if (p && p.offsetParent !== null) p.focus(); }, 60); }
+});
+
+/* ================= Озвучення ================= */
+let speaking = false;
+function plainText(ex) {
+  const parts = [];
+  const tokText = (toks, isList) => {
+    let s = '', afterGap = false;
+    toks.forEach((t, k) => {
+      if (t.k === 't') {
+        let x = t.s;
+        if (afterGap) x = x.replace(/^\s*\([^)]*\)/, '');
+        const nx = toks[k + 1];
+        if (isList && nx && (nx.k === 'g' || nx.k === 'x')) x = x.replace(/\([^)]*\)\s*$/, '');
+        s += x; afterGap = false;
+      } else if (t.k === 'g') { s += t.g.show[0]; afterGap = true; }
+      else if (t.k === 'x') { s += t.s; afterGap = true; }
+      else if (t.k === 'xc') { s += t.opts[t.ok]; afterGap = false; }
+      else if (t.k === 'u') { s += t.s; afterGap = false; }
+    });
+    return s.replace(/\s+/g, ' ').trim();
+  };
+  if (ex.t === 's') { if (ex.exs) parts.push(ex.exs.a.replace(/\s*\([^)]*\)/g, '').replace(/\/\w+/g, '')); ex.gaps.forEach(g => parts.push(g.show[0])); }
+  else ex.blocks.forEach(b => { const s = tokText(b.toks, b.type !== 'p'); if (s) parts.push(s); });
+  return parts;
+}
+function stopSpeech() { if (window.speechSynthesis) speechSynthesis.cancel(); speaking = false; }
+function speak(ex, btn) {
+  const ss = window.speechSynthesis;
+  if (!ss || typeof SpeechSynthesisUtterance === 'undefined') { toast('Цей браузер не підтримує озвучення.'); return; }
+  if (speaking) { stopSpeech(); btn.textContent = '▶ Прослухати'; return; }
+  const go = () => {
+    const voice = ss.getVoices().find(v => /^pl/i.test(v.lang));
+    if (!voice) { toast('На цьому пристрої немає польського голосу. Додайте його в налаштуваннях системи (Мова й мовлення).'); return; }
+    const chunks = [];
+    plainText(ex).forEach(p => (p.match(/[^.!?…]+[.!?…]*["”)]*\s*/g) || [p]).forEach(c => { if (c.trim()) chunks.push(c.trim()); }));
+    speaking = true; btn.textContent = '■ Зупинити';
+    chunks.forEach((c, k) => {
+      const u = new SpeechSynthesisUtterance(c);
+      u.lang = 'pl-PL'; u.voice = voice; u.rate = 0.9;
+      if (k === chunks.length - 1) u.onend = () => { speaking = false; if (document.contains(btn)) btn.textContent = '▶ Прослухати'; };
+      ss.speak(u);
+    });
+  };
+  if (ss.getVoices().length) go();
+  else {
+    let done = false;
+    const once = () => { if (done) return; done = true; go(); };
+    ss.addEventListener('voiceschanged', once, { once: true });
+    setTimeout(once, 700);
+  }
+}
+
+/* ================= Сторінки ================= */
+function head(title, sub) { return h('div', null, h('h1', null, title), sub ? h('p', { class: 'mut' }, sub) : null); }
+function barNode(p) { return h('div', { class: 'bar', role: 'progressbar', 'aria-valuemin': '0', 'aria-valuemax': '100', 'aria-valuenow': p }, h('i', { style: 'width:' + p + '%' })); }
+const flatIdx = ex => ALL.indexOf(ex);
+const exHash = ex => '#/e/' + ex.topic.id + '/' + (ex.idx + 1);
+
+function pageHome() {
+  const ov = overall(), nErr = errKeys().length, last = S.last && EXMAP[S.last] ? EXMAP[S.last] : null;
+  const p = pct(ov.pts, ov.max);
+  // порада
+  let tip;
+  const ts = TOPICS.map(t => ({ t, s: topicStat(t) })).filter(x => x.s.done > 0);
+  const weak = ts.slice().sort((a, b) => a.s.pts / a.s.dmax - b.s.pts / b.s.dmax)[0];
+  if (!ov.done) tip = h('span', null, 'Почніть із першої теми — ', h('a', { href: '#/t/rz' }, 'Odmiana rzeczownika i przymiotnika'), '. Результат рахується за першою перевіркою, тож спершу подумайте, а потім перевіряйте.');
+  else if (weak && weak.s.pts / weak.s.dmax < 0.8) tip = h('span', null, 'Варто повторити тему ', h('a', { href: '#/t/' + weak.t.id }, weak.t.pl), ' — середній результат ' + pct(weak.s.pts, weak.s.dmax) + ' %. Перечитайте шпаргалку й пройдіть вправи ще раз.');
+  else if (nErr) tip = h('span', null, 'У «Моїх помилках» ' + nErr + ' ' + plural(nErr, 'пропуск', 'пропуски', 'пропусків') + '. ', h('a', { href: '#/errors/train' }, 'Потренуйте їх'), ' — пропуск зникає після двох правильних відповідей поспіль.');
+  else if (ov.done >= ov.n) tip = h('span', null, 'Усі вправи виконано. Перевірте себе в режимі ', h('a', { href: '#/exam' }, 'іспиту'), '.');
+  else tip = h('span', null, 'Добрий темп! Продовжуйте — попереду ще ' + (ov.n - ov.done) + ' ' + plural(ov.n - ov.done, 'вправа', 'вправи', 'вправ') + '.');
+
+  const hero = h('div', { class: 'hero' },
+    h('div', { class: 'card' },
+      h('div', { class: 'row' }, h('div', { class: 'grow' }, h('div', { class: 'small mut' }, 'Загальний прогрес'), h('div', { class: 'big' }, p + ' %')),
+        last ? h('a', { class: 'btn pri', href: exHash(last) }, 'Продовжити →') : h('a', { class: 'btn pri', href: '#/e/rz/1' }, 'Почати →')),
+      h('div', { style: 'margin:.5rem 0 .25rem' }, barNode(p)),
+      h('div', { class: 'small mut' }, 'Виконано ' + ov.done + ' з ' + ov.n + ' вправ · ' + fmt(ov.pts) + ' з ' + fmt(ov.max) + ' б.' + (last ? ' · зупинилися: ' + last.topic.pl + ', ' + exTitle(last) : ''))),
+    h('div', { class: 'card' },
+      h('div', { class: 'row' }, h('a', { class: 'btn grow', href: '#/errors' }, 'Мої помилки', nErr ? h('span', { class: 'badge' }, nErr) : null),
+        h('a', { class: 'btn grow', href: '#/exam' }, S.exam.cur ? 'Іспит триває →' : 'Іспит')),
+      h('p', { class: 'small mut', style: 'margin-bottom:0' }, S.exam.last ? 'Останній іспит: ' + fmt(examTotal(S.exam.last)) + ' з ' + fmt(EXAM_MAX) + ' б. (' + pct(examTotal(S.exam.last), EXAM_MAX) + ' %)' : 'Іспит: 10 завдань, 40 б., 45 хвилин.')));
+  app.append(hero, h('p', { class: 'tip' }, h('b', null, 'Порада. '), tip));
+  GROUPS.forEach((g, gi) => {
+    app.append(h('h2', { class: 'grp', lang: 'pl' }, g));
+    const list = h('div', { class: 'tlist' });
+    TOPICS.filter(t => t.g === gi).forEach(t => {
+      const s = topicStat(t), pp = pct(s.pts, s.max);
+      list.append(h('a', { class: 'tcard', href: '#/t/' + t.id },
+        h('div', { class: 'pl', lang: 'pl' }, t.pl), h('div', { class: 'ua' }, t.ua), barNode(pp),
+        h('div', { class: 'st' }, h('span', null, s.done + ' з ' + s.n + ' вправ'), h('span', null, pp + ' %'))));
+    });
+    app.append(list);
+  });
+}
+function plural(n, one, few, many) {
+  const a = n % 10, b = n % 100;
+  return a === 1 && b !== 11 ? one : a >= 2 && a <= 4 && (b < 12 || b > 14) ? few : many;
+}
+
+function pageTopic(tid) {
+  const t = TMAP[tid]; if (!t) return pageHome();
+  const s = topicStat(t), pp = pct(s.pts, s.max);
+  app.append(h('a', { class: 'crumb', href: '#/' }, '← Усі теми'),
+    h('div', { class: 'small mut', lang: 'pl' }, GROUPS[t.g]),
+    h('h1', { lang: 'pl' }, t.pl), h('p', { class: 'mut' }, t.ua),
+    h('div', { class: 'row', style: 'margin:.5rem 0 1rem' },
+      h('div', { class: 'grow', style: 'min-width:160px' }, barNode(pp), h('div', { class: 'small mut' }, s.done + ' з ' + s.n + ' вправ · ' + fmt(s.pts) + ' з ' + fmt(s.max) + ' б.')),
+      h('button', { class: 'btn', type: 'button', onclick: () => openSheet(tid) }, 'Шпаргалка')));
+  const ul = h('ul', { class: 'elist' });
+  t.ex.forEach(e => {
+    const st = S.ex[e.id], done = st && st.best != null;
+    ul.append(h('li', null, h('a', { href: exHash(e) },
+      h('span', { class: 'rn', lang: 'pl' }, e.n),
+      h('span', { class: 'inf' }, h('span', null, TYPE_UA[e.t]), h('br'), h('span', { class: 'small mut' }, fmt(e.max) + ' б. · ' + e.gaps.length + ' × ' + fmt(e.pts) + ' · с. ' + e.p)),
+      h('span', { class: 'res' + (done ? ' done' : '') }, done ? pct(st.best, e.max) + ' %' : (st && Object.keys(st.a).length ? 'розпочато' : '—')))));
+  });
+  app.append(ul);
+}
+
+function exHeader(ex, extra) {
+  return h('div', null,
+    h('h1', { lang: 'pl' }, exTitle(ex)),
+    h('div', { class: 'meta' }, TYPE_UA[ex.t] + ' · ' + fmt(ex.max) + ' p. (' + ex.gaps.length + ' × ' + fmt(ex.pts) + ' p.) · с. ' + ex.p + ' PDF', extra || null),
+    h('p', { class: 'ins', lang: 'pl' }, ex.ins), h('p', { class: 'ins-ua' }, ex.ua));
+}
+
+function pageExercise(tid, num) {
+  const t = TMAP[tid], ex = t && t.ex[num - 1];
+  if (!ex) return pageHome();
+  if (S.last !== ex.id) { S.last = ex.id; save(); }
+  const fi = flatIdx(ex), prev = ALL[fi - 1], next = ALL[fi + 1];
+  let hintOpen = false;
+  const hintBox = h('div', { class: 'box hint', hidden: true }, h('div', { class: 'lbl' }, 'Підказка'), h('div', null, ex.hint));
+  const resBox = h('div', { class: 'result', role: 'status' });
+  const o = {
+    mode: 'ex', ans: peek(ex.id).a, marks: peek(ex.id).m, insert: makeInsert(ex),
+    onChange(i, val, wrap) {
+      const st = exState(ex.id); o.ans = st.a;
+      if (val === undefined || val === '') delete st.a[i]; else st.a[i] = val;
+      if (st.m && st.m[i]) { delete st.m[i]; setMark(wrap, null); }
+      save();
+    }
+  };
+  const st0 = peek(ex.id);
+  app.append(
+    h('a', { class: 'crumb', href: '#/t/' + t.id, lang: 'pl' }, '← ' + t.pl),
+    exHeader(ex, st0.best != null ? h('span', null, ' · найкращий результат: ', h('b', null, pct(st0.best, ex.max) + ' %')) : null),
+    h('div', { class: 'box info small', hidden: !ex.info }, ex.info || ''),
+    hintBox, renderIntro(ex, o));
+  const bodyWrap = h('div', { class: 'card' });
+  const drawBody = () => { const st = peek(ex.id); o.ans = st.a; o.marks = st.m; bodyWrap.textContent = ''; bodyWrap.append(renderBody(ex, o)); };
+  drawBody();
+  app.append(bodyWrap, resBox,
+    h('div', { class: 'pn' },
+      prev ? h('a', { class: 'btn', href: exHash(prev) }, '← Попередня') : h('span', { class: 'btn', 'aria-disabled': 'true', style: 'opacity:.4' }, '← Попередня'),
+      next ? h('a', { class: 'btn', href: exHash(next) }, next.topic === t ? 'Наступна →' : 'Наступна тема →') : h('a', { class: 'btn', href: '#/exam' }, 'До іспиту →')));
+
+  function drawResult() {
+    const st = peek(ex.id);
+    resBox.textContent = '';
+    if (st.first == null) return;
+    const marks = st.m || {}, okNow = ex.gaps.filter(g => marks[g.i] === 'ok').length;
+    const allOk = okNow === ex.gaps.length;
+    const card = h('div', { class: 'card' },
+      h('div', { class: 'sc' }, 'Перша спроба: ' + fmt(st.first) + ' з ' + fmt(ex.max) + ' б. (' + pct(st.first, ex.max) + ' %)'),
+      h('div', { class: 'small mut' }, 'У прогрес іде найкращий результат першої перевірки: ' + pct(st.best, ex.max) + ' %. Щоб покращити його, скиньте вправу й виконайте її ще раз.'),
+      h('p', { style: 'margin:.5rem 0 0' }, allOk ? h('b', { class: 'pass' }, '✓ Зараз усі відповіді правильні.')
+        : h('span', null, 'Зараз правильно: ', h('b', null, okNow + ' з ' + ex.gaps.length), '. Виправте позначені місця й перевірте ще раз — або відкрийте ключ.')),
+      h('div', { class: 'legend' }, h('span', null, h('b', { class: 'ok' }, '✓'), ' правильно'), h('span', null, h('b', { class: 'near' }, '≈'), ' майже: перевірте літери ą, ę, ł, ó…'), h('span', null, h('b', { class: 'bad' }, '✗'), ' помилка або порожньо')));
+    if (allOk || st.key) {
+      const sb = h('button', { class: 'btn sm', type: 'button' }, '▶ Прослухати');
+      sb.addEventListener('click', () => speak(ex, sb));
+      card.append(h('div', { class: 'row', style: 'margin-top:.5rem' }, sb, h('span', { class: 'small mut' }, 'правильний текст польським голосом пристрою')));
+    }
+    resBox.append(card);
+    if (st.key) {
+      const wide = ex.t === 's' || ex.gaps.some(g => g.show.join('').length > 22);
+      const kb = h('div', { class: 'card key' + (wide ? ' wide' : '') }, h('h3', null, 'Ключ'),
+        h('ol', { lang: 'pl' }, ex.gaps.map(g => h('li', null, h('b', null, g.show[0]), g.show.length > 1 ? h('span', { class: 'alt' }, ' / ' + g.show.slice(1).join(' / ')) : null))),
+        ex.note ? h('p', { class: 'small mut' }, ex.note) : null,
+        h('p', { class: 'small mut', style: 'margin-bottom:0' }, 'Ключ не змінює результат першої спроби.'));
+      resBox.append(kb);
+    }
+  }
+  function refreshMarks() {
+    const st = peek(ex.id);
+    $$('[data-i]', bodyWrap).forEach(w => setMark(w, st.m ? st.m[w.dataset.i] : null));
+  }
+  function doCheck() {
+    const st = exState(ex.id); o.ans = st.a;
+    const marks = {}; let okN = 0;
+    ex.gaps.forEach(g => { const m = judge(g, st.a[g.i]); marks[g.i] = m; if (m === 'ok') okN++; });
+    st.m = marks;
+    if (st.first == null) {
+      st.first = r2(okN * ex.pts);
+      st.best = st.best == null ? st.first : Math.max(st.best, st.first);
+      noteErrors(ex, marks, st.a);
+      updateBadge();
+    }
+    saveNow(); refreshMarks(); drawResult(); drawDock();
+    return okN;
+  }
+  function check() {
+    const okN = doCheck();
+    toast(okN === ex.gaps.length ? 'Усе правильно!' : 'Правильно: ' + okN + ' з ' + ex.gaps.length);
+    resBox.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  }
+  function showKey() {
+    const st = peek(ex.id);
+    const open = () => { if (peek(ex.id).first == null) doCheck(); exState(ex.id).key = true; saveNow(); drawResult(); drawDock(); resBox.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); };
+    if (st.key) { exState(ex.id).key = false; saveNow(); drawResult(); drawDock(); return; }
+    if (st.first != null) return open();
+    const filled = ex.gaps.filter(g => st.a[g.i] !== undefined && st.a[g.i] !== '').length;
+    confirmBox('Показати ключ?', 'Ви ще не перевіряли цю вправу. Ключ зафіксує результат першої спроби за поточними відповідями (заповнено ' + filled + ' з ' + ex.gaps.length + '). Балів ключ не додає.', 'Показати ключ', open);
+  }
+  function reset() {
+    const st = peek(ex.id);
+    const run = () => { const s = exState(ex.id); s.a = {}; s.m = null; s.first = null; s.key = false; saveNow(); stopSpeech(); drawBody(); drawResult(); drawDock(); window.scrollTo({ top: 0 }); toast('Вправу скинуто. Найкращий результат збережено.'); };
+    if (st.first == null && Object.keys(st.a).length) confirmBox('Скинути вправу?', 'Введені відповіді буде стерто.', 'Скинути', run);
+    else run();
+  }
+  function drawDock() {
+    const st = peek(ex.id);
+    setDock({
+      letters: ex.typed && !(ex.ins1 === 2 && coarse),
+      acts: [
+        { t: st.first == null ? 'Перевірити' : 'Перевірити ще раз', cls: 'pri', on: check },
+        { t: 'Підказка', pressed: hintOpen, on: () => { hintOpen = !hintOpen; hintBox.hidden = !hintOpen; drawDock(); if (hintOpen) hintBox.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); } },
+        { t: 'Ключ', pressed: !!st.key, on: showKey }
+      ]
+    });
+  }
+  app.insertBefore(h('div', { class: 'row', style: 'margin:.25rem 0 .5rem' },
+    h('button', { class: 'btn sm', type: 'button', onclick: () => openSheet(t.id) }, 'Шпаргалка до теми'),
+    h('button', { class: 'btn sm', type: 'button', onclick: reset }, 'Скинути вправу')), bodyWrap);
+  drawResult(); drawDock();
+}
+
+/* ---------- Мої помилки ---------- */
+function updateBadge() {
+  const n = errKeys().length, b = $('#errBadge');
+  b.hidden = !n; b.textContent = n;
+}
+function pageErrors() {
+  const keys = errKeys();
+  app.append(head('Мої помилки', 'Сюди потрапляють пропуски, у яких була помилка на першій перевірці вправи чи іспиту. Пропуск зникає після двох правильних відповідей поспіль у тренуванні.'));
+  if (!keys.length) { app.append(h('div', { class: 'card' }, h('p', null, 'Список порожній. Виконуйте вправи — помилки з’являться тут автоматично.'), h('a', { class: 'btn pri', href: '#/' }, 'До тем'))); return; }
+  const by = {};
+  keys.forEach(k => { const ex = EXMAP[k.split('#')[0]], id = ex.topic ? ex.topic.id : 'exam'; (by[id] = by[id] || []).push(k); });
+  app.append(h('div', { class: 'card row' }, h('div', { class: 'grow' }, h('div', { class: 'big' }, keys.length), h('div', { class: 'small mut' }, plural(keys.length, 'пропуск', 'пропуски', 'пропусків') + ' для тренування')),
+    h('a', { class: 'btn pri', href: '#/errors/train' }, 'Тренувати все →')));
+  const ul = h('ul', { class: 'elist', style: 'margin-top:.75rem' });
+  TOPICS.map(t => t.id).concat('exam').forEach(id => {
+    if (!by[id]) return;
+    const name = id === 'exam' ? 'Przykładowy zestaw zadań (іспит)' : TMAP[id].pl;
+    ul.append(h('li', null, h('a', { href: '#/errors/train/' + id },
+      h('span', { class: 'inf' }, h('span', { lang: 'pl' }, name), id !== 'exam' ? h('span', { class: 'small mut' }, h('br'), TMAP[id].ua) : null),
+      h('span', { class: 'res' }, by[id].length + ' →'))));
+  });
+  app.append(ul);
+}
+function splitSentences(toks) {
+  const out = [[]];
+  toks.forEach((t, k) => {
+    if (t.k !== 't') { out[out.length - 1].push(t); return; }
+    const re = /[.!?…]+[”"»)]*\s+(?=[A-ZĄĆĘŁŃÓŚŹŻ„"–—\[(])|[.!?…]+[”"»)]*\s+$/g;
+    let last = 0, m;
+    while ((m = re.exec(t.s))) {
+      const end = m.index + m[0].length;
+      if (end === t.s.length && k === toks.length - 1) break;
+      out[out.length - 1].push({ k: 't', s: t.s.slice(last, end) }); out.push([]); last = end;
+    }
+    if (last < t.s.length) out[out.length - 1].push({ k: 't', s: t.s.slice(last) });
+  });
+  return out.filter(a => a.length);
+}
+function contextFor(ex, g) {
+  const b = ex.blocks[g.bi], ss = splitSentences(b.toks);
+  const k = ss.findIndex(s => s.some(t => t.k === 'g' && t.g === g));
+  let toks = ss[k];
+  const len = toks.reduce((n, t) => n + (t.k === 't' ? t.s.length : 8), 0);
+  if (len < 45 && k > 0) toks = ss[k - 1].concat(toks);
+  return toks;
+}
+function pageTrain(scope) {
+  let queue = shuffle(errKeys().filter(k => { if (!scope) return true; const ex = EXMAP[k.split('#')[0]]; return (ex.topic ? ex.topic.id : 'exam') === scope; }));
+  const total = queue.length; let seen = 0, fixed = 0;
+  if (!total) { app.append(head('Тренування помилок'), h('div', { class: 'card' }, h('p', null, 'Тут немає пропусків для тренування.'), h('a', { class: 'btn pri', href: '#/errors' }, 'До списку помилок'))); return; }
+  step();
+  function step() {
+    app.textContent = ''; window.scrollTo(0, 0);
+    if (!queue.length) {
+      setDock(null);
+      app.append(head('Тренування завершено'), h('div', { class: 'card' },
+        h('p', null, 'Опрацьовано: ' + seen + '. Закріплено й прибрано зі списку: ' + fixed + '. Лишилося в «Моїх помилках»: ' + errKeys().length + '.'),
+        h('div', { class: 'row' }, h('a', { class: 'btn pri', href: '#/errors' }, 'До списку помилок'),
+          errKeys().length ? h('button', { class: 'btn', type: 'button', onclick: route }, 'Тренувати ще') : null, h('a', { class: 'btn', href: '#/' }, 'До тем'))));
+      return;
+    }
+    const key = queue.shift(), parts = key.split('#'), ex = EXMAP[parts[0]], g = ex.gaps[+parts[1]];
+    let val, answered = false;
+    const o = { mode: 'train', only: g.i, ans: {}, marks: null, insert: makeInsert(ex), onChange(i, v) { val = v; o.ans[i] = v; } };
+    const fb = h('div', { role: 'status' });
+    app.append(h('a', { class: 'crumb', href: '#/errors' }, '← Мої помилки'),
+      h('div', { class: 'small mut' }, 'Пропуск ' + (seen + 1) + ' · у черзі ще ' + queue.length),
+      h('h1', { lang: 'pl' }, exWhere(ex)),
+      h('div', { class: 'meta' }, exTitle(ex) + ', пропуск ' + (g.i + 1) + ' · с. ' + ex.p + ' PDF'),
+      h('p', { class: 'ins', lang: 'pl' }, ex.ins), h('p', { class: 'ins-ua' }, ex.ua));
+    let card;
+    if (ex.t === 's') {
+      card = h('div', { class: 'card' }, h('div', { class: 'body', lang: 'pl', style: 'line-height:1.5' }, h('ol', { class: 'sitems' }, sentItem(ex, g, o))));
+      $('.q .n', card).remove();
+    } else {
+      app.append(renderIntro(ex, o));
+      card = h('div', { class: 'card' }, h('div', { class: 'body', lang: 'pl' }, h('p', null, renderToks(ex, contextFor(ex, g), o))));
+    }
+    app.append(card, fb);
+    const field = $('input.gap, textarea.sent', card);
+    if (field) { field.focus({ preventScroll: true }); lastInput = field; }
+    const dockCheck = () => setDock({ letters: g.kind !== 'c', acts: [{ t: 'Перевірити', cls: 'pri', on: answer }, { t: 'Пропустити', on: () => { queue.push(key); step(); } }] });
+    function answer() {
+      if (answered) return;
+      const m = judge(g, val);
+      if (g.kind !== 'c' && !normA(val || '')) { toast('Спершу впишіть відповідь.'); return; }
+      if (g.kind === 'c' && val === undefined) { toast('Спершу оберіть варіант.'); return; }
+      answered = true; seen++;
+      const wrap = $('[data-i]', card); if (wrap) setMark(wrap, m);
+      $$('input, textarea, .opt', card).forEach(x => { x.disabled = true; });
+      const e = S.err[key] || (S.err[key] = { w: 0, s: 0 });
+      if (m === 'ok') {
+        e.s++;
+        if (e.s >= 2) { delete S.err[key]; fixed++; fb.append(h('div', { class: 'box' }, h('b', { class: 'pass' }, '✓ Правильно вдруге поспіль — закріплено.'), ' Пропуск прибрано зі списку.')); }
+        else { queue.push(key); fb.append(h('div', { class: 'box' }, h('b', { class: 'pass' }, '✓ Правильно.'), ' Ще одна правильна відповідь — і пропуск зникне зі списку.')); }
+      } else {
+        e.w++; e.s = 0; queue.push(key);
+        fb.append(h('div', { class: 'box' }, h('b', { class: m === 'near' ? '' : 'fail' }, m === 'near' ? '≈ Майже: помилка в польській літері.' : '✗ Неправильно.'),
+          ' Правильна відповідь: ', h('b', { lang: 'pl' }, g.show.join(' / ')), '. Цей пропуск ще повернеться.'));
+      }
+      e.t = Date.now(); saveNow(); updateBadge();
+      setDock({ letters: false, acts: [{ t: queue.length ? 'Далі →' : 'Завершити', cls: 'pri', on: step, id: 'nextBtn' }, { t: 'Підказка', on: () => openModal('Підказка', h('p', null, ex.hint)) }] });
+      const nb = $('#nextBtn'); if (nb) nb.focus();
+    }
+    card.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey && e.target.matches('input.gap, textarea.sent')) { e.preventDefault(); e.stopPropagation(); answer(); } });
+    dockCheck();
+  }
+}
+
+/* ---------- Іспит ---------- */
+let timerInt = 0;
+function examTotal(last) {
+  let s = last.pts.reduce((a, b) => a + b, 0);
+  Object.keys(last.self || {}).forEach(k => { const ex = EXMAP[k.split('#')[0]]; if (ex) s += ex.pts; });
+  return r2(s);
+}
+function examTaskPts(last, ex) {
+  let s = last.pts[ex.idx];
+  Object.keys(last.self || {}).forEach(k => { if (k.split('#')[0] === ex.id) s += ex.pts; });
+  return r2(s);
+}
+const examLeft = cur => EXAM_SEC - Math.floor((Date.now() - cur.start) / 1000);
+function finishExam(auto) {
+  const cur = S.exam.cur; if (!cur) return;
+  clearInterval(timerInt);
+  const now = Date.now();
+  let dur = Math.round((now - cur.start) / 1000); if (cur.timed) dur = Math.min(dur, EXAM_SEC);
+  const marks = {}, pts = [];
+  EXAM.forEach(ex => {
+    const a = cur.a[ex.id] || {}, m = {}; let ok = 0;
+    ex.gaps.forEach(g => { const r = judge(g, a[g.i]); m[g.i] = r; if (r === 'ok') ok++; });
+    marks[ex.id] = m; pts.push(r2(ok * ex.pts)); noteErrors(ex, m, a);
+  });
+  S.exam.last = { at: now, dur, timed: cur.timed, auto: !!auto, a: cur.a, marks, pts, self: {} };
+  S.exam.hist.unshift({ at: now, dur, timed: cur.timed, pts: examTotal(S.exam.last) });
+  S.exam.hist = S.exam.hist.slice(0, 30);
+  S.exam.cur = null; saveNow(); updateBadge();
+  if (auto) toast('Час вийшов — іспит завершено.');
+  if (location.hash === '#/exam/result') route(); else location.hash = '#/exam/result';
+}
+function examInfo() {
+  return h('div', { class: 'box info small' },
+    h('b', null, 'Про іспит. '), 'На сертифікаційному іспиті B1 модуль «Poprawność gramatyczna» триває 45 хвилин (в окремих сесіях — 40). Щоб скласти іспит, потрібно набрати щонайменше 50 % з кожного модуля. ',
+    'Цей зразковий набір — зі збірника в старішому форматі: 10 завдань, 40 балів (у сучасному форматі модуль оцінюється в 30 балів), тому орієнтуйтеся на відсоток.');
+}
+function histTable() {
+  if (!S.exam.hist.length) return null;
+  return h('div', { class: 'card' }, h('h3', null, 'Історія спроб'),
+    h('table', { class: 't', style: 'margin-top:.5rem' }, h('thead', null, h('tr', null, h('th', null, 'Дата'), h('th', { class: 'num' }, 'Бали'), h('th', { class: 'num' }, '%'), h('th', null, 'Час'))),
+      h('tbody', null, S.exam.hist.map(x => h('tr', null, h('td', null, fmtDate(x.at)), h('td', { class: 'num' }, fmt(x.pts) + ' / ' + fmt(EXAM_MAX)),
+        h('td', { class: 'num ' + (x.pts / EXAM_MAX >= 0.5 ? 'pass' : 'fail') }, pct(x.pts, EXAM_MAX) + ' %'), h('td', null, fmtDur(x.dur) + (x.timed ? '' : ' (без таймера)')))))));
+}
+function startExam(timed) { S.exam.cur = { start: Date.now(), timed, a: {}, pos: 0 }; saveNow(); route(); }
+function pageExam() {
+  const cur = S.exam.cur;
+  if (cur && cur.timed && examLeft(cur) <= 0) return finishExam(true);
+  if (!cur) {
+    app.append(head('Пробний іспит', 'Przykładowy zestaw zadań · 10 завдань · 40 балів'),
+      h('div', { class: 'card' },
+        h('p', null, 'Як на справжньому іспиті: без підказок, без перевірки й ключа до завершення. Результат і розбір з ключем — після того, як натиснете «Завершити» або вийде час.'),
+        h('div', { class: 'row' }, h('button', { class: 'btn pri', type: 'button', onclick: () => startExam(true) }, 'Почати з таймером 45 хв'),
+          h('button', { class: 'btn', type: 'button', onclick: () => startExam(false) }, 'Почати без таймера'))),
+      examInfo());
+    if (S.exam.last) app.append(h('div', { class: 'card row' }, h('div', { class: 'grow' }, h('div', { class: 'small mut' }, 'Останній результат · ' + fmtDate(S.exam.last.at)), h('div', { class: 'big' }, fmt(examTotal(S.exam.last)) + ' / ' + fmt(EXAM_MAX))),
+      h('a', { class: 'btn', href: '#/exam/result' }, 'Результат і розбір')));
+    const ht = histTable(); if (ht) app.append(ht);
+    return;
+  }
+  // іспит триває
+  cur.pos = Math.min(Math.max(cur.pos || 0, 0), EXAM.length - 1);
+  const ex = EXAM[cur.pos];
+  const filledOf = e => { const a = cur.a[e.id] || {}; return e.gaps.filter(g => a[g.i] !== undefined && a[g.i] !== '').length; };
+  const tEl = h('div', { class: 'timer', role: 'timer', 'aria-label': 'Залишок часу' });
+  const tick = () => {
+    if (!cur.timed) { tEl.textContent = '∞'; tEl.title = 'Без таймера'; return; }
+    const left = examLeft(cur);
+    if (left <= 0) { finishExam(true); return; }
+    tEl.textContent = String(Math.floor(left / 60)).padStart(2, '0') + ':' + String(left % 60).padStart(2, '0');
+    tEl.classList.toggle('low', left <= 300);
+  };
+  tick(); clearInterval(timerInt); if (cur.timed) timerInt = setInterval(tick, 500);
+  const go = p => { cur.pos = p; saveNow(); route(); };
+  const overview = () => {
+    const grid = h('div', { class: 'ovw' }, EXAM.map((e, k) => h('button', { class: 'btn' + (k === cur.pos ? ' pri' : ''), type: 'button', onclick: () => { closeModal(); go(k); } }, h('span', { lang: 'pl' }, e.n), h('small', null, filledOf(e) + '/' + e.gaps.length))));
+    openModal('Завдання іспиту', h('div', null, h('p', { class: 'small mut' }, 'Під номером — скільки пропусків заповнено.'), grid));
+  };
+  const askFinish = () => {
+    const filled = EXAM.reduce((s, e) => s + filledOf(e), 0);
+    confirmBox('Завершити іспит?', 'Заповнено ' + filled + ' з ' + EXAM_GAPS + ' пропусків. Після завершення відповіді змінити не можна — ви побачите результат і розбір із ключем.', 'Завершити', () => finishExam(false));
+  };
+  const o = {
+    mode: 'exam', ans: cur.a[ex.id] || {}, marks: null, insert: makeInsert(ex),
+    onChange(i, val) { const a = cur.a[ex.id] || (cur.a[ex.id] = {}); o.ans = a; if (val === undefined || val === '') delete a[i]; else a[i] = val; save(); }
+  };
+  app.append(
+    h('div', { class: 'xbar' }, tEl,
+      h('button', { class: 'btn sm grow', type: 'button', onclick: overview }, 'Завдання ' + ex.n + ' · ' + (cur.pos + 1) + ' з ' + EXAM.length + ' ▾'),
+      h('button', { class: 'btn sm', type: 'button', onclick: askFinish }, 'Завершити')),
+    exHeader(ex), renderIntro(ex, o), h('div', { class: 'card' }, renderBody(ex, o)));
+  setDock({
+    letters: ex.typed && !(ex.ins1 === 2 && coarse), acts: [
+      { t: '← Попереднє', on: () => { if (cur.pos > 0) go(cur.pos - 1); } },
+      cur.pos < EXAM.length - 1 ? { t: 'Наступне →', cls: 'pri', on: () => go(cur.pos + 1) } : { t: 'Завершити іспит', cls: 'pri', on: askFinish }
+    ]
+  });
+}
+function pageExamResult() {
+  const L = S.exam.last;
+  if (!L) return pageExam();
+  const tot = examTotal(L), p = pct(tot, EXAM_MAX), pass = tot / EXAM_MAX >= 0.5;
+  app.append(h('a', { class: 'crumb', href: '#/exam' }, '← Іспит'), head('Результат іспиту', fmtDate(L.at) + ' · ' + fmtDur(L.dur) + (L.timed ? (L.auto ? ' · час вийшов' : '') : ' · без таймера')),
+    h('div', { class: 'card' },
+      h('div', { class: 'big ' + (pass ? 'pass' : 'fail') }, fmt(tot) + ' / ' + fmt(EXAM_MAX) + ' б. · ' + p + ' %'),
+      h('p', null, pass ? h('b', { class: 'pass' }, '✓ Поріг 50 % (20 з 40 б.) подолано.') : h('b', { class: 'fail' }, '✗ До порога 50 % (20 з 40 б.) бракує ' + fmt(EXAM_MAX / 2 - tot) + ' б.')),
+      h('div', { class: 'row' }, h('a', { class: 'btn pri', href: '#/exam/review' }, 'Розбір із ключем'), h('button', { class: 'btn', type: 'button', onclick: () => { location.hash = '#/exam'; } }, 'Нова спроба'))));
+  const weak = [];
+  const tb = h('tbody', null, EXAM.map(ex => {
+    const got = examTaskPts(L, ex), t = TMAP[ex.tp];
+    if (got / ex.max < 0.7 && weak.indexOf(t) < 0) weak.push(t);
+    return h('tr', null, h('td', { lang: 'pl' }, h('b', null, ex.n)), h('td', null, h('span', { lang: 'pl' }, t.pl), h('br'), h('span', { class: 'small mut' }, TYPE_UA[ex.t])),
+      h('td', { class: 'num' }, fmt(got) + ' / ' + fmt(ex.max)), h('td', { class: 'num ' + (got / ex.max >= 0.5 ? 'pass' : 'fail') }, pct(got, ex.max) + ' %'));
+  }));
+  app.append(h('div', { class: 'card' }, h('h3', null, 'По завданнях'),
+    h('table', { class: 't', style: 'margin-top:.5rem' }, h('thead', null, h('tr', null, h('th', null, '№'), h('th', null, 'Тема'), h('th', { class: 'num' }, 'Бали'), h('th', { class: 'num' }, '%'))), tb)));
+  app.append(h('div', { class: 'card' }, h('h3', null, 'Що повторити'),
+    weak.length ? h('ul', null, weak.map(t => h('li', null, h('a', { href: '#/t/' + t.id, lang: 'pl' }, t.pl), ' — ' + t.ua)))
+      : h('p', null, 'У кожному завданні щонайменше 70 % — слабких тем не видно.'),
+    h('p', { class: 'small mut', style: 'margin-bottom:0' }, 'Помилки з іспиту додано до «Моїх помилок». У завданні X (вільні речення) можна зарахувати власний правильний варіант у розборі.')),
+    examInfo());
+  const ht = histTable(); if (ht) app.append(ht);
+}
+function pageExamReview() {
+  const L = S.exam.last;
+  if (!L) return pageExam();
+  app.append(h('a', { class: 'crumb', href: '#/exam/result' }, '← Результат'), head('Розбір іспиту', 'Ваші відповіді, позначки й правильні відповіді з ключа.'));
+  EXAM.forEach(ex => {
+    const card = h('div', { class: 'card' });
+    const draw = () => {
+      card.textContent = '';
+      const got = examTaskPts(L, ex);
+      const o = {
+        mode: 'review', ans: L.a[ex.id] || {}, marks: L.marks[ex.id],
+        selfBtn: (g, mark) => {
+          if (mark === 'ok') return null;
+          const k = ex.id + '#' + g.i, on = !!L.self[k];
+          if (!on && !normA((L.a[ex.id] || {})[g.i] || '')) return null;
+          return h('button', { class: 'btn sm', type: 'button', style: 'margin-top:.5rem', 'aria-pressed': String(on), onclick: () => {
+            if (on) delete L.self[k]; else { L.self[k] = true; delete S.err[k]; }
+            if (S.exam.hist[0] && S.exam.hist[0].at === L.at) S.exam.hist[0].pts = examTotal(L);
+            saveNow(); updateBadge(); draw();
+          } }, on ? '✓ Зараховано за самооцінкою (скасувати)' : 'Моя відповідь теж правильна — зарахувати');
+        }
+      };
+      card.append(h('div', { class: 'row' }, h('h3', { class: 'grow', lang: 'pl' }, exTitle(ex)), h('b', { class: got / ex.max >= 0.5 ? 'pass' : 'fail' }, fmt(got) + ' / ' + fmt(ex.max) + ' б.')),
+        h('p', { class: 'small mut', lang: 'pl', style: 'margin-top:.25rem' }, ex.ins));
+      if (ex.preB) card.append(h('div', { class: 'box' }, renderBlocks(ex, ex.preB, null, 'static')));
+      card.append(renderBody(ex, o));
+      if (ex.t === 's') card.append(h('p', { class: 'small mut' }, 'Вільні речення перевіряються за ключем дослівно (без урахування регістру й пунктуації). Якщо ваш варіант правильний за змістом і граматикою, зарахуйте його самі.'));
+      card.append(h('div', { class: 'row', style: 'margin-top:.5rem' }, h('button', { class: 'btn sm', type: 'button', onclick: () => openSheet(ex.tp) }, 'Шпаргалка: ' + TMAP[ex.tp].ua),
+        h('button', { class: 'btn sm', type: 'button', onclick: () => openModal('Підказка до завдання ' + ex.n, h('p', null, ex.hint)) }, 'Правило')));
+    };
+    draw(); app.append(card);
+  });
+  app.append(h('div', { class: 'pn' }, h('a', { class: 'btn', href: '#/exam/result' }, '← Результат'), h('a', { class: 'btn', href: '#/errors' }, 'Мої помилки →')));
+}
+
+/* ---------- Налаштування ---------- */
+function applyFont() { document.documentElement.style.setProperty('--fs', [1, 1.125, 1.25][S.font || 0]); }
+function pageSettings() {
+  const seg = h('div', { class: 'seg', role: 'group', 'aria-label': 'Розмір шрифту' }, ['A', 'A+', 'A++'].map((t, k) =>
+    h('button', { type: 'button', 'aria-pressed': String((S.font || 0) === k), onclick: () => { S.font = k; saveNow(); applyFont(); route(); } }, t)));
+  const file = h('input', { type: 'file', accept: '.json,application/json', class: 'vh', tabindex: '-1', 'aria-hidden': 'true' });
+  file.addEventListener('change', () => {
+    const f = file.files[0]; if (!f) return;
+    const rd = new FileReader();
+    rd.onerror = () => toast('Не вдалося прочитати файл. Прогрес не змінено.');
+    rd.onload = () => {
+      let o = null;
+      try { o = JSON.parse(rd.result); } catch (e) { o = null; }
+      const d = o && o.app === 'pl_b1' ? o.data : null;
+      if (!validState(d)) { toast('Це не файл прогресу тренажера або він пошкоджений. Прогрес не змінено.'); file.value = ''; return; }
+      S = d; saveNow(); applyFont(); updateBadge(); toast('Прогрес імпортовано.'); route();
+    };
+    rd.readAsText(f);
+  });
+  const exportIt = () => {
+    saveNow();
+    const blob = new Blob([JSON.stringify({ app: 'pl_b1', v: 2, exported: new Date().toISOString(), data: S })], { type: 'application/json' });
+    const a = h('a', { href: URL.createObjectURL(blob), download: 'polski-b1-progres-' + new Date().toISOString().slice(0, 10) + '.json' });
+    document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+    toast('Файл прогресу збережено в «Завантаження».');
+  };
+  const ov = overall();
+  app.append(head('Налаштування'),
+    h('div', { class: 'card' }, h('h3', null, 'Розмір шрифту'), h('div', { style: 'margin-top:.5rem' }, seg)),
+    h('div', { class: 'card' }, h('h3', null, 'Прогрес'),
+      h('p', { class: 'small mut' }, 'Прогрес зберігається в цьому браузері на цьому пристрої' + (storageOK ? '.' : ' — але зараз сховище недоступне, тож після закриття сторінки він зникне.') + ' Щоб перенести його на інший пристрій, експортуйте файл і імпортуйте його там.'),
+      h('p', { class: 'small' }, 'Зараз: ' + ov.done + ' з ' + ov.n + ' вправ, ' + errKeys().length + ' у «Моїх помилках», спроб іспиту: ' + S.exam.hist.length + '.'),
+      h('div', { class: 'row' }, h('button', { class: 'btn', type: 'button', onclick: exportIt }, 'Експорт у файл'),
+        h('button', { class: 'btn', type: 'button', onclick: () => file.click() }, 'Імпорт із файла'), file,
+        h('button', { class: 'btn', type: 'button', onclick: () => confirmBox('Скинути весь прогрес?', 'Буде стерто відповіді, результати, «Мої помилки» та історію іспитів. Цю дію не можна скасувати — за потреби спершу зробіть експорт.', 'Скинути все', () => { const f = S.font; S = fresh(); S.font = f; saveNow(); updateBadge(); toast('Прогрес скинуто.'); route(); }) }, 'Скинути все'))),
+    h('div', { class: 'card' }, h('h3', null, 'Як рахується результат'),
+      h('ul', { class: 'small' },
+        h('li', null, 'Бал вправи — результат ', h('b', null, 'першої перевірки'), '. Після неї можна виправляти помилки й перевіряти знову, але бал не зміниться.'),
+        h('li', null, 'У прогрес іде найкращий результат першої перевірки. Щоб покращити його, скиньте вправу й виконайте її ще раз.'),
+        h('li', null, 'Ключ балів не додає: якщо відкрити його до перевірки, зараховується те, що було введено на той момент.'),
+        h('li', null, 'Регістр літер, зайві пробіли й розділові знаки не враховуються. Відповідь без польських знаків (nia замість nią) отримує позначку «≈ майже» і балів не дає.'))),
+    examInfo(),
+    h('p', { class: 'small mut' }, 'Тексти вправ і ключ — зі збірника «Poprawność gramatyczna. B1» Państwowej Komisji ds. Poświadczania Znajomości Języka Polskiego jako Obcego (certyfikatpolski.pl). Тренажер працює без інтернету з одного файла.'));
+}
+
+/* ================= Маршрути ================= */
+function route() {
+  stopSpeech(); clearInterval(timerInt); closeModal();
+  const p = location.hash.replace(/^#\/?/, '').split('/').filter(Boolean).map(decodeURIComponent);
+  app.textContent = ''; setDock(null); lastInput = null; setShift(false);
+  let nav = 'home';
+  if (p[0] === 't') pageTopic(p[1]);
+  else if (p[0] === 'e') pageExercise(p[1], +p[2]);
+  else if (p[0] === 'errors') { nav = 'errors'; if (p[1] === 'train') pageTrain(p[2]); else pageErrors(); }
+  else if (p[0] === 'exam') { nav = 'exam'; if (p[1] === 'result') pageExamResult(); else if (p[1] === 'review') pageExamReview(); else pageExam(); }
+  else if (p[0] === 'settings') { nav = 'settings'; pageSettings(); }
+  else pageHome();
+  $$('.top nav a').forEach(a => { if (a.dataset.nav === nav) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
+  updateBadge(); placeDock();
+  window.scrollTo(0, 0);
+}
+window.addEventListener('hashchange', route);
+
+/* ================= Самоперевірка даних ================= */
+window.B1 = {
+  selfTest() {
+    const bad = []; let checked = 0, gaps = 0;
+    ALL.concat(EXAM).forEach(ex => {
+      let ok = 0;
+      ex.gaps.forEach(g => {
+        gaps++;
+        (g.kind === 'c' ? [g.ok] : g.raw).forEach(v => { checked++; if (judge(g, v) !== 'ok') bad.push(ex.id + '#' + (g.i + 1) + ': ' + v); });
+        if (judge(g, g.kind === 'c' ? g.ok : g.show[0]) === 'ok') ok++;
+        if (g.kind === 'c') g.opts.forEach((x, k) => { if (k !== g.ok && judge(g, k) !== 'bad') bad.push(ex.id + '#' + (g.i + 1) + ': wrong option accepted'); });
+      });
+      if (r2(ok * ex.pts) !== ex.max) bad.push(ex.id + ': key gives ' + r2(ok * ex.pts) + ' of ' + ex.max);
+    });
+    return { exercises: ALL.length, examTasks: EXAM.length, gaps, answersChecked: checked, totalMax: TOTAL_MAX, examMax: EXAM_MAX, bad };
+  },
+  judgeText(id, n, val) { return judge(EXMAP[id].gaps[n - 1], val); },
+  key(id, n) { const g = EXMAP[id].gaps[n - 1]; return g.kind === 'c' ? g.ok : g.show[0]; },
+  ids() { return ALL.map(e => e.id); }
+};
+
+applyFont();
+route();
+// час іспиту вийшов, поки сторінка була закрита
+if (S.exam.cur && S.exam.cur.timed && examLeft(S.exam.cur) <= 0) finishExam(true);
+})();
+</script>
+</body>
+</html>
